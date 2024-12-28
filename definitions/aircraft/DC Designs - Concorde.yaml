@@ -1,4 +1,4 @@
-# Version 1.0.7
+# Version 1.0.9
 
 include:
   - definitions/modules/controls.yaml
@@ -1247,54 +1247,6 @@ shared:
   -
     type: var
     var_name: L:ADS_2
-# -
-#   type: var
-#   var_name: L:SPILL_POSITION1
-# -
-#   type: var
-#   var_name: L:SPILL_POSITION3
-# -
-#   type: var
-#   var_name: L:RAMPS_POSITION4
-# -
-#   type: var
-#   var_name: L:SPILL_POSITION2
-  -
-    type: var
-    var_name: L:Window_opener_FO
-# -
-#   type: var
-#   var_name: L:RAMPS_POSITION1
-# -
-#   type: var
-#   var_name: L:RAMPS_POSITION3
-# -
-#   type: var
-#   var_name: L:RAMPS_POSITION2
-  -
-    type: var
-    var_name: L:Window_opener
-# -
-#   type: var
-#   var_name: L:SPILL_POSITION4
-# -
-#   type: var
-#   var_name: L:XMLVAR_AB_L_Current_Stage
-# -
-#   type: var
-#   var_name: L:XMLVAR_AB_L2_Current_Stage
-# -
-#   type: var
-#   var_name: L:XMLVAR_AB_R_Current_Stage
-# -
-#   type: var
-#   var_name: L:XMLVAR_AB_R2_Current_Stage
-  -
-    type: var
-    var_name: L:GPU Switch
-  -
-    type: var
-    var_name: L:Covers Switch
   -
     type: var
     var_name: L:XMLVAR_Transponder_Mode_Is_Auto
@@ -1668,27 +1620,51 @@ shared:
   -
     type: var
     var_name: L:RAMP_RAISE
+# -
+#   type: var
+#   var_name: L:RAMPS_POSITION1
   -
     type: var
     var_name: L:RAMP_RAISEB
+# -
+#   type: var
+#   var_name: L:RAMPS_POSITION2
   -
     type: var
     var_name: L:RAMP_RAISEC
+# -
+#   type: var
+#   var_name: L:RAMPS_POSITION3
   -
     type: var
     var_name: L:RAMP_RAISED
+# -
+#   type: var
+#   var_name: L:RAMPS_POSITION4
   -
     type: var
     var_name: L:SPILL_RAMPA
+# -
+#   type: var
+#   var_name: L:SPILL_POSITION1
   -
     type: var
     var_name: L:SPILL_RAMPB
+# -
+#   type: var
+#   var_name: L:SPILL_POSITION2
   -
     type: var
     var_name: L:SPILL_RAMPC
+# -
+#   type: var
+#   var_name: L:SPILL_POSITION3
   -
     type: var
     var_name: L:SPILL_RAMPD
+# -
+#   type: var
+#   var_name: L:SPILL_POSITION4
   -
     type: var
     var_name: L:XMLVAR_A320_WeatherRadar_Sys
@@ -1698,6 +1674,12 @@ shared:
   -
     type: var
     var_name: L:A320_Neo_MFD_Range
+  -
+    type: var
+    var_name: L:SWITCH_EXTEND_MAIN_LANDING
+  -
+    type: var
+    var_name: L:SWITCH_EXTEND_SHORT_LANDING
   -
     type: var
     var_name: L:CIVA_INS_HOLD
@@ -1752,6 +1734,12 @@ shared:
   -
     type: var
     var_name: L:CIVA_INS_CLEAR
+  -
+    type: var
+    var_name: L:Window_opener
+  -
+    type: var
+    var_name: L:Window_opener_FO
   -
     type: var
     var_name: L:GEN_1_2
@@ -2436,6 +2424,24 @@ shared:
     var_name: L:FO_TCAS_NEEDLE_PARENT:1
 # -
 #   type: var
+#   var_name: L:XMLVAR_AB_L_Current_Stage
+# -
+#   type: var
+#   var_name: L:XMLVAR_AB_L2_Current_Stage
+# -
+#   type: var
+#   var_name: L:XMLVAR_AB_R_Current_Stage
+# -
+#   type: var
+#   var_name: L:XMLVAR_AB_R2_Current_Stage
+  -
+    type: var
+    var_name: L:GPU Switch
+  -
+    type: var
+    var_name: L:Covers Switch
+# -
+#   type: var
 #   var_name: L:YourControlsPanelId
 # -
 #   type: var
@@ -2596,6 +2602,9 @@ shared:
   -
     type: var
     var_name: L:AP_STEERING_SOURCE
+# -
+#   type: var
+#   var_name: L:RADIONAV_SOURCE
   -
     type: var
     var_name: L:MACH_AP_VALUE
@@ -2613,9 +2622,6 @@ shared:
 #   var_name: L:CONCORDE_OVERSPEED_WARNING
 # -
 #   type: var
-#   var_name: L:RADIONAV_SOURCE
-# -
-#   type: var
 #   var_name: L:AIRLINER_V1_SPEED
 # -
 #   type: var
@@ -2629,6 +2635,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:MAP_SHOW_TEMPORARY_FLIGHT_PLAN
+# -
+#   type: var
+#   var_name: L:YourControlsServerRunning
 # -
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_SPEED

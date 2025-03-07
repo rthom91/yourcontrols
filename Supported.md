@@ -66,7 +66,7 @@
 - Cowan Simulation - MD Helicopters 500E # v2.1.0
 - Cowan Simulation - Robinson R66 # v2.0.0
 - DC Designs - Boeing PT-17 Stearman # v1.0.6
-- DC Designs - Concorde # v1.0.9
+- DC Designs - Concorde # v1.1.0
 - Deejing - Van's RV-7 # v1.1.2
 - Erasam - Tecnam P92 Echo # v2.0.1
 - FlightFX - Cirrus SF50 Vision Jet G2 # v2.3.5

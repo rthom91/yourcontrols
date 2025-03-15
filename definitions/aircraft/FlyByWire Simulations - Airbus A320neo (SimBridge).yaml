@@ -2484,12 +2484,12 @@ shared:
   -
     type: var
     var_name: L:A32NX_OVHD_ELEC_BAT_2_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_ELEC_ENG_GEN_1_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_ELEC_ENG_GEN_2_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_ELEC_ENG_GEN_1_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_ELEC_ENG_GEN_2_PB_HAS_FAULT
   -
     type: var
     var_name: L:A32NX_OVHD_PNEU_ENG_1_BLEED_PB_HAS_FAULT
@@ -2508,9 +2508,9 @@ shared:
   -
     type: var
     var_name: L:A32NX_OVHD_ELEC_IDG_2_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_ELEC_AC_ESS_FEED_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_ELEC_AC_ESS_FEED_PB_HAS_FAULT
   -
     type: var
     var_name: L:A32NX_OVHD_APU_MASTER_SW_PB_HAS_FAULT
@@ -2559,15 +2559,15 @@ shared:
   -
     type: var
     var_name: L:A32NX_OVHD_EMER_ELEC_RAT_AND_EMER_GEN_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_HYD_ENG_1_PUMP_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_HYD_ENG_2_PUMP_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_HYD_EPUMPB_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_HYD_ENG_1_PUMP_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_HYD_ENG_2_PUMP_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_HYD_EPUMPB_PB_HAS_FAULT
   -
     type: var
     var_name: L:A32NX_OVHD_HYD_PTU_PB_HAS_FAULT
@@ -4483,7 +4483,6 @@ shared:
   -
     type: var
     var_name: L:A32NX_REFUEL_STARTED_BY_USR
-    cancel_h_events: true
 # -
 #   type: var
 #   var_name: L:A32NX_LIGHTING_PRESET_LOAD
@@ -5436,9 +5435,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_ELEC_EXT_PWR_LOAD_NORMAL
-  -
-    type: var
-    var_name: L:A32NX_LGCIU_1_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_LGCIU_1_FAULT
 # -
 #   type: var
 #   var_name: L:A32NX_LGCIU_2_LEFT_GEAR_DOWNLOCKED
@@ -5454,9 +5453,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_LGCIU_2_RIGHT_GEAR_UNLOCKED
-  -
-    type: var
-    var_name: L:A32NX_LGCIU_2_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_LGCIU_2_FAULT
 # -
 #   type: var
 #   var_name: L:A32NX_GEAR_HANDLE_HITS_LOCK_SOUND
@@ -5971,7 +5970,7 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_PFD_1_State
-  -
+  - # Does not exist on A320
     type: var
     var_name: L:A32NX_PUSH_TRUE_REF
 # -
@@ -6508,8 +6507,7 @@ master:
     var_name: L:A32NX_AUTOTHRUST_TLA:2
     interpolate: Default
 
-server:
-  -
+  - # Fuel
     type: var
     var_name: L:A32NX_FUEL_LEFT_PRE
     var_type: i32
@@ -6933,4 +6931,5 @@ ignore:
 # EFB Refuel
   - EFB#-1299300527
   - EFB#-771149527
+  - EFB#-612867715
   - EFB#670372333

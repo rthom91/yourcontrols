@@ -1,4 +1,4 @@
-# Version 4.5.0
+# Version 4.7.0
 
 include:
   - definitions/modules/Instruments/AS_GNS530.yaml
@@ -275,9 +275,9 @@ shared:
     event_param: 17
     index_reversed: true
 
-  - # LVAR's (TDS)
-    type: var
-    var_name: L:EFB_POSITION
+# - # LVAR's (TDS)
+#   type: var
+#   var_name: L:EFB_POSITION
   -
     type: var
     var_name: L:EFB_PUSH_PLUGS_1
@@ -496,166 +496,180 @@ shared:
     var_name: L:INTERCOM_AUDIO_SWITCH
   -
     type: var
-    var_name: L:CIRCUIT_OAT
+    var_name: L:GENERIC_CIRCUIT_OAT
   -
     type: var
-    var_name: L:CIRCUIT_FLAP
+    var_name: L:GENERIC_CIRCUIT_FLAP
   -
     type: var
-    var_name: L:CIRCUIT_LDG_WARN
+    var_name: L:GENERIC_CIRCUIT_LDG_WARN
   -
     type: var
-    var_name: L:CIRCUIT_LDG_HYD
+    var_name: L:GENERIC_CIRCUIT_LDG_HYD
   -
     type: var
-    var_name: L:CIRCUIT_PROP_SYNC
+    var_name: L:GENERIC_CIRCUIT_PROP_SYNC
   -
     type: var
-    var_name: L:CIRCUIT_START
+    var_name: L:GENERIC_CIRCUIT_START
   -
     type: var
-    var_name: L:CIRCUIT_LIGHTS_RADIO
+    var_name: L:GENERIC_CIRCUIT_LIGHTS_RADIO
   -
     type: var
-    var_name: L:CIRCUIT_LIGHTS_PILOT
+    var_name: L:GENERIC_CIRCUIT_LIGHTS_PILOT
   -
     type: var
-    var_name: L:CIRCUIT_LIGHTS_COPILOT
+    var_name: L:GENERIC_CIRCUIT_LIGHTS_COPILOT
   -
     type: var
-    var_name: L:CIRCUIT_LIGHTS_CABIN
+    var_name: L:GENERIC_CIRCUIT_LIGHTS_CABIN
   -
     type: var
-    var_name: L:CIRCUIT_LIGHTS_WARN
+    var_name: L:GENERIC_CIRCUIT_LIGHTS_WARN
   -
     type: var
-    var_name: L:CIRCUIT_L_FUEL_PUMP
+    var_name: L:GENERIC_CIRCUIT_L_FUEL_PUMP
   -
     type: var
-    var_name: L:CIRCUIT_R_FUEL_PUMP
+    var_name: L:GENERIC_CIRCUIT_R_FUEL_PUMP
   -
     type: var
-    var_name: L:CIRCUIT_L_LOW_FUEL
+    var_name: L:GENERIC_CIRCUIT_L_LOW_FUEL
   -
     type: var
-    var_name: L:CIRCUIT_R_LOW_FUEL
+    var_name: L:GENERIC_CIRCUIT_R_LOW_FUEL
   -
     type: var
-    var_name: L:CIRCUIT_L_EGT
+    var_name: L:GENERIC_CIRCUIT_L_EGT
   -
     type: var
-    var_name: L:CIRCUIT_R_EGT
+    var_name: L:GENERIC_CIRCUIT_R_EGT
   -
     type: var
-    var_name: L:CIRCUIT_L_ENG_GAGE
+    var_name: L:GENERIC_CIRCUIT_L_ENG_GAGE
   -
     type: var
-    var_name: L:CIRCUIT_R_ENG_GAGE
+    var_name: L:GENERIC_CIRCUIT_R_ENG_GAGE
   -
     type: var
-    var_name: L:CIRCUIT_L_FUEL_QTY
+    var_name: L:GENERIC_CIRCUIT_L_FUEL_QTY
   -
     type: var
-    var_name: L:CIRCUIT_R_FUEL_QTY
+    var_name: L:GENERIC_CIRCUIT_R_FUEL_QTY
   -
     type: var
-    var_name: L:CIRCUIT_DOOR_WARN
+    var_name: L:GENERIC_CIRCUIT_DOOR_WARN
   -
     type: var
-    var_name: L:CIRCUIT_STALL_WARN
+    var_name: L:GENERIC_CIRCUIT_STALL_WARN
   -
     type: var
-    var_name: L:CIRCUIT_CABIN_FAN
+    var_name: L:GENERIC_CIRCUIT_CABIN_FAN
   -
     type: var
-    var_name: L:CIRCUIT_SURFACE_DEICE
+    var_name: L:GENERIC_CIRCUIT_SURFACE_DEICE
   -
     type: var
-    var_name: L:CIRCUIT_L_PROP_DEICE
+    var_name: L:GENERIC_CIRCUIT_L_PROP_DEICE
   -
     type: var
-    var_name: L:CIRCUIT_R_PROP_DEICE
+    var_name: L:GENERIC_CIRCUIT_R_PROP_DEICE
   -
     type: var
-    var_name: L:CIRCUIT_L_LDG_GEAR
+    var_name: L:GENERIC_CIRCUIT_L_LDG_GEAR
   -
     type: var
-    var_name: L:CIRCUIT_R_LDG_GEAR
+    var_name: L:GENERIC_CIRCUIT_R_LDG_GEAR
   -
     type: var
-    var_name: L:CIRCUIT_CABIN_PRESS
+    var_name: L:GENERIC_CIRCUIT_CABIN_PRESS
   -
     type: var
-    var_name: L:CIRCUIT_PITOT_1
+    var_name: L:GENERIC_CIRCUIT_PITOT_1
   -
     type: var
-    var_name: L:CIRCUIT_PITOT_2
+    var_name: L:GENERIC_CIRCUIT_PITOT_2
   -
     type: var
-    var_name: L:CIRCUIT_TURN_BANK
+    var_name: L:GENERIC_CIRCUIT_TURN_BANKCIRCUIT_TURN_BANK
   -
     type: var
-    var_name: L:CIRCUIT_ELECT_CLOCK
+    var_name: L:GENERIC_CIRCUIT_ELECT_CLOCK
   -
     type: var
-    var_name: L:CIRCUIT_COND_FAN
+    var_name: L:GENERIC_CIRCUIT_COND_FAN
   -
     type: var
-    var_name: L:CIRCUIT_LH_EVAP
+    var_name: L:GENERIC_CIRCUIT_LH_EVAP
   -
     type: var
-    var_name: L:CIRCUIT_RH_EVAP
+    var_name: L:GENERIC_CIRCUIT_RH_EVAP
   -
     type: var
-    var_name: L:CIRCUIT_ELECT_WSHIELD
+    var_name: L:GENERIC_CIRCUIT_ELECT_WSHIELD
   -
     type: var
-    var_name: L:CIRCUIT_L_ALT
+    var_name: L:GENERIC_CIRCUIT_L_ALT
   -
     type: var
-    var_name: L:CIRCUIT_R_ALT
+    var_name: L:GENERIC_CIRCUIT_R_ALT
   -
     type: var
-    var_name: L:CIRCUIT_COMM_NAV_1
+    var_name: L:GENERIC_CIRCUIT_COMM_NAV_1
   -
     type: var
-    var_name: L:CIRCUIT_COMM_NAV_2
+    var_name: L:GENERIC_CIRCUIT_COMM_NAV_2
   -
     type: var
-    var_name: L:CIRCUIT_NAV_1
+    var_name: L:GENERIC_CIRCUIT_NAV_1
   -
     type: var
-    var_name: L:CIRCUIT_NAV_2
+    var_name: L:GENERIC_CIRCUIT_NAV_2
   -
     type: var
-    var_name: L:CIRCUIT_ADI_1
+    var_name: L:GENERIC_CIRCUIT_ADI_1
   -
     type: var
-    var_name: L:CIRCUIT_AUDIO_1
+    var_name: L:GENERIC_CIRCUIT_AUDIO_1
   -
     type: var
-    var_name: L:CIRCUIT_XPDR_1
+    var_name: L:GENERIC_CIRCUIT_XPDR_1
   -
     type: var
-    var_name: L:CIRCUIT_DME_1
+    var_name: L:GENERIC_CIRCUIT_DME_1
   -
     type: var
-    var_name: L:CIRCUIT_GLIDE_SLOPE_1
+    var_name: L:GENERIC_CIRCUIT_GLIDE_SLOPE_1
   -
     type: var
-    var_name: L:CIRCUIT_GLIDE_SLOPE_2
+    var_name: L:GENERIC_CIRCUIT_GLIDE_SLOPE_2
   -
     type: var
-    var_name: L:CIRCUIT_AUTO_PILOT_COMP
+    var_name: L:GENERIC_CIRCUIT_AUTO_PILOT_COMP
   -
     type: var
-    var_name: L:CIRCUIT_YAW_DAMPER
+    var_name: L:GENERIC_CIRCUIT_YAW_DAMPER
   -
     type: var
-    var_name: L:CIRCUIT_RADAR
+    var_name: L:GENERIC_CIRCUIT_RADAR
   -
     type: var
-    var_name: L:CIRCUIT_HOSKINS_FUEL_FLOW
+    var_name: L:GENERIC_CIRCUIT_HOSKINS_FUEL_FLOW
+  -
+    type: var
+    var_name: L:XMLVAR_PRESSURIZATION_Knob_CabinAltitude_Position
+    unreliable: true
+  -
+    type: var
+    var_name: L:XMLVAR_LEAR_CABIN_CLIMB_RATE_Position
+    unreliable: true
+  -
+    type: var
+    var_name: L:PRESSURIZATION_DUMP_LEVER
+  -
+    type: var
+    var_name: L:CABIN_PRESSURIZATION_SWITCH
   -
     type: var
     var_name: L:GENERIC_Momentary_LIGHT_SWITCH_LANDING_1
@@ -680,9 +694,36 @@ shared:
   -
     type: var
     var_name: L:HOTSPOT_FUEL_SUMP_1
+# -
+#   type: var
+#   var_name: L:ANIM_FUEL_SUMP_1
+  -
+    type: var
+    var_name: L:INTER_CHECK_SUMP_1
   -
     type: var
     var_name: L:HOTSPOT_FUEL_SUMP_2
+# -
+#   type: var
+#   var_name: L:ANIM_FUEL_SUMP_2
+  -
+    type: var
+    var_name: L:INTER_CHECK_SUMP_2
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_1_LEVER
+  -
+    type: var
+    var_name: L:DOOR_UPPER
+  -
+    type: var
+    var_name: L:LOCKER_WING_R_LEVER
+# -
+#   type: var
+#   var_name: L:Prop1Rotation
+  -
+    type: var
+    var_name: L:LOCKER_WING_L_LEVER
   -
     type: var
     var_name: L:LOCKER_NOSE_3_LEVER
@@ -691,109 +732,76 @@ shared:
     var_name: L:LOCKER_NOSE_2_LEVER
   -
     type: var
+    var_name: L:ENGINE_DOOR_RIGHT
+  -
+    type: var
     var_name: L:ENGINE_DOOR_LEFT
-  -
-    type: var
-    var_name: L:HYD_RESERVOIR
-  -
-    type: var
-    var_name: L:LOCKER_WING_L_LEVER
-# -
-#   type: var
-#   var_name: L:STEERING_UPPER
-# -
-#   type: var
-#   var_name: L:STEERING
-  -
-    type: var
-    var_name: L:AC_INLET
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_3_BUTTON
-  -
-    type: var
-    var_name: L:FUEL_CAP_LEFT
-  -
-    type: var
-    var_name: L:LOCKER_WING_L
-# -
-#   type: var
-#   var_name: L:STRUCTURAL_DEICE_CYCLE
-# -
-#   type: var
-#   var_name: L:Prop2Rotation
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_1_BUTTON
-# -
-#   type: var
-#   var_name: L:Prop1Rotation
-# -
-#   type: var
-#   var_name: L:LANDING_LIGHT_MOTOR
-  -
-    type: var
-    var_name: L:LOCKER_WING_R
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_1_LEVER
-  -
-    type: var
-    var_name: L:LOCKER_WING_R_LEVER
-  -
-    type: var
-    var_name: L:ENGINE_OIL_LEFT
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_2_BUTTON
   -
     type: var
     var_name: L:FUEL_CAP_RIGHT
   -
     type: var
-    var_name: L:ENGINE_DOOR_RIGHT
+    var_name: L:LOCKER_NOSE_2_BUTTON
+  -
+    type: var
+    var_name: L:GENERIC_Momentary_HOTSPOT_DOOR_HANDLE_UPPER_OUTSIDE_1
+# -
+#   type: var
+#   var_name: L:LANDING_LIGHT_MOTOR
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_1_BUTTON
+# -
+#   type: var
+#   var_name: L:STEERING_UPPER
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_3_BUTTON
+# -
+#   type: var
+#   var_name: L:STEERING
+  -
+    type: var
+    var_name: L:HYD_RESERVOIR
+# -
+#   type: var
+#   var_name: L:STRUCTURAL_DEICE_CYCLE
+  -
+    type: var
+    var_name: L:AC_INLET
+# -
+#   type: var
+#   var_name: L:Prop2Rotation
+  -
+    type: var
+    var_name: L:FUEL_CAP_LEFT
+  -
+    type: var
+    var_name: L:LOCKER_WING_R
+  -
+    type: var
+    var_name: L:LOCKER_WING_L
+  -
+    type: var
+    var_name: L:ENGINE_OIL_LEFT
   -
     type: var
     var_name: L:ENGINE_OIL_RIGHT
   -
     type: var
+    var_name: L:DOOR_LOWER
+  -
+    type: var
     var_name: L:DEICE_PROP
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_PROP_DEICE
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_R_PROP_DEICE
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_COND_FAN
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_OAT
   -
     type: var
     var_name: L:GENERIC_NAV2_RADIO_ENT
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_SURFACE_DEICE
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_DME_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_DOOR_WARN
-  -
-    type: var
     var_name: L:GENERIC_NAV2_RADIO_BUTTON5
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_FLAP
-  -
-    type: var
     var_name: L:GENERIC_NAV2_RADIO_BUTTON7
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_ENG_GAGE
   -
     type: var
     var_name: L:GENERIC_DME_C1077B_BUTTON_UP
@@ -802,19 +810,10 @@ shared:
     var_name: L:GENERIC_DME_C1077B_BUTTON_DN
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_LIGHTS_PILOT
-  -
-    type: var
     var_name: L:GENERIC_NAV2_RADIO_BUTTON8
-  -
+  - # Does nothing?
     type: var
-    var_name: L:GENERIC_CIRCUIT_YAW_DAMPER
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_LH_EVAP
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_ALT
+    var_name: L:GENERIC_PRESSURIZATION_Knob_CabinAltitude
   -
     type: var
     var_name: L:GENERIC_COMM2_XFER
@@ -826,49 +825,13 @@ shared:
     var_name: L:GENERIC_COMM2_RECALL
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_R_LDG_GEAR
-  -
-    type: var
     var_name: L:GENERIC_ADF1_RECALL
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_PITOT_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_GLIDE_SLOPE_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_CABIN_PRESS
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_PROP_SYNC
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_AUTO_PILOT_COMP
   -
     type: var
     var_name: L:GENERIC_NAV2_RADIO_PERIOD
   -
     type: var
-    var_name: L:GENERIC_Momentary_DOOR_HANDLE_UPPER_OUTSIDE_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_ADI_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_RADAR
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_R_ALT
-  -
-    type: var
     var_name: L:RMI_ADF_KNOB
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_EGT
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_CABIN_FAN
   -
     type: var
     var_name: L:GENERIC_NAV2_RADIO_CLR
@@ -878,9 +841,9 @@ shared:
   -
     type: var
     var_name: L:GENERIC_MASTER_BAR_1
-  -
+  - # Does nothing?
     type: var
-    var_name: L:GENERIC_CIRCUIT_LIGHTS_CABIN
+    var_name: L:GENERIC_PRESSURIZATION_Knob_ClimbRate
   -
     type: var
     var_name: L:GENERIC_ADF1_TEST
@@ -889,40 +852,10 @@ shared:
     var_name: L:GENERIC_NAV2_RADIO_BUTTON9
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_LDG_HYD
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_COMM_NAV_2
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_HOSKINS_FUEL_FLOW
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_PITOT_2
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_ELECT_WSHIELD
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_COMM_NAV_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_NAV_1
-  -
-    type: var
     var_name: L:GENERIC_NAV2_RADIO_BUTTON4
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_STALL_WARN
-  -
-    type: var
     var_name: L:GENERIC_Momentary_DAVTRON_SWITCH_DIM
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_R_LOW_FUEL
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_FUEL_PUMP
   -
     type: var
     var_name: L:GENERIC_ELECTRICAL_Switch_Battery_Master_1
@@ -931,37 +864,10 @@ shared:
     var_name: L:GENERIC_CFS1000A_SET
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_L_FUEL_QTY
-  -
-    type: var
     var_name: L:GENERIC_NAV2_RADIO_BUTTON_ZERO
   -
     type: var
     var_name: L:GENERIC_CIRCUIT_TURN_BANK
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_LIGHTS_COPILOT
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_NAV_2
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_AUDIO_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_LDG_GEAR
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_LIGHTS_RADIO
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_L_LOW_FUEL
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_LDG_WARN
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_R_FUEL_PUMP
   -
     type: var
     var_name: L:GENERIC_NAV2_RADIO_BUTTON6
@@ -971,9 +877,6 @@ shared:
   -
     type: var
     var_name: L:GENERIC_ADF1_XFER
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_GLIDE_SLOPE_2
   -
     type: var
     var_name: L:GENERIC_Momentary_DEICE_ELECT
@@ -1003,43 +906,22 @@ shared:
     var_name: L:GENERIC_Momentary_PRIMER_SWITCH
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_XPDR_1
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_R_EGT
-  -
-    type: var
     var_name: L:VOLTAMMETER_KNOB
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_ELECT_CLOCK
   -
     type: var
     var_name: L:GENERIC_Momentary_AUX_RIGHT_PUMP_SWITCH
   -
     type: var
-    var_name: L:GENERIC_CIRCUIT_R_FUEL_QTY
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_START
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_LIGHTS_WARN
-  -
-    type: var
     var_name: L:GENERIC_Momentary_AUX_LEFT_PUMP_SWITCH
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_RH_EVAP
-  -
-    type: var
-    var_name: L:GENERIC_CIRCUIT_R_ENG_GAGE
   -
     type: var
     var_name: L:GENERIC_Momentary_DAVTRON_SWITCH_SET
   -
     type: var
     var_name: L:AUTOPILOT_MASTER_DISCONNECT_YOKE
+# -
+#   type: var
+#   var_name: L:PMS50_AUTOPILOT_VNAV_PATH_MODE
   -
     type: ToggleSwitch
     var_name: L:PILOT_FD_SYNC_SWITCH
@@ -1141,13 +1023,7 @@ shared:
     var_name: L:COPILOT_ATTITUDE_BARS
   -
     type: var
-    var_name: L:DOOR_UPPER
-  -
-    type: var
     var_name: L:DOOR_HANDLE_UPPER_INSIDE_ENABLED
-  -
-    type: var
-    var_name: L:DOOR_LOWER
   -
     type: var
     var_name: L:DOOR_HANDLE_UPPER_INSIDE
@@ -1187,15 +1063,6 @@ shared:
   -
     type: var
     var_name: L:R_WINGLOCKER
-  -
-    type: var
-    var_name: L:PRESSURIZATION_DUMP_LEVER
-  -
-    type: var
-    var_name: L:EMER_OXYGEN_PULL
-  -
-    type: var
-    var_name: L:CABIN_PRESSURIZATION_SWITCH
   -
     type: var
     var_name: L:LIGHTING_Knob_Light_Passenger3
@@ -1251,6 +1118,9 @@ shared:
   -
     type: var
     var_name: L:PILOT_WINDOW_LOCK
+# -
+#   type: var
+#   var_name: L:LEAR_CABIN_ALT_DIFF_NEEDLE
   -
     type: var
     var_name: L:XMLVAR_COPILOT_WINDOW_Position
@@ -1325,6 +1195,9 @@ shared:
     var_name: L:NAV1_GPS_BUTTON
   -
     type: var
+    var_name: L:EMER_OXYGEN_PULL
+  -
+    type: var
     var_name: L:XMLVAR_ALT_SEL_1000_Position
   -
     type: var
@@ -1386,12 +1259,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_IE_Throttle_VR_Value
-  -
-    type: var
-    var_name: L:XMLVAR_PRESSURIZATION_Knob_ClimbRate_Position
-# -
-#   type: var
-#   var_name: L:XMLVAR_PRESSURIZATION_Knob_CabinAltitude_Position
 # -
 #   type: var
 #   var_name: L:LIGHTING_PEDESTRAL_2
@@ -1437,6 +1304,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:CABIN_FAN_SOUND
+# -
+#   type: var
+#   var_name: L:LEAR_CABIN_PRESSURE_KNOB
+# -
+#   type: var
+#   var_name: L:LEAR_CABIN_CLIMB_RATE
+# -
+#   type: var
+#   var_name: L:FSW_AUTOPILOT_VNAV_PATH_MODE
+# -
+#   type: var
+#   var_name: L:break
   -
     type: var
     var_name: L:AP_PFT_POWER
@@ -1481,7 +1360,10 @@ shared:
     var_name: L:GENERIC_Momentary_LIGHT_SWITCH_LANDING
 # -
 #   type: var
-#   var_name: L:VOLTAMMETER_NEEDLE
+#   var_name: L:AMMETER_SCALE
+# -
+#   type: var
+#   var_name: L:AMMETER
 # -
 #   type: var
 #   var_name: L:MASTER_BAR_MEMORY
@@ -1712,19 +1594,31 @@ shared:
     var_name: L:RUDDER_LOCK
 # -
 #   type: var
-#   var_name: L:GTN750_HSI_GSI_NEEDLE
+#   var_name: L:LEAR_CABIN_ALT_NEEDLE
 # -
 #   type: var
-#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
+#   var_name: L:XMLVAR_LEAR_CABIN_ALTITUDE_RATE
 # -
 #   type: var
-#   var_name: L:TDSGTNXI_InstrumentPanelSelfTest
+#   var_name: L:CABIN_CATEGORY
+# -
+#   type: var
+#   var_name: L:CABIN_MODE
 # -
 #   type: var
 #   var_name: L:PHASE_ANIM
 # -
 #   type: var
+#   var_name: L:TDSGTNXI_InstrumentPanelSelfTest
+# -
+#   type: var
 #   var_name: L:MIXTURE2_Pos
+# -
+#   type: var
+#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
+# -
+#   type: var
+#   var_name: L:GTN750_HSI_GSI_NEEDLE
 # -
 #   type: var
 #   var_name: L:MIXTURE1_Pos
@@ -1734,9 +1628,9 @@ shared:
   -
     type: var
     var_name: L:DAVTRON_BRIGHTNESS
-  -
-    type: var
-    var_name: L:RNAV_ENTER_LIGHT
+# -
+#   type: var
+#   var_name: L:RNAV_ENTER_LIGHT
   -
     type: var
     var_name: L:GENERIC_AUTOPILOT_NAV1_NAV2
@@ -1914,6 +1808,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:AUTOPILOT_PREFLIGHT_CHECK
+# -
+#   type: var
+#   var_name: L:YourControlsServerRunning
 # -
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_SPEED

@@ -1,4 +1,4 @@
-# Version 2.0.7
+# Version 2.1.0
 
 include:
   - definitions/modules/Instruments/AS_FES_FCU.yaml
@@ -77,19 +77,10 @@ shared:
     var_name: L:VARIO_TONE_ACTIVE
   -
     type: var
-    var_name: L:YAWSTRING_1
-  -
-    type: var
-    var_name: L:BALLAST_ENABLE
-  -
-    type: var
-    var_name: L:WaterBallastRatio
-  -
-    type: var
     var_name: L:UNITS_IMPERIAL
   -
     type: var
-    var_name: L:NAV_SWAP
+    var_name: L:TEMP_IMPERIAL
   -
     type: var
     var_name: L:NAV_BRIGHTNESS
@@ -105,49 +96,16 @@ shared:
     var_name: L:NAV_TOGGLE
   -
     type: var
-    var_name: L:COVER_TOGGLE
-  -
-    type: var
-    var_name: L:NAV_SCREEN
-  -
-    type: var
-    var_name: L:NOTICE_VIS
-# -
-#   type: var
-#   var_name: L:PILOT_ACTIVE
-  -
-    type: var
-    var_name: L:RELEASE_CABLE_NEW
-  -
-    type: var
-    var_name: L:RELEASE_CABLE_OLD
-  -
-    type: var
-    var_name: L:TEMP_IMPERIAL
-  -
-    type: var
-    var_name: L:WINDOW_LARGE
-  -
-    type: var
-    var_name: L:WINDOW_SMALL
-# -
-#   type: var
-#   var_name: L:WINDOW_SMALL_VOLUME
-# -
-#   type: var
-#   var_name: L:WINDOW_LARGE_VOLUME
-  -
-    type: var
-    var_name: L:OXYGEN_KNOB
-# -
-#   type: var
-#   var_name: L:OXYGEN_SOUND
+    var_name: L:GUARD_OPEN_ALL
 # -
 #   type: var
 #   var_name: L:YOKE_TOGGLE
   -
     type: var
     var_name: L:YAW_TOGGLE
+# -
+#   type: var
+#   var_name: L:PILOT_ACTIVE
   -
     type: var
     var_name: L:COMPASS_ACTIVE
@@ -159,70 +117,110 @@ shared:
     var_name: L:GOPRO_ACTIVE
 # -
 #   type: var
-#   var_name: L:Vibration1
-# -
-#   type: var
-#   var_name: L:Vibration2
-# -
-#   type: var
-#   var_name: L:LVAR_SPOILERS_PERCENT
-# -
-#   type: var
-#   var_name: L:SPOILERS_OPEN_LVAR
-# -
-#   type: var
-#   var_name: L:SPOILERS_CLOSE_LVAR
-# -
-#   type: var
-#   var_name: L:SOUND_SPOILERS
-# -
-#   type: var
-#   var_name: L:HANDLING_ElevatorTrim
-# -
-#   type: var
-#   var_name: L:SOUND_GEAR
-  -
-    type: var
-    var_name: L:IsFES
-# -
-#   type: var
 #   var_name: L:AdverseYaw
-# -
-#   type: var
-#   var_name: L:CANOPY_PERCENT_SOUND
-  -
-    type: var
-    var_name: L:CANOPY_OPEN
-  -
-    type: var
-    var_name: L:CANOPY_CLOSE
-# -
-#   type: var
-#   var_name: L:AC_OPEN_VOLUME
-  -
-    type: var
-    var_name: L:GUARD_OPEN_ALL
   -
     type: var
     var_name: L:BEZEL_CAL_ANALOG
+    unreliable: true
+  -
+    type: var
+    var_name: L:BEZEL_CAL
+    unreliable: true
+  -
+    type: var
+    var_name: L:WaterBallastRatio
+  -
+    type: var
+    var_name: L:OXYGEN_QTY
+    unreliable: true
+  -
+    type: var
+    var_name: L:VENT_MOVE
+    unreliable: true
+  -
+    type: var
+    var_name: L:S80_MODE
+  -
+    type: var
+    var_name: L:GUARD_OPEN_FES
+# -
+#   type: var
+#   var_name: L:HANDLING_ElevatorTrim
+  -
+    type: var
+    var_name: L:APRON_WARNING
+  -
+    type: var
+    var_name: L:WINDOW_LARGE
+  -
+    type: var
+    var_name: L:WINDOW_SMALL
+  -
+    type: var
+    var_name: L:OXYGEN_KNOB
   -
     type: var
     var_name: L:S80_UP_BUTTON
-  -
-    type: var
-    var_name: L:S80_ENTER_BUTTON
   -
     type: var
     var_name: L:S80_DOWN_BUTTON
   -
     type: var
     var_name: L:S80_SD_CARD
+# -
+#   type: var
+#   var_name: L:IsFES
   -
     type: var
-    var_name: L:VENT_MOVE
+    var_name: L:NAV_SWAP
   -
     type: var
-    var_name: L:OXYGEN_QTY
+    var_name: L:KA_SOUND_ON
+  -
+    type: var
+    var_name: L:TOW_HANDLE
+# -
+#   type: var
+#   var_name: L:Vibration1
+# -
+#   type: var
+#   var_name: L:Vibration2
+# -
+#   type: var
+#   var_name: L:SPOILERS_CLOSE_LVAR
+# -
+#   type: var
+#   var_name: L:SPOILERS_OPEN_LVAR
+# -
+#   type: var
+#   var_name: L:SOUND_SPOILERS
+# -
+#   type: var
+#   var_name: L:SOUND_GEAR
+# -
+#   type: var
+#   var_name: L:WINDOW_SMALL_VOLUME
+# -
+#   type: var
+#   var_name: L:WINDOW_LARGE_VOLUME
+# -
+#   type: var
+#   var_name: L:CANOPY_CLOSE
+# -
+#   type: var
+#   var_name: L:CANOPY_OPEN
+  -
+    type: var
+    var_name: L:COVER_TOGGLE
+# -
+#   type: var
+#   var_name: L:OXYGEN_SOUND
+# -
+#   type: var
+#   var_name: L:AC_OPEN_VOLUME
+  -
+    type: var
+    var_name: L:NAV_SCREEN
 # -
 #   type: var
 #   var_name: L:SIM_ACTIVE
@@ -247,9 +245,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:TOTAL ENERGY
-  -
-    type: var
-    var_name: L:VARIO_POWER_STATUS
+# -
+#   type: var
+#   var_name: L:VARIO_POWER_STATUS
 # -
 #   type: var
 #   var_name: L:VARIO_NEEDLE
@@ -276,34 +274,94 @@ shared:
 #   var_name: L:AUTO_PILOT_COURSE_DIFF
 # -
 #   type: var
-#   var_name: L:YAWSTRING_TIP_ANIM
-# -
-#   type: var
 #   var_name: L:YAWSTRING_X_DEG
 # -
 #   type: var
 #   var_name: L:YAWSTRING_X_ANIM
+# -
+#   type: var
+#   var_name: L:YAWSTRING_TIP_ANIM
   -
     type: var
-    var_name: L:BEZEL_CAL
-  -
-    type: var
-    var_name: L:KA_SOUND_ON
-  -
-    type: var
-    var_name: L:TOW_HANDLE
+    var_name: L:S80_ENTER_BUTTON
+# -
+#   type: var
+#   var_name: L:VARIO_IS_RUNNING
 # -
 #   type: var
 #   var_name: L:NETTO
-  -
-    type: var
-    var_name: L:FES_SWITCH
-  -
-    type: var
-    var_name: L:CANOPY_VOLUME
 # -
 #   type: var
 #   var_name: L:YourControlsPanelId
+# -
+#   type: var
+#   var_name: L:LOCAL_milliBar_to_inHg
+# -
+#   type: var
+#   var_name: L:XMLVAR_STBYBattery_Test
+# -
+#   type: var
+#   var_name: L:XMLVAR_BatterySTBY_SwitchState
+# -
+#   type: var
+#   var_name: L:XMLVAR_STBYBattery_IsHeld
+# -
+#   type: var
+#   var_name: L:XMLVAR_Magneto_Starter_IsHeld
+# -
+#   type: var
+#   var_name: L:ENG FUEL VALVE:1
+# -
+#   type: var
+#   var_name: L:XMLVAR_ElevatorTrim_Switch_Yoke
+# -
+#   type: var
+#   var_name: L:XMLVAR_ElevatorTrim_Yoke_SwitchStateTimer
+# -
+#   type: var
+#   var_name: L:ParkingBrake_Position
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_Brightness
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_Brightness_IsAuto
+  -
+    type: var
+    var_name: L:XMLVAR_Autopilot_1_Status
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_Brightness
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_Brightness_IsAuto
+  -
+    type: var
+    var_name: L:XMLVAR_Autopilot_2_Status
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_STATE
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverThrottleHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverMixtureHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
   -
     type: var
     var_name: L:RADAR_PING
@@ -673,9 +731,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:THUMB_ANIM
-# -
-#   type: var
-#   var_name: L:MAP_SHOWN_FLIGHTPLAN_INDEX
+  -
+    type: var
+    var_name: L:AP_NAV_SELECT_TMP
 # -
 #   type: var
 #   var_name: L:MAP_SHOW_TEMPORARY_FLIGHT_PLAN
@@ -684,10 +742,10 @@ shared:
 #   var_name: L:FLIGHTPLAN_USE_DECEL_WAYPOINT
 # -
 #   type: var
-#   var_name: L:tablet_script_ScreenLuminosity
+#   var_name: L:MAP_SHOWN_FLIGHTPLAN_INDEX
 # -
 #   type: var
-#   var_name: L:tablet_script_State
+#   var_name: L:YourControlsServerRunning
 # -
 #   type: var
 #   var_name: L:AS1000_AttitudeBackup_ScreenLuminosity
@@ -702,22 +760,16 @@ shared:
 #   var_name: L:Aera_State
 # -
 #   type: var
-#   var_name: L:WasmInstrument_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:WasmInstrument_State
-# -
-#   type: var
-#   var_name: L:AS92_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS92_State
-# -
-#   type: var
 #   var_name: L:AS21_ScreenLuminosity
 # -
 #   type: var
 #   var_name: L:AS21_State
+# -
+#   type: var
+#   var_name: L:WasmInstrument_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:WasmInstrument_State
 # -
 #   type: var
 #   var_name: L:lxnav_v80_script_ScreenLuminosity
@@ -726,20 +778,65 @@ shared:
 #   var_name: L:lxnav_v80_script_State
 # -
 #   type: var
+#   var_name: L:AS5_1_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS5_1_State
+# -
+#   type: var
+#   var_name: L:tablet_script_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:tablet_script_State
+# -
+#   type: var
+#   var_name: L:AS92_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS92_State
+# -
+#   type: var
 #   var_name: L:HUD_AP_SELECTED_SPEED
 # -
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_ALTITUDE
 
-# - # FES (trimmed)
+# - # FES
 #   type: var
 #   var_name: L:PropAngle
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
   -
     type: var
-    var_name: L:GUARD_OPEN_FES
+    var_name: L:FES_SWITCH
+# -
+#   type: var
+#   var_name: L:XMLVAR_IE_Throttle_VR_Handled
+# -
+#   type: var
+#   var_name: L:XMLVAR_IE_Throttle_VR_Value
+# -
+#   type: var
+#   var_name: L:DiagGroundDistFeet
+# -
+#   type: var
+#   var_name: L:DiagGroundDistMeters
+# -
+#   type: var
+#   var_name: L:DiagGroundVelocity
+# -
+#   type: var
+#   var_name: L:DiagGroundDistFeet50
+# -
+#   type: var
+#   var_name: L:DiagGroundDistMeters15
+# -
+#   type: var
+#   var_name: L:DiagGlideRatio
+# -
+#   type: var
+#   var_name: L:DiagGlideRatioAvg
+# -
+#   type: var
+#   var_name: L:DiagGForce
 # -
 #   type: var
 #   var_name: L:FES_ALARM
@@ -749,6 +846,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:FES_ERROR
+# -
+#   type: var
+#   var_name: L:fes_fcu_script_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:fes_fcu_script_State
 
 server:
   -

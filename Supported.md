@@ -77,7 +77,7 @@
 - FlyInside - Bell 47G-2 # v2.73
 - Flysimware - Cessna 414AW Chancellor # v4.7.0
 - Flysimware - Grumman G-44A Widgeon # v1.8.2
-- Got Friends - Discus-2c # v2.0.7
+- Got Friends - Discus-2c # v2.1.0
 - Got Friends - Edgley EA-7 Optica # v1.0.7
 - Headwind Simulations - Airbus A330-900neo # v0.6.1
 - Headwind Simulations - Sukhoi SuperJet 100-95 # v0.6.1

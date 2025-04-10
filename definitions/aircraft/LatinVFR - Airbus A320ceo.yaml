@@ -1,4 +1,4 @@
-# Version 1.1.8 (based on Asobo A320)
+# Version 2.1.9 (based on Asobo A320)
 
 include:
   - definitions/aircraft/Asobo Studio - Airbus A320neo.yaml
@@ -15,7 +15,19 @@ shared:
     var_name: L:LVFR_ADIRS_FORCE_ALIGN
   -
     type: var
+    var_name: L:LVFR_IRS_1_SWITCH_STATE
+  -
+    type: var
+    var_name: L:LVFR_IRS_2_SWITCH_STATE
+  -
+    type: var
+    var_name: L:LVFR_IRS_3_SWITCH_STATE
+  -
+    type: var
     var_name: L:LVFR_Source_Nav1
+  -
+    type: var
+    var_name: L:LVFR_Source_Nav2
   -
     type: var
     var_name: L:EFB_ON
@@ -55,18 +67,6 @@ shared:
   -
     type: var
     var_name: L:FLIGHT_DECK_DOOR
-  -
-    type: var
-    var_name: L:LVFR_Source_Nav2
-  -
-    type: var
-    var_name: L:LVFR_IRS_1_SWITCH_STATE
-  -
-    type: var
-    var_name: L:LVFR_IRS_2_SWITCH_STATE
-  -
-    type: var
-    var_name: L:LVFR_IRS_3_SWITCH_STATE
 # -
 #   type: var
 #   var_name: L:LVFR_RMI
@@ -81,9 +81,6 @@ shared:
     var_name: L:LVFR_ADIRS3_STATE
 # -
 #   type: var
-#   var_name: L:LVFR_CUSTOM_VNAV_PATH_DESCENT
-# -
-#   type: var
 #   var_name: L:LVFR_SECTOR_TEMP_CKPT
 # -
 #   type: var
@@ -91,12 +88,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:LVFR_SECTOR_TEMP_AFT
-# -
-#   type: var
-#   var_name: L:LVFR_EFB_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_EFB_State
   -
     type: var
     var_name: L:LVFR_SYSTEM_SIMBRIEF_IMPORTER_STATE
@@ -153,16 +144,25 @@ shared:
 #   var_name: L:LVFR_Audio:DH
 # -
 #   type: var
-#   var_name: L:LVFR_DMER_ScreenLuminosity
+#   var_name: L:LVFR_CUSTOM_VNAV_PATH_DESCENT
 # -
 #   type: var
-#   var_name: L:LVFR_DMER_State
+#   var_name: L:LVFR_EFB_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_EFB_State
 # -
 #   type: var
 #   var_name: L:LVFR_DMEL_ScreenLuminosity
 # -
 #   type: var
 #   var_name: L:LVFR_DMEL_State
+# -
+#   type: var
+#   var_name: L:LVFR_DMER_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_DMER_State
 
 server:
   -
@@ -191,5 +191,13 @@ server:
     unreliable: true
 
 ignore:
-  - LVFR_EFB#TotalFuelSlider
-  - LVFR_EFB#TotalPaxSlider
+  - LVFR_Airbus_CDU_AP_INC_SPEED
+  - LVFR_Airbus_CDU_AP_DEC_SPEED
+  - LVFR_Airbus_CDU_AP_INC_HEADING
+  - LVFR_Airbus_CDU_AP_DEC_HEADING
+  - LVFR_Airbus_CDU_AP_INC_ALT
+  - LVFR_Airbus_CDU_AP_DEC_ALT
+  - LVFR_Airbus_FCU_VS_INC
+  - LVFR_Airbus_FCU_VS_DEC
+
+  - LVFR_Airbus_EXPEDITE_MODE

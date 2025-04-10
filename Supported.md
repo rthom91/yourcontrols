@@ -92,11 +92,11 @@
 - jXt Simulations - Bell 429 GlobalRanger # v0.9.7
 - jXt Simulations - Bell 505 Jet Ranger X # v0.3.1
 - Kurorin - Boeing 787-8 Dreamliner # v3.0.1
-- LatinVFR - Airbus A318ceo # v2.1.10
-- LatinVFR - Airbus A319ceo # v2.1.10
-- LatinVFR - Airbus A320ceo # v1.1.8
-- LatinVFR - Airbus A321neo # v2.1.7
-- LatinVFR - Airbus A330-900neo # v1.0.7
+- LatinVFR - Airbus A318ceo # v2.1.11
+- LatinVFR - Airbus A319ceo # v2.1.11
+- LatinVFR - Airbus A320ceo # v1.1.9
+- LatinVFR - Airbus A321neo # v2.1.8
+- LatinVFR - Airbus A330-900neo # v1.0.10
 - LightSim - Stream # v1.3
 - MADolo Simulations - Schleicher AS 33 Me # v2.0.2
 - Microsoft & Aeroplane Heaven - Douglas DC-3 # v1.2.5 / 1.2.5 Enhanced

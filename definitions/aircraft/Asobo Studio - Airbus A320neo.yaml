@@ -7,7 +7,6 @@ include:
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/navigation.yaml
-  - definitions/modules/pressurization.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/transponder.yaml
@@ -133,6 +132,29 @@ shared:
     type: event
     event_name: AP_LOC_HOLD
 
+  - # Bleeds
+    type: NumSet
+    var_name: A:BLEED AIR APU
+    var_units: Bool
+    var_type: i32
+    event_name: APU_BLEED_AIR_SOURCE_SET
+  -
+    type: NumSet
+    var_name: A:BLEED AIR ENGINE:1
+    var_units: Bool
+    var_type: i32
+    event_name: ENGINE_BLEED_AIR_SOURCE_SET
+    event_param: 1
+    index_reversed: true
+  -
+    type: NumSet
+    var_name: A:BLEED AIR ENGINE:2
+    var_units: Bool
+    var_type: i32
+    event_name: ENGINE_BLEED_AIR_SOURCE_SET
+    event_param: 2
+    index_reversed: true
+
   - # Deice
     type: NumSet
     var_name: A:PITOT HEAT SWITCH
@@ -225,36 +247,6 @@ shared:
 
   - # Fuel
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:1
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
-    event_param: 1
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:2
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
-    event_param: 2
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:3
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 3
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:8
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 8
-  -
-    type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:1
     var_units: Bool
     var_type: bool
@@ -295,6 +287,36 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 6
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_OPEN
+    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_param: 1
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:2
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_OPEN
+    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_param: 2
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:3
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 3
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:8
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 8
 
   - # Passengers
     type: ToggleSwitch

@@ -1,10 +1,10 @@
-# Version 1.0.7 (based on Asobo A320)
+# Version 1.0.10 (based on Asobo A320)
 
 include:
   - definitions/aircraft/Asobo Studio - Airbus A320neo.yaml
 
 shared:
-  - # Doors
+  - # 4L Cabin Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:6
     var_units: Bool
@@ -12,7 +12,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 7
     cancel_h_events: true
-  -
+  - # Bulk Cargo Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:7
     var_units: Bool
@@ -20,7 +20,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 8
     cancel_h_events: true
-  -
+  - # 2R Cabin Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:10
     var_units: Bool
@@ -28,7 +28,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 11
     cancel_h_events: true
-  -
+  - # 3R Cabin Door (stacked)
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:11
     var_units: Bool
@@ -36,7 +36,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 12
     cancel_h_events: true
-  -
+  - # 3R Cabin Door (stacked)
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:12
     var_units: Bool
@@ -44,6 +44,98 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 13
     cancel_h_events: true
+
+  - # APU BAT
+    type: CustomCalculator
+    get: 12 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:6, Bool)
+    set: 6 12 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
+  - # EXT B
+    type: NumSet
+    var_name: A:EXTERNAL POWER ON:2
+    var_units: Bool
+    var_type: i32
+    event_name: SET_EXTERNAL_POWER
+    event_param: 2
+    index_reversed: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM PUMP SWITCH:7
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 7
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM PUMP SWITCH:8
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 8
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM PUMP SWITCH:9
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_PUMP_ON
+    off_event_name: FUELSYSTEM_PUMP_OFF
+    event_param: 9
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:4
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 4
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:5
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 5
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:13
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 13
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:14
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 14
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:15
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 15
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:16
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 16
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:23
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 23
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:24
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 24
 
   - # Interior
     type: ToggleSwitch
@@ -87,6 +179,24 @@ shared:
   -
     type: var
     var_name: L:LVFR_ADIRS_FORCE_ALIGN
+# -
+#   type: var
+#   var_name: L:LVFR_FLIGHT_PHASE
+  -
+    type: var
+    var_name: L:LVFR_AUDIO_PAX_ACTIVE
+  -
+    type: var
+    var_name: L:LVFR_AUDIO_PAX_LANGUAGE
+  -
+    type: var
+    var_name: L:LVFR_IRS_1_SWITCH_STATE
+  -
+    type: var
+    var_name: L:LVFR_IRS_2_SWITCH_STATE
+  -
+    type: var
+    var_name: L:LVFR_IRS_3_SWITCH_STATE
   -
     type: var
     var_name: L:XMLVAR_ELEC_BATSWITCH_State
@@ -148,15 +258,6 @@ shared:
   -
     type: var
     var_name: L:LVFR_R_READ_LIGHT
-  -
-    type: var
-    var_name: L:LVFR_IRS_1_SWITCH_STATE
-  -
-    type: var
-    var_name: L:LVFR_IRS_2_SWITCH_STATE
-  -
-    type: var
-    var_name: L:LVFR_IRS_3_SWITCH_STATE
 # -
 #   type: var
 #   var_name: L:XMLVAR_IE_Throttle_Reverser_VR_Handled
@@ -166,6 +267,69 @@ shared:
 # -
 #   type: var
 #   var_name: L:ELECTRICAL_ExternalPower_2
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TARGET_CG
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_O
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_CENTER_TRANSFER_RUNNING
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_A
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_B
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_C
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_D
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_E
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_OUTER_TRANSFER_RUNNING
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TEST_CG
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TEST_WEIGHT
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TEST_ALTITUDE
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TEST_RCG
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_TRANSFER_FWD_POSSIBLE
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_MODE_CRUISE
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_TRANSFER_MODE
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_FWD_TRANSFER_RUNNING
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_MODE_DESCENT
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_MODE
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_MODE_SUPER
+# -
+#   type: var
+#   var_name: L:LVFR_FUEL_TRIM_MODE_SUPER2
 # -
 #   type: var
 #   var_name: L:LVFR_RMI
@@ -180,19 +344,16 @@ shared:
     var_name: L:LVFR_ADIRS3_STATE
 # -
 #   type: var
-#   var_name: L:LVFR_Airbus_PFD_ScreenLuminosity
+#   var_name: L:LVFR_Airbus_MFD_ScreenLuminosity
 # -
 #   type: var
-#   var_name: L:LVFR_Airbus_PFD_State
+#   var_name: L:LVFR_Airbus_MFD_State
 # -
 #   type: var
-#   var_name: L:LVFR_CUSTOM_VNAV_PATH_DESCENT
+#   var_name: L:LVFR_Airbus_EICAS_2_ScreenLuminosity
 # -
 #   type: var
-#   var_name: L:LVFR_Airbus_EICAS_1_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_EICAS_1_State
+#   var_name: L:LVFR_Airbus_EICAS_2_State
 # -
 #   type: var
 #   var_name: L:LVFR_SECTOR_TEMP_CKPT
@@ -220,6 +381,48 @@ shared:
 # -
 #   type: var
 #   var_name: L:LVFR_SECTOR_TEMP_BULK
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_Clock_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_Clock_State
+  -
+    type: var
+    var_name: L:LVFR_SYSTEM_SIMBRIEF_IMPORTER_STATE
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_CDU_1_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_CDU_1_State
+# -
+#   type: var
+#   var_name: L:LVFR_BAT_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_BAT_State
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_CDU_3_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_CDU_3_State
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_PFD_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_PFD_State
+# -
+#   type: var
+#   var_name: L:LVFR_CUSTOM_VNAV_PATH_DESCENT
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_EICAS_1_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_Airbus_EICAS_1_State
 # -
 #   type: var
 #   var_name: L:LVFR_Airbus_FCU_ScreenLuminosity
@@ -279,43 +482,13 @@ shared:
 #   var_name: L:LVFR_Audio:DH
 # -
 #   type: var
-#   var_name: L:LVFR_Airbus_MFD_ScreenLuminosity
+#   var_name: L:LVFR_PAX_ScreenLuminosity
 # -
 #   type: var
-#   var_name: L:LVFR_Airbus_MFD_State
+#   var_name: L:LVFR_PAX_State
 # -
 #   type: var
-#   var_name: L:LVFR_Airbus_EICAS_2_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_EICAS_2_State
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_Clock_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_Clock_State
-  -
-    type: var
-    var_name: L:LVFR_SYSTEM_SIMBRIEF_IMPORTER_STATE
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_CDU_1_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_CDU_1_State
-# -
-#   type: var
-#   var_name: L:LVFR_BAT_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_BAT_State
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_CDU_3_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:LVFR_Airbus_CDU_3_State
+#   var_name: L:AIRLINER_CRUISE_ALTITUDE
 # -
 #   type: var
 #   var_name: L:LVFR_Audio:DHBottomBorder
@@ -351,3 +524,15 @@ server:
     var_units: Pounds
     var_type: f64
     unreliable: true
+
+ignore:
+  - LVFR_Airbus_CDU_AP_INC_SPEED
+  - LVFR_Airbus_CDU_AP_DEC_SPEED
+  - LVFR_Airbus_CDU_AP_INC_HEADING
+  - LVFR_Airbus_CDU_AP_DEC_HEADING
+  - LVFR_Airbus_CDU_AP_INC_ALT
+  - LVFR_Airbus_CDU_AP_DEC_ALT
+  - LVFR_Airbus_FCU_VS_INC
+  - LVFR_Airbus_FCU_VS_DEC
+
+  - LVFR_Airbus_EXPEDITE_MODE

@@ -81,7 +81,7 @@
 - Got Friends - Edgley EA-7 Optica # v1.0.7
 - Headwind Simulations - Airbus A330-900neo # v0.6.1
 - Headwind Simulations - Sukhoi SuperJet 100-95 # v0.6.1
-- Horizon Simulations - Boeing 787-9 Dreamliner # v1.0.1
+- Horizon Simulations - Boeing 787-9 Dreamliner # v1.2.1
 - HypePerformanceGroup - Airbus H135 # Build 447
 - IRIS Simulations - Grob G115E Tutor T.1 # v2.4.0
 - IRIS Simulations - Jabiru J160 & J170 # v1.5.6

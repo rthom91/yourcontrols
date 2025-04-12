@@ -136,7 +136,7 @@
 - Salty Simulations - Boeing 747-8 Intercontinental # v0.6.0
 - Shrike Simulations - MD Helicopters 530F # v1.0.2
 - Sim Skunk Works - Lockheed TF-104G Starfighter # v3.3.11
-- SimWorks Studios - Daher Kodiak 100 # v1.4.0
+- SimWorks Studios - Daher Kodiak 100 # v1.5.4
 - SimWorks Studios - Van's RV-10 # v1.1.0
 - SimWorks Studios - Van's RV-14 # v1.4.0
 - VrilleAPlat - Cessna A-37B Dragonfly # v1.1.2

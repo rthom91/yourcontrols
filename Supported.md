@@ -47,8 +47,8 @@
 - Black Square - Beechcraft King Air 350i # v0.1.4
 - Black Square - Cessna 208B Grand Caravan # v0.1.5
 - Black Square - Velocity XL # v0.1.2
-- BlackBox Simulation - BN-2 Islander # v2.1.2
-- BlackBox Simulation - BN-3 Trislander # v1.1.6
+- BlackBox Simulation - BN-2 Islander # v2.2.2
+- BlackBox Simulation - BN-3 Trislander # v1.2.0
 - Carenado - Cessna 170B # v2.0.0
 - Carenado - Cessna 337H Skymaster II # v2.0.1
 - Carenado - Cessna R182 II Skylane RG # v1.0.2

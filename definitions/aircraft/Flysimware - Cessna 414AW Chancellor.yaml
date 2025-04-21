@@ -78,18 +78,22 @@ shared:
     unreliable: true
   -
     type: NumSet
-    var_name: A:GENERAL ENG MIXTURE LEVER POSITION:1
-    var_units: Position 16k
+    var_name: L:MIXTURE1_Pos
+    var_units: Number
     var_type: f64
-    event_name: MIXTURE1_SET
+    multiply_by: 328
+    add_by: -16384
+    event_name: AXIS_MIXTURE1_SET
     use_calculator: true
     unreliable: true
   -
     type: NumSet
-    var_name: A:GENERAL ENG MIXTURE LEVER POSITION:2
-    var_units: Position 16k
+    var_name: L:MIXTURE2_Pos
+    var_units: Number
     var_type: f64
-    event_name: MIXTURE2_SET
+    multiply_by: 328
+    add_by: -16384
+    event_name: AXIS_MIXTURE2_SET
     use_calculator: true
     unreliable: true
 

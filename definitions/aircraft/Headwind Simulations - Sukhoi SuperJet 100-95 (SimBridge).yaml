@@ -3028,7 +3028,6 @@ shared:
       equals:
         F64: 1.0
     use_calculator: true
-    unreliable: true
   -
     type: NumSet
     var_name: L:A32NX_AUTOPILOT_VS_SELECTED
@@ -3042,7 +3041,6 @@ shared:
       equals:
         F64: 0.0
     use_calculator: true
-    unreliable: true
 # -
 #   type: var
 #   var_name: L:A32NX_FMA_MODE_REVERSION
@@ -6426,9 +6424,9 @@ shared:
   -
     type: var
     var_name: L:A32NX_ELEC_IDG2_TOGGLE
-  -
-    type: var
-    var_name: L:A32NX_PFD_SHOW_SPEED_MARGINS
+# -
+#   type: var
+#   var_name: L:A32NX_PFD_SHOW_SPEED_MARGINS
 # -
 #   type: var
 #   var_name: L:A32NX_PFD_UPPER_SPEED_MARGIN

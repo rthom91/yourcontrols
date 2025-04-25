@@ -6504,27 +6504,38 @@ master:
     type: var
     var_name: L:A32NX_FUEL_LEFT_PRE
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:A32NX_FUEL_RIGHT_PRE
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:A32NX_FUEL_AUX_LEFT_PRE
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:A32NX_FUEL_AUX_RIGHT_PRE
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:A32NX_FUEL_CENTER_PRE
     var_type: i32
-    unreliable: true
+    interpolate: Default
+
+  - # Fuel used
+    type: var
+    var_name: L:A32NX_FUEL_USED:1
+    var_type: i32
+    interpolate: Default
+  -
+    type: var
+    var_name: L:A32NX_FUEL_USED:2
+    var_type: i32
+    interpolate: Default
 
 ignore:
   - A32NX_RMP_L_INNER_KNOB_TURNED_CLOCKWISE

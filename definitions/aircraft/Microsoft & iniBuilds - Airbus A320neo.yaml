@@ -9334,10 +9334,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_BARO3_PRESSURE
-  -
-    type: var
-    var_name: L:INI_TOTAL_FUEL_WEIGHT
-    cancel_h_events: true
+# -
+#   type: var
+#   var_name: L:INI_TOTAL_FUEL_WEIGHT
 # -
 #   type: var
 #   var_name: L:INI_THROTTLE_MODE_ACTIVE
@@ -12697,32 +12696,32 @@ master:
     type: var
     var_name: L:INI_FUEL_WEIGHT_LEFT_OUTER
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:INI_FUEL_WEIGHT_LEFT_INNER
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:INI_FUEL_WEIGHT_RIGHT_OUTER
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:INI_FUEL_WEIGHT_RIGHT_INNER
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:INI_FUEL_WEIGHT_CENTER
     var_type: i32
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:INI_FUEL_WEIGHT_TRIM
     var_type: i32
-    unreliable: true
+    interpolate: Default
 
 ignore:
 # EFB Dashboard
@@ -12738,10 +12737,12 @@ ignore:
   - iniEfbA320Neo#pax
   - iniEfbA320Neo#paxText
   - iniEfbA320Neo#zfw
+  - iniEfbA320Neo#zfwDirect
   - iniEfbA320Neo#zfwText
   - iniEfbA320Neo#fuel
   - iniEfbA320Neo#fuelText
   - iniEfbA320Neo#enterZFWText
+  - iniEfbA320Neo#applyingLoad
   - iniEfbA320Neo#applyLoadButton
   - iniEfbA320Neo#startLoad_instant
 # EFB Takeoff

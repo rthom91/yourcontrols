@@ -524,6 +524,43 @@ shared:
     event_name: CABIN_LIGHTS_SET
     event_param: 6
 
+  - # Payload
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:1
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:2
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:3
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:4
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:5
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:6
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+
   - # LVAR's (trimmed)
     type: var
     var_name: L:Float_Switch_State
@@ -1343,7 +1380,7 @@ shared:
     var_name: L:My_Prop_pitch_Electrical
 
 master:
-  -
+  - # Throttles
     type: var
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:5
     var_units: Position 16k
@@ -1356,8 +1393,7 @@ master:
     var_type: f64
     unreliable: true
 
-server:
-  -
+  - # Fuel
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:1
     var_units: Percent
@@ -1427,41 +1463,5 @@ server:
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:12
     var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:3
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:4
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:5
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:6
-    var_units: Pounds
     var_type: f64
     unreliable: true

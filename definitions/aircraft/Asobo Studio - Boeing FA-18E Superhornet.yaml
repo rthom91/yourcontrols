@@ -173,6 +173,13 @@ shared:
     var_type: i32
     event_name: G_LIMITER_SET
 
+  - # Payload
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:1
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+
   - # LVAR's
     type: var
     var_name: L:XMLVAR_AS04F_UFCD_1_Brightness
@@ -539,7 +546,7 @@ shared:
     type: var
     var_name: L:HUD_AP_SELECTED_ALTITUDE
 
-server:
+master:
   -
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:1
@@ -574,12 +581,6 @@ server:
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:6
     var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
     var_type: f64
     unreliable: true
 

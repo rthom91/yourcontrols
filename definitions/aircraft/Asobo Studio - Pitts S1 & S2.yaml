@@ -11,6 +11,7 @@ include:
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/navigation.yaml
+  - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/trim.yaml
@@ -22,23 +23,3 @@ shared:
     var_units: Bool
     var_type: i32
     event_name: ANTI_ICE_SET_ENG1
-
-server:
-  -
-    type: var
-    var_name: A:FUEL TANK CENTER LEVEL
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUEL TANK CENTER2 LEVEL
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true

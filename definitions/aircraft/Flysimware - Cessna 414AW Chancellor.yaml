@@ -1971,7 +1971,7 @@ shared:
 #   var_name: L:MARKER_BEACON_TIMER
 
 master:
-  -
+  - # Throttles
     type: NumSet
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:1
     var_units: Position 16k
@@ -1986,8 +1986,7 @@ master:
     event_name: THROTTLE2_SET
     unreliable: true
 
-server:
-  -
+  - # Fuel
     type: var
     var_name: A:FUEL TANK LEFT MAIN LEVEL
     var_units: Percent

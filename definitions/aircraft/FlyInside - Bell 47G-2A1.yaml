@@ -5,6 +5,7 @@ include:
   - definitions/modules/Instruments/AS_KT76C.yaml
   - definitions/modules/general.yaml
   - definitions/modules/navigation.yaml
+  - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/trim.yaml
 
@@ -407,30 +408,4 @@ master:
     multiply_by: -1
     event_name: AXIS_RUDDER_SET
     use_calculator: true
-    unreliable: true
-
-server:
-  -
-    type: var
-    var_name: A:FUEL TANK LEFT MAIN LEVEL
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUEL TANK RIGHT MAIN LEVEL
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
     unreliable: true

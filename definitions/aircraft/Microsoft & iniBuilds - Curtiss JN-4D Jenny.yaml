@@ -6,6 +6,7 @@ include:
   - definitions/modules/engines.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
+  - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/transponder.yaml
   - definitions/modules/trim.yaml
@@ -83,26 +84,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:JN4_ENG_MAGNETO_R
-
-server:
-  -
-    type: var
-    var_name: A:FUEL TANK CENTER LEVEL
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
 
 ignore:
   - jn4-ini-efb#9

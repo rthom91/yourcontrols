@@ -164,32 +164,6 @@ shared:
 #   type: var
 #   var_name: L:LVFR_DMER_State
 
-server:
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:7
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:8
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:9
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:10
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-
 ignore:
   - LVFR_Airbus_CDU_AP_INC_SPEED
   - LVFR_Airbus_CDU_AP_DEC_SPEED

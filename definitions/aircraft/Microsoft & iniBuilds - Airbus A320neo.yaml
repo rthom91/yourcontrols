@@ -12693,8 +12693,7 @@ master:
     use_calculator: true
     unreliable: true
 
-server:
-  -
+  - # Fuel
     type: var
     var_name: L:INI_FUEL_WEIGHT_LEFT_OUTER
     var_type: i32

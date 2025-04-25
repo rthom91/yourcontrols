@@ -289,6 +289,19 @@ shared:
     event_name: PEDESTRAL_LIGHTS_SET
     event_param: 0
 
+  - # Payload
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:1
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:2
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+
   - # LVAR's
     type: var
     var_name: L:InversionPedales
@@ -1044,7 +1057,7 @@ shared:
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_ALTITUDE
 
-server:
+master:
   -
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:1
@@ -1061,17 +1074,5 @@ server:
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:3
     var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
     var_type: f64
     unreliable: true

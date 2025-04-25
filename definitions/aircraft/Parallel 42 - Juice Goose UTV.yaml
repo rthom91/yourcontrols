@@ -3,6 +3,7 @@
 include:
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
+  - definitions/modules/payload.yaml
 
 shared:
   - # Doors
@@ -442,30 +443,4 @@ master:
     multiply_by: 16384
     event_name: AXIS_RUDDER_SET
     use_calculator: true
-    unreliable: true
-
-server:
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:3
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:4
-    var_units: Pounds
-    var_type: f64
     unreliable: true

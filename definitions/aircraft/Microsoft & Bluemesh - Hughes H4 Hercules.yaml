@@ -298,6 +298,25 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
 
+  - # Payload
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:1
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:2
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+  -
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:3
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+
   - # LVAR's (trimmed)
     type: var
     var_name: L:CARRIAGE_HERCULES_SET
@@ -574,7 +593,7 @@ shared:
     var_name: L:BTCI_CTDN
 
 master:
-  -
+  - # Throttles
     type: var
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:5
     var_units: Position 16k
@@ -599,8 +618,7 @@ master:
     var_type: f64
     unreliable: true
 
-server:
-  -
+  - # Fuel
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:1
     var_units: Percent
@@ -682,23 +700,5 @@ server:
     type: var
     var_name: A:FUELSYSTEM TANK LEVEL:14
     var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:3
-    var_units: Pounds
     var_type: f64
     unreliable: true

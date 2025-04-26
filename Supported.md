@@ -73,14 +73,14 @@
 - FlightFX - Honda HA-420 HondaJet # v2.1.2
 - FlightSim Studio - SeaRey Elite # v1.0.3
 - FlightSim Studio - Tecnam P2006T MkII # v1.1.2
-- FlyByWire Simulations - Airbus A320neo # v0.12.3
+- FlyByWire Simulations - Airbus A320-251N # v0.12.3
 - FlyByWire Simulations - Airbus A380-842 # v0.12.3
 - FlyInside - Bell 47G-2 # v2.73
 - Flysimware - Cessna 414AW Chancellor # v4.7.0
 - Flysimware - Grumman G-44A Widgeon # v1.8.2
 - Got Friends - Discus-2c # v2.1.0
 - Got Friends - Edgley EA-7 Optica # v1.0.7
-- Headwind Simulations - Airbus A330-900neo # v0.6.1
+- Headwind Simulations - Airbus A330-941N # v0.6.1
 - Headwind Simulations - Sukhoi SuperJet 100-95 # v0.6.1
 - Horizon Simulations - Boeing 787-9 Dreamliner # v1.2.1
 - HypePerformanceGroup - Airbus H135 # Build 447

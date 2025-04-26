@@ -74,6 +74,7 @@
 - FlightSim Studio - SeaRey Elite # v1.0.3
 - FlightSim Studio - Tecnam P2006T MkII # v1.1.2
 - FlyByWire Simulations - Airbus A320neo # v0.12.3
+- FlyByWire Simulations - Airbus A380-842 # v0.12.3
 - FlyInside - Bell 47G-2 # v2.73
 - Flysimware - Cessna 414AW Chancellor # v4.7.0
 - Flysimware - Grumman G-44A Widgeon # v1.8.2

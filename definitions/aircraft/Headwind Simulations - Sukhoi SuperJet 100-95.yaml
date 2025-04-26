@@ -2615,8 +2615,25 @@ shared:
     var_name: L:A32NX_AUTOPILOT_2_ACTIVE
   -
     type: CustomCalculator
-    get: "1 0 (L:A32NX_AUTOTHRUST_STATUS, number) ? "
-    set: "(>K:AUTO_THROTTLE_ARM)"
+    get: (L:A32NX_AUTOTHRUST_STATUS) 0 ==
+    set: 0 (>K:AUTO_THROTTLE_ARM)
+    condition:
+      equals:
+        F64: 1.0
+  -
+    type: CustomCalculator
+    get: (L:A32NX_AUTOTHRUST_STATUS) 1 ==
+    set: 1 (>K:AUTO_THROTTLE_ARM)
+    condition:
+      equals:
+        F64: 1.0
+  -
+    type: CustomCalculator
+    get: (L:A32NX_AUTOTHRUST_STATUS) 2 ==
+    set: 1 (>K:AUTO_THROTTLE_ARM)
+    condition:
+      equals:
+        F64: 1.0
   -
     type: NumSet
     var_name: L:A32NX_FCU_LOC_MODE_ACTIVE

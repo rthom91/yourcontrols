@@ -1,5 +1,22 @@
 # YourControls Changelog
 
+## Version 2.8.7
+
+### Profiles
+
+- Added: Airbus A380-842 by FlyByWire Simulations (v0.12.3).
+- Updated: Airbus A320 family and A330 by LatinVFR.
+- Updated: Cessna 414AW Chancellor by Flysimware (v4.7.0).
+- Updated: Daher Kodiak 100 by SimWorks Studios (v1.5.4).
+
+### Aircraft Fixes
+
+- General: Fuel sync changed to master due to drastic autothrottle differences when host is not in control.
+- General: Payload station weights (menu sliders) are now shared on most aircraft.
+- FSW C414: Potential input conflicts with mixture levers.
+- LVFR A330: Overhead electric and fuel pump switches.
+- SWS Kodiak: Inert separator event.
+
 ## Version 2.8.6
 
 ### Profiles

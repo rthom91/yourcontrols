@@ -51,22 +51,6 @@ shared:
     event_name: SET_DECISION_ALTITUDE_MSL
     cancel_h_events: true
   -
-    type: ToggleSwitch
-    var_name: A:GPS OBS ACTIVE
-    var_units: Bool
-    var_type: bool
-    event_name: GPS_OBS
-    cancel_h_events: true
-    use_calculator: true
-  -
-    type: NumSet
-    var_name: A:GPS OBS VALUE
-    var_units: Degrees
-    var_type: f64
-    event_name: GPS_OBS_SET
-    cancel_h_events: true
-    use_calculator: true
-  -
     type: NumSet
     var_name: A:ADF CARD
     var_units: Degrees

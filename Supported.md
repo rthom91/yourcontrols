@@ -1,9 +1,9 @@
-# Actively supported modules (as of 2.8.7)
+# Actively supported modules (as of 2.8.8)
 
 ## Developer name & Verified version
 
 - Aeroplane Heaven - Cessna 140 # v1.6.0
-- Aeroplane Heaven - Electra 10A # v1.4.5
+- Aeroplane Heaven - Lockheed Model 10A Electra # v1.4.5
 - AeroSachs - Tecnam P92 Echo # v1.6.0
 - Aerosoft - DHC-6 Twin Otter # v1.1.1
 - Asobo Studio - Airbus A320neo # v0.1.109
@@ -14,8 +14,8 @@
 - Asobo Studio - Boeing 787-10 Dreamliner # v0.1.110
 - Asobo Studio - Boeing FA-18E Superhornet # v0.1.29
 - Asobo Studio - Cessna 152 # v0.1.93
-- Asobo Studio - Cessna 172SP Skyhawk # v0.1.90
 - Asobo Studio - Cessna 172SP Skyhawk (G1000) # v0.1.107
+- Asobo Studio - Cessna 172SP Skyhawk # v0.1.90
 - Asobo Studio - Cessna 208B Grand Caravan EX # v0.1.102
 - Asobo Studio - Cessna Citation CJ4 # v0.1.98
 - Asobo Studio - Cessna Citation Longitude # v0.1.110 / 1.0.0 Enhanced
@@ -42,10 +42,10 @@
 - Asobo Studio - Zlin Shock Ultra # v0.1.81
 - Big Radials - Grumman JRF-6B Goose # v1.0.9
 - Big Radials - Noorduyn Norseman # v1.0.3
-- Black Square - Beechcraft Baron B58 # v0.1.2
-- Black Square - Beechcraft Bonanza A36 # v0.1.3
-- Black Square - Beechcraft King Air 350i # v0.1.4
-- Black Square - Cessna 208B Grand Caravan # v0.1.5
+- Black Square - Beechcraft Baron B58 (Steam Overhaul) # v0.1.2
+- Black Square - Beechcraft Bonanza A36 (Steam Overhaul) # v0.1.3
+- Black Square - Beechcraft King Air 350i (Steam Overhaul) # v0.1.4
+- Black Square - Cessna 208B Grand Caravan (Steam Overhaul) # v0.1.5
 - Black Square - Velocity XL # v0.1.2
 - BlackBox Simulation - BN-2 Islander # v2.2.2
 - BlackBox Simulation - BN-3 Trislander # v1.2.0
@@ -59,7 +59,7 @@
 - Carenado - Piper PA-28R-201 Arrow III # v2.0.0
 - Carenado - Piper PA-34-220T Seneca V # v2.0.1
 - Carenado - Piper PA-44-180 Seminole # v2.0.0
-- Cowan Simulation - Airbus H125 # v2.1.0
+- Cowan Simulation - Airbus H125 (AS350B3e) # v2.1.0
 - Cowan Simulation - Bell 206B-3 JetRanger III # v2.1.0
 - Cowan Simulation - Bell 206L-3 LongRanger III # v2.1.0
 - Cowan Simulation - Bell 222B # v2.2.0
@@ -78,7 +78,7 @@
 - FlyInside - Bell 47G-2 # v2.73
 - Flysimware - Cessna 414AW Chancellor # v4.7.0
 - Flysimware - Grumman G-44A Widgeon # v1.8.2
-- Got Friends - Discus-2c # v2.1.0
+- Got Friends - Schempp-Hirth Discus-2c # v2.1.0
 - Got Friends - Edgley EA-7 Optica # v1.0.7
 - Headwind Simulations - Airbus A330-941N # v0.6.1
 - Headwind Simulations - Sukhoi SuperJet 100-95 # v0.6.1
@@ -86,18 +86,17 @@
 - HypePerformanceGroup - Airbus H135 # Build 447
 - IRIS Simulations - Grob G115E Tutor T.1 # v2.4.0
 - IRIS Simulations - Jabiru J160 & J170 # v1.5.6
-- JPLogistics & WB-Sim - Cessna 152 # v2.0.6
 - Just Flight - Piper PA-28-161 Warrior II # v0.3.8
 - Just Flight - Piper PA-28R-201 Arrow III # v0.10.8
 - Just Flight - Piper PA-28R-201T Turbo Arrow III & IV # v0.5.8
 - jXt Simulations - Bell 429 GlobalRanger # v0.9.7
 - jXt Simulations - Bell 505 Jet Ranger X # v0.3.1
 - Kurorin - Boeing 787-8 Dreamliner # v3.0.1
-- LatinVFR - Airbus A318ceo # v2.1.11
-- LatinVFR - Airbus A319ceo # v2.1.11
-- LatinVFR - Airbus A320ceo # v1.1.9
-- LatinVFR - Airbus A321neo # v2.1.8
-- LatinVFR - Airbus A330-900neo # v1.0.10
+- LatinVFR - Airbus A318ceo (Legacy) # v2.1.11
+- LatinVFR - Airbus A319ceo (Legacy) # v2.1.11
+- LatinVFR - Airbus A320ceo (Legacy) # v1.1.9
+- LatinVFR - Airbus A321neo (Legacy) # v2.1.8
+- LatinVFR - Airbus A330-900neo (Legacy) # v1.0.10
 - LightSim - Stream # v1.3
 - MADolo Simulations - Schleicher AS 33 Me # v2.0.2
 - Microsoft & Aeroplane Heaven - Douglas DC-3 # v1.2.5 / 1.2.5 Enhanced
@@ -142,4 +141,5 @@
 - SimWorks Studios - Van's RV-14 # v1.4.0
 - VrilleAPlat - Cessna A-37B Dragonfly # v1.1.2
 - VrilleAPlat - Cessna T-37B Tweet # v1.5
-- WB-Sim - Cessna 172SP Classic # v1.0.9
+- WBSim - Cessna 152 # v2.0.6
+- WBSim - Cessna 172SP Classic # v1.0.9

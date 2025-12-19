@@ -1,5 +1,11 @@
 # YourControls Changelog
 
+## Version 2.8.8
+
+### Aircraft Fixes
+
+- All: Removed GPS OBS VALUE causing application crashing with SU16.
+
 ## Version 2.8.7
 
 ### Profiles

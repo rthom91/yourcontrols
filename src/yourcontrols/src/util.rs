@@ -68,6 +68,7 @@ impl NumberDigits {
     }
 }
 
+#[allow(dead_code)]
 #[derive(Debug, Copy, Clone)]
 pub struct Vector3 {
     pub x: f64,

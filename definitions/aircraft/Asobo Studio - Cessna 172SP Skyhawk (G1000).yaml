@@ -1,12 +1,10 @@
-# Version 0.1.107
+# Version 0.1.113
 
 include:
   - definitions/modules/Instruments/AS_G1000.yaml
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/magnetos.yaml
@@ -17,13 +15,14 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
-  - # Avionics Bus
+  - # Avionics masters
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:24
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 24
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:25
@@ -31,6 +30,15 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 25
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
 
   - # Electrical
     type: ToggleSwitch
@@ -39,6 +47,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ELECTRICAL MASTER BATTERY:2
@@ -46,55 +55,77 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 2
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
     var_units: Bool
     var_type: i32
     event_name: ALTERNATOR_SET
+    event_param: 1
   -
     type: NumSet
     var_name: A:GENERAL ENG STARTER:1
     var_units: Bool
     var_type: i32
     event_name: STARTER1_SET
+    use_calculator: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_FUEL_VALVE_ENG1
+    use_calculator: true
   -
-    type: event
-    event_name: SET_STARTER1_HELD
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT NAV:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: NAV_LIGHTS_SET
     event_param: 0
   -
     type: NumSet
     var_name: A:LIGHT BEACON:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: BEACON_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT STROBE:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: STROBES_SET
     event_param: 0
   -
     type: NumSet
     var_name: A:LIGHT LANDING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT TAXI:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 1
 
@@ -113,6 +144,7 @@ shared:
     event_name: PANEL_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:1
@@ -128,6 +160,7 @@ shared:
     event_name: CABIN_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:2
@@ -143,6 +176,7 @@ shared:
     event_name: CABIN_LIGHTS_POWER_SETTING_SET
     event_param: 2
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:1
@@ -158,6 +192,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:3
@@ -166,6 +201,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:4
@@ -174,11 +210,4 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 4
     index_reversed: true
-  -
-    type: NumSet
-    var_name: A:LIGHT POTENTIOMETER:6
-    var_units: Percent
-    var_type: f64
-    event_name: LIGHT_POTENTIOMETER_SET
-    event_param: 6
-    index_reversed: true
+    unreliable: true

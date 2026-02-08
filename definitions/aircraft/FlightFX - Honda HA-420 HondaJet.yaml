@@ -19,12 +19,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:GENERAL ENG STARTER:2
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER2
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -1538,28 +1540,3 @@ master:
     type: var
     var_name: L:THROTTLE2_SET
     interpolate: Default
-
-ignore:
-# Audio Box
-  - WTG3000_GTC_1#-1430431223
-  - WTG3000_GTC_2#-1430431223
-
-# STBY Box
-  - WTG3000_GTC_1#1188903370
-  - WTG3000_GTC_1#-1555674681
-  - WTG3000_GTC_1#2066884492
-  - WTG3000_GTC_1#-1555674680
-  - WTG3000_GTC_2#1188903370
-  - WTG3000_GTC_2#-1555674681
-  - WTG3000_GTC_2#2066884492
-  - WTG3000_GTC_2#-1555674680
-
-# XPNDR Box
-  - WTG3000_GTC_1#256782690
-  - WTG3000_GTC_1#1091177850
-  - WTG3000_GTC_2#256782690
-  - WTG3000_GTC_2#1091177850
-
-# XPNDR Mode Box
-  - WTG3000_GTC_1#-1430431224
-  - WTG3000_GTC_2#-1430431224

@@ -25,6 +25,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 19
+    use_calculator: true
 
   - # LVAR's
     type: var

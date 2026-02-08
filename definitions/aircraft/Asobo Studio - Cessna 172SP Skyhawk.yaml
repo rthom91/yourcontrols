@@ -1,4 +1,4 @@
-# Version 0.1.90
+# Version 0.1.92
 
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
@@ -6,9 +6,7 @@ include:
   - definitions/modules/Instruments/AS_KAP140.yaml
   - definitions/modules/Instruments/AS_KT76C.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/magnetos.yaml
@@ -19,20 +17,23 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
-  - # Avionics Bus
+  - # ADF power
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:11
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 11
-  -
+    use_calculator: true
+
+  - # Avionics masters
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:39
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 39
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:40
@@ -40,6 +41,15 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 40
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
 
   - # Electrical
     type: ToggleSwitch
@@ -48,28 +58,52 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
     var_units: Bool
     var_type: i32
     event_name: ALTERNATOR_SET
+    event_param: 1
   -
     type: NumSet
     var_name: A:GENERAL ENG STARTER:1
     var_units: Bool
     var_type: i32
     event_name: STARTER1_SET
-  -
-    type: event
-    event_name: SET_STARTER1_HELD
+    use_calculator: true
 
   - # EGT Bug
     type: NumSet
     var_name: A:ENG EXHAUST GAS TEMPERATURE GES:1
     var_units: Percent scaler 32k
-    var_type: i32
+    var_type: f64
     event_name: EGT1_SET
+    use_calculator: true
+    unreliable: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_FUEL_VALVE_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
 
   - # Lights
     type: NumSet
@@ -122,6 +156,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:1
@@ -137,6 +172,7 @@ shared:
     event_name: CABIN_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:2
@@ -152,6 +188,7 @@ shared:
     event_name: CABIN_LIGHTS_POWER_SETTING_SET
     event_param: 2
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:1
@@ -167,6 +204,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT GLARESHIELD:1
@@ -182,6 +220,7 @@ shared:
     event_name: GLARESHIELD_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT GLARESHIELD:2
@@ -205,14 +244,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 7
     index_reversed: true
-  -
-    type: NumSet
-    var_name: A:LIGHT POTENTIOMETER:15
-    var_units: Percent
-    var_type: f64
-    event_name: LIGHT_POTENTIOMETER_SET
-    event_param: 15
-    index_reversed: true
+    unreliable: true
 
   - # LVAR's
     type: var

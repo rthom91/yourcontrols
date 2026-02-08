@@ -34,6 +34,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
     cancel_h_events: true
+    use_calculator: true
   - # Door 1R
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -42,6 +43,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
     cancel_h_events: true
+    use_calculator: true
   - # Front Cargo Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:7
@@ -50,6 +52,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 8
     cancel_h_events: true
+    use_calculator: true
   - # Rear Cargo Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:6
@@ -58,6 +61,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 7
     cancel_h_events: true
+    use_calculator: true
   - # Rear Bulk Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:11
@@ -66,6 +70,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 12
     cancel_h_events: true
+    use_calculator: true
   - # Door 2L
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -74,6 +79,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
     cancel_h_events: true
+    use_calculator: true
   - # Door 2R
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -82,6 +88,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
     cancel_h_events: true
+    use_calculator: true
 
   - # GPU
     type: ToggleSwitch
@@ -90,8 +97,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_EXTERNAL_POWER
     event_param: 1
-    index_reversed: true
-    cancel_h_events: true
+    use_calculator: true
 
   - # Handling
     type: NumSet
@@ -99,32 +105,13 @@ shared:
     var_units: Bool
     var_type: i32
     event_name: PARKING_BRAKE_SET
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FLAPS HANDLE PERCENT
     var_units: Position 16k
     var_type: f64
     event_name: FLAPS_SET
-    use_calculator: true
-    unreliable: true
-  -
-    type: NumSet
-    var_name: L:LEFT_BRAKE_PEDAL_INPUT
-    var_units: Number
-    var_type: f64
-    multiply_by: 32768
-    add_by: -16384
-    event_name: AXIS_LEFT_BRAKE_SET
-    use_calculator: true
-    unreliable: true
-  -
-    type: NumSet
-    var_name: L:RIGHT_BRAKE_PEDAL_INPUT
-    var_units: Number
-    var_type: f64
-    multiply_by: 32768
-    add_by: -16384
-    event_name: AXIS_RIGHT_BRAKE_SET
     use_calculator: true
     unreliable: true
 
@@ -134,18 +121,21 @@ shared:
     var_units: Hz
     var_type: i32
     event_name: COM_RADIO_SET_HZ
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM ACTIVE FREQUENCY:2
     var_units: Hz
     var_type: i32
     event_name: COM2_RADIO_SET_HZ
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM ACTIVE FREQUENCY:3
     var_units: Hz
     var_type: i32
     event_name: COM3_RADIO_SET_HZ
+    use_calculator: true
 
   - # Stick
     type: event
@@ -153,26 +143,25 @@ shared:
 
   - # Transponder
     type: NumSet
+    var_name: A:TRANSPONDER IDENT:1
+    var_units: Bool
+    var_type: i32
+    event_name: XPNDR_IDENT_SET
+    event_param: 1
+  -
+    type: NumSet
     var_name: A:TRANSPONDER CODE:1
     var_units: Bco16
     var_type: i32
     event_name: XPNDR_SET
     event_param: 1
-  -
-    type: ToggleSwitch
-    var_name: A:TRANSPONDER IDENT:1
-    var_units: Bool
-    var_type: bool
-    event_name: XPNDR_IDENT_ON
-    off_event_name: XPNDR_IDENT_OFF
-    event_param: 1
 
   - # Trim
     type: NumSet
-    var_name: A:RUDDER TRIM PCT
+    var_name: A:AILERON TRIM PCT
     var_units: Percent scaler 16k
     var_type: f64
-    event_name: RUDDER_TRIM_SET_EX1
+    event_name: AILERON_TRIM_SET_EX1
     unreliable: true
   -
     type: NumSet
@@ -180,14 +169,20 @@ shared:
     var_units: Percent scaler 16k
     var_type: f64
     event_name: ELEVATOR_TRIM_SET
-    use_calculator: true
+    condition:
+      var:
+        var_name: A:SIM ON GROUND
+        var_units: Bool
+        var_type: bool
+      equals:
+        Bool: true
     unreliable: true
   -
     type: NumSet
-    var_name: A:AILERON TRIM PCT
+    var_name: A:RUDDER TRIM PCT
     var_units: Percent scaler 16k
     var_type: f64
-    event_name: AILERON_TRIM_SET_EX1
+    event_name: RUDDER_TRIM_SET_EX1
     unreliable: true
 
   - # LVAR's
@@ -289,9 +284,13 @@ shared:
     type: var
     var_name: L:INI_CAPT_WINDOW
   -
-    type: var
+    type: NumSet
     var_name: L:INI_GPU_AVAIL
+    var_units: Number
+    var_type: f64
+    event_name: INIB.TOGGLE_GPU
     cancel_h_events: true
+    use_calculator: true
 # -
 #   type: var
 #   var_name: L:Right_spoiler_4
@@ -322,13 +321,17 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_ELEC_AC_ESS_BUS_IS_POWERED
+# -
+#   type: var
+#   var_name: L:INI_GPU_NOT_AVAIL
   -
-    type: var
-    var_name: L:INI_GPU_NOT_AVAIL
-  -
-    type: var
+    type: NumSet
     var_name: L:INI_CHOCKS_ENABLED
+    var_units: Number
+    var_type: f64
+    event_name: INIB.TOGGLE_CHOCKS 
     cancel_h_events: true
+    use_calculator: true
   -
     type: var
     var_name: L:INI_VHF_2_VOLUME_FO
@@ -2190,9 +2193,9 @@ shared:
   -
     type: var
     var_name: L:INI_2_ALTIMETER_PULL_COMMAND
-  -
-    type: var
-    var_name: L:XMLVAR_Baro_Selector_HPA_2
+# -
+#   type: var
+#   var_name: L:XMLVAR_Baro_Selector_HPA_2
 # -
 #   type: var
 #   var_name: L:INI_EFIS_FO_CSTR_BUTTON
@@ -4343,9 +4346,16 @@ shared:
   -
     type: var
     var_name: L:ATHR_OFF_REQ
-# -
-#   type: var
-#   var_name: L:RIGHT_BRAKE_PEDAL_INPUT
+  -
+    type: NumSet
+    var_name: L:RIGHT_BRAKE_PEDAL_INPUT
+    var_units: Number
+    var_type: f64
+    multiply_by: 32768
+    add_by: -16384
+    event_name: AXIS_RIGHT_BRAKE_SET
+    use_calculator: true
+    unreliable: true
 # -
 #   type: var
 #   var_name: L:INI_WXR_GAIN_KNOB_ANIMATION
@@ -4379,9 +4389,16 @@ shared:
   -
     type: var
     var_name: L:INI_CTR_SUN_VISOR_STATE_ANIM
-# -
-#   type: var
-#   var_name: L:LEFT_BRAKE_PEDAL_INPUT
+  -
+    type: NumSet
+    var_name: L:LEFT_BRAKE_PEDAL_INPUT
+    var_units: Number
+    var_type: f64
+    multiply_by: 32768
+    add_by: -16384
+    event_name: AXIS_LEFT_BRAKE_SET
+    use_calculator: true
+    unreliable: true
   -
     type: var
     var_name: L:INI_FO_SUN_VISOR_STATE_ANIM
@@ -5994,12 +6011,12 @@ shared:
   -
     type: var
     var_name: L:INI_ENG2_ANTI_ICE_FAILURE
-  -
-    type: var
-    var_name: L:INI_WINDOW_HEAT1_FAILURE
-  -
-    type: var
-    var_name: L:INI_WINDOW_HEAT2_FAILURE
+# -
+#   type: var
+#   var_name: L:INI_WINDOW_HEAT1_FAILURE
+# -
+#   type: var
+#   var_name: L:INI_WINDOW_HEAT2_FAILURE
   -
     type: var
     var_name: L:INI_TAT1_FAILURE
@@ -6708,12 +6725,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_AUTOBRAKE_LAST_USED
-  -
-    type: var
-    var_name: L:INI_RESET_AUTOBRAKE
-  -
-    type: var
-    var_name: L:INI_AUTOBRAKE_DISCONNECTED
+# -
+#   type: var
+#   var_name: L:INI_RESET_AUTOBRAKE
+# -
+#   type: var
+#   var_name: L:INI_AUTOBRAKE_DISCONNECTED
 # -
 #   type: var
 #   var_name: L:INI_BRAKE_AXIS_LEFT
@@ -6978,15 +6995,15 @@ shared:
 # -
 #   type: var
 #   var_name: L:FLAPS_HANDLE_POSITION
-  -
-    type: var
-    var_name: L:INI_ADR1_STATE
-  -
-    type: var
-    var_name: L:INI_ADR2_STATE
-  -
-    type: var
-    var_name: L:INI_ADR3_STATE
+# -
+#   type: var
+#   var_name: L:INI_ADR1_STATE
+# -
+#   type: var
+#   var_name: L:INI_ADR2_STATE
+# -
+#   type: var
+#   var_name: L:INI_ADR3_STATE
 # -
 #   type: var
 #   var_name: L:INI_FUEL_WEIGHT_TRIM
@@ -7469,12 +7486,12 @@ shared:
   -
     type: var
     var_name: L:INI_REDUCTION_HEIGHT_OPTIONS
-  -
-    type: var
-    var_name: L:INI_NEW_ROUTE_CB
-  -
-    type: var
-    var_name: L:INI_CUSTOM_NAVAID_NUM
+# -
+#   type: var
+#   var_name: L:INI_NEW_ROUTE_CB
+# -
+#   type: var
+#   var_name: L:INI_CUSTOM_NAVAID_NUM
 # -
 #   type: var
 #   var_name: L:INI_IRS_LATITUDE
@@ -7604,9 +7621,9 @@ shared:
   -
     type: var
     var_name: L:INI_TC_FUEL
-# -
-#   type: var
-#   var_name: L:INI_PAYLOAD_WEIGHT_TOTAL
+  -
+    type: var
+    var_name: L:INI_PAYLOAD_WEIGHT_TOTAL
   -
     type: var
     var_name: L:INI_ED_FUEL
@@ -7872,9 +7889,9 @@ shared:
   -
     type: var
     var_name: L:INI_ENABLE_DECEL_POINT
-  -
-    type: var
-    var_name: L:INI_DUPLICATE_NAMES_ACTION
+# -
+#   type: var
+#   var_name: L:INI_DUPLICATE_NAMES_ACTION
 # -
 #   type: var
 #   var_name: L:INI_DUMP_VNAV_DEBUG
@@ -8214,21 +8231,21 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_PERF_COST_INDEX_DESCENT_SECONDARY
-  -
-    type: var
-    var_name: L:INI_ac_essential_bus2_off
-  -
-    type: var
-    var_name: L:INI_ac_bus2_off
+# -
+#   type: var
+#   var_name: L:INI_ac_essential_bus2_off
+# -
+#   type: var
+#   var_name: L:INI_ac_bus2_off
 # -
 #   type: var
 #   var_name: L:INI_FMS_gps_primary_lost
   -
     type: var
     var_name: L:INI_eng_ignition_switch
-  -
-    type: var
-    var_name: L:INI_managed_speed
+# - # Causes weirdness
+#   type: var
+#   var_name: L:INI_managed_speed
 # -
 #   type: var
 #   var_name: L:INI_LOWER_SPEED_RANGE
@@ -8526,9 +8543,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_ALTITUDE_MEM_DIAL
-# - # Causes weirdness
-#   type: var
-#   var_name: L:INI_Airspeed_is_mach
+  -
+    type: var
+    var_name: L:INI_Airspeed_is_mach
 # -
 #   type: var
 #   var_name: L:INI_Airspeed_Dial_Mach_knots
@@ -8678,9 +8695,9 @@ shared:
   -
     type: var
     var_name: L:INI_LEVEL_CHANGE_MACH_CHANGE
-  -
-    type: var
-    var_name: L:INI_AUTOTHROTTLE_MASTER_SWITCH_GENERAL
+# -
+#   type: var
+#   var_name: L:INI_AUTOTHROTTLE_MASTER_SWITCH_GENERAL
 # -
 #   type: var
 #   var_name: L:INI_AUTOLAND_RUDDER_OUTPUT_ROLLOUT
@@ -8777,18 +8794,20 @@ shared:
   -
     type: var
     var_name: L:INI_MINIMUMS_PILOT
+    interpolate: Default
   -
     type: var
     var_name: L:INI_MINIMUMS_COPILOT
+    interpolate: Default
 # -
 #   type: var
 #   var_name: L:INI_hyd_yellow_pressure
-  -
-    type: var
-    var_name: L:INI_CWS1_ON
-  -
-    type: var
-    var_name: L:INI_CWS2_ON
+# -
+#   type: var
+#   var_name: L:INI_CWS1_ON
+# -
+#   type: var
+#   var_name: L:INI_CWS2_ON
   -
     type: var
     var_name: L:INI_pitch_trim1
@@ -9334,9 +9353,13 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_BARO3_PRESSURE
-# -
-#   type: var
-#   var_name: L:INI_TOTAL_FUEL_WEIGHT
+  -
+    type: NumSet
+    var_name: L:INI_TOTAL_FUEL_WEIGHT
+    var_units: Number
+    var_type: f64
+    event_name: INIB.SET_FUEL
+    use_calculator: true
 # -
 #   type: var
 #   var_name: L:INI_THROTTLE_MODE_ACTIVE
@@ -10433,9 +10456,9 @@ shared:
   -
     type: var
     var_name: L:INI_IGNITION_SYSTEM2
-  -
-    type: var
-    var_name: L:INI_PAUSE_AT_TOD_ENABLED
+# -
+#   type: var
+#   var_name: L:INI_PAUSE_AT_TOD_ENABLED
 # -
 #   type: var
 #   var_name: L:FMGS_ACCEPTED_GPS_COORDS
@@ -10544,9 +10567,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_ALT_REACH_DIST_TOTAL
-  -
-    type: var
-    var_name: L:INI_AP_MASTER
+# -
+#   type: var
+#   var_name: L:INI_AP_MASTER
 # -
 #   type: var
 #   var_name: L:FMGS_SB_ERROR
@@ -11334,9 +11357,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:FG_ROLL_ORDER_FD
-  -
-    type: var
-    var_name: L:FMGS_HOLD_ACTIVE
+# -
+#   type: var
+#   var_name: L:FMGS_HOLD_ACTIVE
 # -
 #   type: var
 #   var_name: L:FE_LOC_DEVF
@@ -11487,18 +11510,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:INI_AUTOPILOT_DISCONNECT_SOUND
-  -
-    type: var
-    var_name: L:INI_AUTOPILOT_DISCONNECT_ECAM
-  -
-    type: var
-    var_name: L:INI_AUTOPILOT_DISCONNECT_EWD
+# -
+#   type: var
+#   var_name: L:INI_AUTOPILOT_DISCONNECT_ECAM
+# -
+#   type: var
+#   var_name: L:INI_AUTOPILOT_DISCONNECT_EWD
   -
     type: var
     var_name: L:INI_AUTOPILOT_DISCONNECT_TYPE
-  -
-    type: var
-    var_name: L:FMGS_CLIMB_TRANSITION_MACH_ALTITUDE_SELECTED
+# -
+#   type: var
+#   var_name: L:FMGS_CLIMB_TRANSITION_MACH_ALTITUDE_SELECTED
 # -
 #   type: var
 #   var_name: L:A320_TCAS_FAULT
@@ -11682,9 +11705,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:FG_VNAV_SPEEDS_MANAGED_PFD
-  -
-    type: var
-    var_name: L:INI_AUTOPILOT_DISCONNECT_LIGHT
+# -
+#   type: var
+#   var_name: L:INI_AUTOPILOT_DISCONNECT_LIGHT
 # -
 #   type: var
 #   var_name: L:FMGS_VNAV_SC_IDX
@@ -11724,9 +11747,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:FG_VNAV_GUIDANCE_GEOMETRIC
-  -
-    type: var
-    var_name: L:FBW_REQUEST_RESET_TRIM
+# -
+#   type: var
+#   var_name: L:FBW_REQUEST_RESET_TRIM
 # -
 #   type: var
 #   var_name: L:FMGS_VNAV_TD_ALT
@@ -12225,9 +12248,9 @@ shared:
     type: var
     var_name: L:INI_POTENTIOMETER_53
     unreliable: true
-# -
-#   type: var
-#   var_name: L:INI_FORCE_APPROACH
+  -
+    type: var
+    var_name: L:INI_FORCE_APPROACH
   -
     type: var
     var_name: L:INI_POTENTIOMETER_54
@@ -12675,7 +12698,7 @@ master:
 
   - # Throttles
     type: NumSet
-    var_name: L:INI_AXIS1_VALUE
+    var_name: L:INI_THROTTLE_MAPPING_INPUT:1
     var_units: Position 16k
     var_type: f64
     multiply_by: 16384
@@ -12684,7 +12707,7 @@ master:
     unreliable: true
   -
     type: NumSet
-    var_name: L:INI_AXIS2_VALUE
+    var_name: L:INI_THROTTLE_MAPPING_INPUT:2
     var_units: Position 16k
     var_type: f64
     multiply_by: 16384

@@ -441,6 +441,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
 
   - # Canopy
     type: var

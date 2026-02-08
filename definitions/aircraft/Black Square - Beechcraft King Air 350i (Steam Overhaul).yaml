@@ -7,19 +7,12 @@ include:
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot_BKSQ.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
-  - definitions/modules/electrical.yaml
-  - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
-  - definitions/modules/pressurization.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
-  - definitions/modules/transponder.yaml
   - definitions/modules/trim.yaml
 
 shared:
@@ -36,6 +29,23 @@ shared:
     get: 3 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:21, Bool)
     set: 21 3 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
 
+  - # Bleed air
+    type: NumSet
+    var_name: A:BLEED AIR ENGINE:1
+    var_units: Bool
+    var_type: i32
+    event_name: ENGINE_BLEED_AIR_SOURCE_SET
+    event_param: 1
+    index_reversed: true
+  -
+    type: NumSet
+    var_name: A:BLEED AIR ENGINE:2
+    var_units: Bool
+    var_type: i32
+    event_name: ENGINE_BLEED_AIR_SOURCE_SET
+    event_param: 2
+    index_reversed: true
+
   - # Bleed valves
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:78
@@ -43,6 +53,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 78
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:79
@@ -50,6 +61,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 79
+    use_calculator: true
 
   - # Blowers
     type: ToggleSwitch
@@ -58,6 +70,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 139
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:140
@@ -65,6 +78,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 140
+    use_calculator: true
 
   - # Cabin accessories
     type: ToggleSwitch
@@ -73,6 +87,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 86
+    use_calculator: true
 
   - # Cabin master
     type: ToggleSwitch
@@ -81,6 +96,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 85
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:109
@@ -88,6 +104,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 109
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:136
@@ -95,6 +112,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 136
+    use_calculator: true
 
   - # Crossfeed
     type: ToggleSwitch
@@ -103,42 +121,95 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 7
+    use_calculator: true
 
   - # Deice
     type: NumSet
-    var_name: A:PITOT HEAT SWITCH:3
-    var_units: Enum
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
     var_type: i32
     event_name: PITOT_HEAT_SET
-    event_param: 3
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:2
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 2
   -
     type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:89
+    var_name: A:PROP DEICE SWITCH:1
     var_units: Bool
     var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 89
+    event_name: TOGGLE_PROPELLER_DEICE
+    event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:90
+    var_name: A:PROP DEICE SWITCH:2
     var_units: Bool
     var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 90
-  -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:91
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 91
-  -
+    event_name: TOGGLE_PROPELLER_DEICE
+    event_param: 2
+    use_calculator: true
+
+  - # Deice brake
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:96
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 96
+    use_calculator: true
+
+  - # Deice stall
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:3
+    var_units: Enum
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 3
+
+  - # Deice surface
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:89
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 89
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:STRUCTURAL DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
+
+  - # Deice windshield
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:97
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 97
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:98
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 98
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:WINDSHIELD DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
 
   - # DME
     type: ToggleSwitch
@@ -147,6 +218,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 133
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:134
@@ -154,6 +226,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 134
+    use_calculator: true
 
   - # Electric heat
     type: ToggleSwitch
@@ -162,6 +235,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 138
+    use_calculator: true
 
   - # Electric trim
     type: ToggleSwitch
@@ -170,6 +244,97 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 73
+    use_calculator: true
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR1
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR2
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: STARTER1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:2
+    var_units: Bool
+    var_type: i32
+    event_name: STARTER2_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:EXTERNAL POWER ON:1
+    var_units: Bool
+    var_type: i32
+    event_name: SET_EXTERNAL_POWER
+    event_param: 1
+    index_reversed: true
+
+  - # Engines
+    type: NumSet
+    var_name: A:TURB ENG IGNITION SWITCH:1
+    var_units: Enum
+    var_type: i32
+    event_name: TURBINE_IGNITION_SWITCH_SET1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:TURB ENG IGNITION SWITCH:2
+    var_units: Enum
+    var_type: i32
+    event_name: TURBINE_IGNITION_SWITCH_SET2
+    use_calculator: true
+  -
+    type: var
+    var_name: A:TURB ENG CONDITION LEVER POSITION:1
+    var_units: Enum
+    var_type: i32
+  -
+    type: var
+    var_name: A:TURB ENG CONDITION LEVER POSITION:2
+    var_units: Enum
+    var_type: i32
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG PROPELLER LEVER POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: PROP_PITCH1_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG PROPELLER LEVER POSITION:2
+    var_units: Position 16k
+    var_type: f64
+    event_name: PROP_PITCH2_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: ToggleSwitch
+    var_name: A:PANEL AUTO FEATHER SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AUTOFEATHER_ARM
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:PROP SYNC ACTIVE
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PROPELLER_SYNC
+    use_calculator: true
 
   - # Extinguishers
     type: ToggleSwitch
@@ -178,6 +343,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 15
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:16
@@ -185,6 +351,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 16
+    use_calculator: true
 
   - # Firewall valves
     type: ToggleSwitch
@@ -193,6 +360,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:13
@@ -200,14 +368,31 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 13
+    use_calculator: true
 
   - # Fuel
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: i32
+    event_name: SET_FUEL_VALVE_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL VALVE:2
+    var_units: Bool
+    var_type: i32
+    event_name: SET_FUEL_VALVE_ENG2
+    use_calculator: true
+
+  - # Fuel vent
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:92
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 92
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:93
@@ -215,6 +400,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 93
+    use_calculator: true
 
   - # G530 1
     type: ToggleSwitch
@@ -223,6 +409,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 103
+    use_calculator: true
   - # G530 2
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:105
@@ -230,6 +417,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 105
+    use_calculator: true
   - # RNAV
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:108
@@ -237,6 +425,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 108
+    use_calculator: true
   - # Bendix
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:131
@@ -244,6 +433,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 131
+    use_calculator: true
 
   - # Ground intercom
     type: ToggleSwitch
@@ -252,6 +442,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 18
+    use_calculator: true
 
   - # Inverters
     type: CustomCalculator
@@ -288,35 +479,67 @@ shared:
 
   - # Lights
     type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
-
-  - # Rudder boost
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:125
+  -
+    type: NumSet
+    var_name: A:LIGHT TAXI:1
     var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 125
-
-  - # Oxygen
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:82
+    var_type: i32
+    event_name: TAXI_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT WING:1
     var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 82
-
-  - # Prop gov test
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:146
+    var_type: i32
+    event_name: WING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
     var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 146
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT RECOGNITION:1
+    var_units: Bool
+    var_type: i32
+    event_name: RECOGNITION_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT BEACON:1
+    var_units: Bool
+    var_type: i32
+    event_name: BEACON_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LOGO:1
+    var_units: Bool
+    var_type: i32
+    event_name: LOGO_LIGHTS_SET
+    event_param: 1
 
   - # Interior
     type: NumSet
@@ -330,8 +553,7 @@ shared:
     var_name: A:LIGHT POTENTIOMETER:12
     var_units: Percent
     var_type: f64
-    event_name: LIGHT_POTENTIOMETER_SET
-    event_param: 12
+    event_name: LIGHT_POTENTIOMETER_12_SET
     index_reversed: true
   -
     type: NumSet
@@ -341,6 +563,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 2
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:3
@@ -349,6 +572,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:4
@@ -357,6 +581,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 4
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:5
@@ -365,6 +590,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 5
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:6
@@ -373,6 +599,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 6
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:11
@@ -381,6 +608,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 11
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:7
@@ -389,6 +617,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 7
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:8
@@ -397,6 +626,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 8
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:9
@@ -405,6 +635,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 9
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:10
@@ -413,6 +644,58 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 10
     index_reversed: true
+    unreliable: true
+
+  - # Oxygen
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:82
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 82
+    use_calculator: true
+
+  - # Payload
+    type: var
+    var_name: A:PAYLOAD STATION WEIGHT:11
+    var_units: Pounds
+    var_type: f64
+    unreliable: true
+
+  - # Pressurization
+    type: ToggleSwitch
+    var_name: A:PRESSURIZATION DUMP SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: PRESSURIZATION_PRESSURE_DUMP_SWITCH
+    use_calculator: true
+  -
+    type: NumIncrement
+    var_name: A:PRESSURIZATION CABIN ALTITUDE GOAL
+    var_units: Feet
+    var_type: f64
+    up_event_name: PRESSURIZATION_PRESSURE_ALT_INC
+    down_event_name: PRESSURIZATION_PRESSURE_ALT_DEC
+    increment_by: 53
+    use_calculator: true
+
+  - # Prop gov test
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:146
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 146
+    use_calculator: true
+
+  - # Rudder boost
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:125
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 125
+    use_calculator: true
 
   - # Transponder
     type: ToggleSwitch
@@ -421,6 +704,26 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 116
+    use_calculator: true
+  -
+    type: var
+    var_name: A:TRANSPONDER STATE:1
+    var_units: Enum
+    var_type: i32
+  -
+    type: NumSet
+    var_name: A:TRANSPONDER IDENT:1
+    var_units: Bool
+    var_type: i32
+    event_name: XPNDR_IDENT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:TRANSPONDER CODE:1
+    var_units: Bco16
+    var_type: i32
+    event_name: XPNDR_SET
+    event_param: 1
 
   - # Voltmeter
     type: ToggleSwitch
@@ -429,6 +732,16 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 61
+    use_calculator: true
+
+  - # Window
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:0
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 3
+    use_calculator: true
 
   - # Wipers
     type: ToggleSwitch
@@ -437,6 +750,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 54
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:55
@@ -444,6 +758,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 55
+    use_calculator: true
   -
     type: NumSet
     var_name: A:CIRCUIT POWER SETTING:54
@@ -452,13 +767,6 @@ shared:
     event_name: ELECTRICAL_CIRCUIT_POWER_SETTING_SET
     event_param: 54
     index_reversed: true
-
-  - # Payload
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:11
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
 
 # - # LVAR's (trimmed)
 #   type: var
@@ -549,9 +857,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_PilotCws_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_PilotCws_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_PilotCws_LeftLeaveToRun
   -
     type: var
     var_name: L:var_yokeChronoMode_L
@@ -625,9 +933,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_GlareshieldAnnunciatorTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_GlareshieldAnnunciatorTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_GlareshieldAnnunciatorTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_meterMode
@@ -637,9 +945,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_acMeterVoltsMode_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_acMeterVoltsMode_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_acMeterVoltsMode_LeftLeaveToRun
   -
     type: var
     var_name: L:var_avionicsMasterSwitch
@@ -740,18 +1048,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_GearLightTestButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_GearLightTestButton_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_GearLightTestButton_LeftLeaveToRun
   -
     type: var
     var_name: L:var_HydraulicTestButton_IsDown
 # -
 #   type: var
 #   var_name: L:var_HydraulicTestButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_HydraulicTestButton_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_HydraulicTestButton_LeftLeaveToRun
   -
     type: var
     var_name: L:var_GearWarningHornLatching
@@ -779,9 +1087,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_stallWarningTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_stallWarningTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_stallWarningTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_AftBlowerSwitch
@@ -848,18 +1156,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_VoiceRecorderTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_VoiceRecorderTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_VoiceRecorderTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_VoiceRecorderErase_IsDown
 # -
 #   type: var
 #   var_name: L:var_VoiceRecorderErase_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_VoiceRecorderErase_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_VoiceRecorderErase_LeftLeaveToRun
   -
     type: var
     var_name: L:var_EmergencyGearHandle_IsDown
@@ -869,9 +1177,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_EmergencyGearHandle
-  -
-    type: var
-    var_name: L:var_EmergencyGearHandle_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_EmergencyGearHandle_LeftLeaveToRun
   -
     type: var
     var_name: L:var_rmiSolidNeedleAdfMode_L
@@ -896,9 +1204,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_AltimeterTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_AltimeterTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_AltimeterTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_altimeterMbMode
@@ -908,27 +1216,27 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_FastErectButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_FastErectButton_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_FastErectButton_LeftLeaveToRun
   -
     type: var
     var_name: L:var_GyroDriveLeft_IsDown
 # -
 #   type: var
 #   var_name: L:var_GyroDriveLeft_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_GyroDriveLeft_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_GyroDriveLeft_LeftLeaveToRun
   -
     type: var
     var_name: L:var_GyroDriveRight_IsDown
 # -
 #   type: var
 #   var_name: L:var_GyroDriveRight_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_GyroDriveRight_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_GyroDriveRight_LeftLeaveToRun
   -
     type: var
     var_name: L:var_GyroSlaveModeSwitch
@@ -955,9 +1263,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_RadarAltimeterTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_RadarAltimeterTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_RadarAltimeterTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_PilotTransmitSelector
@@ -1082,7 +1390,7 @@ shared:
   -
     type: var
     var_name: L:var_masterPanelLights
-  -
+  - # Animation
     type: var
     var_name: L:LIGHTING_CABIN_2
   -
@@ -1333,9 +1641,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_WeatherSquare4000_PlayMusic_ReadOnly
-  -
-    type: var
-    var_name: L:var_startupComplete
+# -
+#   type: var
+#   var_name: L:var_startupComplete
   -
     type: var
     var_name: L:var_startupCount
@@ -1408,22 +1716,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_RadarAltimeterTest
-  -
-    type: var
-    var_name: L:var_starterInUseSeconds_L
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_starterInUseSeconds_R
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_inertSepWindup_L
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_inertSepWindup_R
-    unreliable: true
+# -
+#   type: var
+#   var_name: L:var_starterInUseSeconds_L
+# -
+#   type: var
+#   var_name: L:var_starterInUseSeconds_R
+# -
+#   type: var
+#   var_name: L:var_inertSepWindup_L
+# -
+#   type: var
+#   var_name: L:var_inertSepWindup_R
 # -
 #   type: var
 #   var_name: L:var_acMeterVoltsMode
@@ -2505,3 +2809,27 @@ shared:
   -
     type: var
     var_name: L:var_rnavApproachMode
+
+master:
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG THROTTLE LEVER POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: THROTTLE1_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG THROTTLE LEVER POSITION:2
+    var_units: Position 16k
+    var_type: f64
+    event_name: THROTTLE2_SET
+    use_calculator: true
+    unreliable: true
+
+ignore:
+  - CTL92_bigInc
+  - CTL92_bigDec
+  - CTL92_smallInc
+  - CTL92_smallDec

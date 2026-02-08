@@ -1,59 +1,89 @@
-# Version 4.7.0
+# Version 4.7.5
 
 include:
   - definitions/modules/Instruments/AS_GNS530.yaml
+  - definitions/modules/Instruments/AS_GTX330.yaml
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
-  - definitions/modules/electrical.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
+  - definitions/modules/magnetos.yaml
   - definitions/modules/navigation.yaml
-  - definitions/modules/pressurization.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
-  - definitions/modules/transponder.yaml
   - definitions/modules/trim.yaml
 
 shared:
-  - # Deice
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:69
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 69
-  -
+  - # Cabin heat
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:72
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 72
+    use_calculator: true
+
+  - # Deice
+    type: ToggleSwitch
+    var_name: A:PROP DEICE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PROPELLER_DEICE
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:STRUCTURAL DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
+
+  - # Deice electrical
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:69
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 69
+    use_calculator: true
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR1
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR2
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STARTER1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG STARTER:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STARTER2
+    use_calculator: true
 
   - # Engines
-    type: NumSet
-    var_name: A:RECIP ENG PRIMER:1
-    var_units: Percent
-    var_type: i32
-    event_name: TOGGLE_PRIMER1
-    unreliable: true
-  -
-    type: NumSet
-    var_name: A:RECIP ENG PRIMER:2
-    var_units: Percent
-    var_type: i32
-    event_name: TOGGLE_PRIMER2
-    unreliable: true
-  -
     type: NumSet
     var_name: A:RECIP ENG COWL FLAP POSITION:1
     var_units: Position 16k
     var_type: f64
     event_name: COWLFLAP1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -61,6 +91,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: COWLFLAP2_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -68,6 +99,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: PROP_PITCH1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -75,27 +107,22 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: PROP_PITCH2_SET
-    unreliable: true
-  -
-    type: NumSet
-    var_name: L:MIXTURE1_Pos
-    var_units: Number
-    var_type: f64
-    multiply_by: 328
-    add_by: -16384
-    event_name: AXIS_MIXTURE1_SET
     use_calculator: true
     unreliable: true
   -
-    type: NumSet
-    var_name: L:MIXTURE2_Pos
-    var_units: Number
-    var_type: f64
-    multiply_by: 328
-    add_by: -16384
-    event_name: AXIS_MIXTURE2_SET
+    type: ToggleSwitch
+    var_name: A:RECIP ENG PRIMER:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PRIMER1
     use_calculator: true
-    unreliable: true
+  -
+    type: ToggleSwitch
+    var_name: A:RECIP ENG PRIMER:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PRIMER2
+    use_calculator: true
 
   - # Lights
     type: ToggleSwitch
@@ -137,12 +164,13 @@ shared:
     event_param: 1
   -
     type: NumSet
-    var_name: A:LIGHT POTENTIOMETER:10
+    var_name: A:LIGHT CABIN POWER SETTING:1
     var_units: Percent
     var_type: f64
-    event_name: LIGHT_POTENTIOMETER_SET
-    event_param: 10
+    event_name: CABIN_LIGHTS_POWER_SETTING_SET
+    event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:1
@@ -158,6 +186,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:2
@@ -173,6 +202,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 2
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:11
@@ -188,6 +218,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 11
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:12
@@ -203,6 +234,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 12
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:13
@@ -218,6 +250,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 13
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:14
@@ -233,6 +266,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 14
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:15
@@ -248,6 +282,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 15
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:16
@@ -263,6 +298,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 16
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PEDESTRAL:17
@@ -278,6 +314,7 @@ shared:
     event_name: PEDESTRAL_LIGHTS_POWER_SETTING_SET
     event_param: 17
     index_reversed: true
+    unreliable: true
 
 # - # LVAR's (TDS)
 #   type: var
@@ -663,11 +700,11 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_PRESSURIZATION_Knob_CabinAltitude_Position
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:XMLVAR_LEAR_CABIN_CLIMB_RATE_Position
-    unreliable: true
+    interpolate: Default
   -
     type: var
     var_name: L:PRESSURIZATION_DUMP_LEVER
@@ -715,85 +752,86 @@ shared:
     var_name: L:INTER_CHECK_SUMP_2
   -
     type: var
-    var_name: L:LOCKER_NOSE_1_LEVER
-  -
-    type: var
-    var_name: L:DOOR_UPPER
-  -
-    type: var
-    var_name: L:LOCKER_WING_R_LEVER
-# -
-#   type: var
-#   var_name: L:Prop1Rotation
-  -
-    type: var
-    var_name: L:LOCKER_WING_L_LEVER
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_3_LEVER
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_2_LEVER
-  -
-    type: var
-    var_name: L:ENGINE_DOOR_RIGHT
-  -
-    type: var
-    var_name: L:ENGINE_DOOR_LEFT
-  -
-    type: var
-    var_name: L:FUEL_CAP_RIGHT
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_2_BUTTON
-  -
-    type: var
-    var_name: L:GENERIC_Momentary_HOTSPOT_DOOR_HANDLE_UPPER_OUTSIDE_1
-# -
-#   type: var
-#   var_name: L:LANDING_LIGHT_MOTOR
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_1_BUTTON
-# -
-#   type: var
-#   var_name: L:STEERING_UPPER
-  -
-    type: var
-    var_name: L:LOCKER_NOSE_3_BUTTON
-# -
-#   type: var
-#   var_name: L:STEERING
-  -
-    type: var
-    var_name: L:HYD_RESERVOIR
-# -
-#   type: var
-#   var_name: L:STRUCTURAL_DEICE_CYCLE
-  -
-    type: var
-    var_name: L:AC_INLET
-# -
-#   type: var
-#   var_name: L:Prop2Rotation
-  -
-    type: var
-    var_name: L:FUEL_CAP_LEFT
+    var_name: L:LOCKER_WING_L
   -
     type: var
     var_name: L:LOCKER_WING_R
   -
     type: var
-    var_name: L:LOCKER_WING_L
+    var_name: L:ENGINE_OIL_LEFT
+# -
+#   type: var
+#   var_name: L:STEERING_UPPER
   -
     type: var
-    var_name: L:ENGINE_OIL_LEFT
+    var_name: L:ENGINE_DOOR_RIGHT
+# -
+#   type: var
+#   var_name: L:STEERING
   -
     type: var
     var_name: L:ENGINE_OIL_RIGHT
+# -
+#   type: var
+#   var_name: L:LANDING_LIGHT_MOTOR
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_1_LEVER
+# -
+#   type: var
+#   var_name: L:Prop1Rotation
+  -
+    type: var
+    var_name: L:DOOR_UPPER
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_3_LEVER
+  -
+    type: var
+    var_name: L:FUEL_CAP_LEFT
+# -
+#   type: var
+#   var_name: L:Prop2Rotation
+  -
+    type: var
+    var_name: L:LOCKER_WING_L_LEVER
   -
     type: var
     var_name: L:DOOR_LOWER
+  -
+    type: var
+    var_name: L:GENERIC_Momentary_HOTSPOT_DOOR_HANDLE_UPPER_OUTSIDE_1
+  -
+    type: var
+    var_name: L:HYD_RESERVOIR
+# -
+#   type: var
+#   var_name: L:AC_INLET
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_2_LEVER
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_1_BUTTON
+  -
+    type: var
+    var_name: L:STRUCTURAL_DEICE_CYCLE
+    interpolate: Default
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_2_BUTTON
+  -
+    type: var
+    var_name: L:ENGINE_DOOR_LEFT
+  -
+    type: var
+    var_name: L:LOCKER_NOSE_3_BUTTON
+  -
+    type: var
+    var_name: L:FUEL_CAP_RIGHT
+  -
+    type: var
+    var_name: L:LOCKER_WING_R_LEVER
   -
     type: var
     var_name: L:DEICE_PROP
@@ -1320,6 +1358,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:break
+# -
+#   type: var
+#   var_name: L:AUTOPILOT_DAMPER_MEMORY
   -
     type: var
     var_name: L:AP_PFT_POWER
@@ -1337,7 +1378,10 @@ shared:
 #   var_name: L:YAW_DAMPER_MEM
 # -
 #   type: var
-#   var_name: L:AUTOPILOT_MEMORY
+#   var_name: L:AUTOPILOT_PITCH_SET
+# -
+#   type: var
+#   var_name: L:AUTOPILOT_PITCH_MEMORY
 # -
 #   type: var
 #   var_name: L:AP_BLINK_ENABLE
@@ -1610,22 +1654,36 @@ shared:
 #   var_name: L:CABIN_MODE
 # -
 #   type: var
-#   var_name: L:PHASE_ANIM
-# -
-#   type: var
 #   var_name: L:TDSGTNXI_InstrumentPanelSelfTest
+  -
+    type: NumSet
+    var_name: L:MIXTURE2_Pos
+    var_units: Number
+    var_type: f64
+    multiply_by: 327.68
+    add_by: -16384
+    event_name: AXIS_MIXTURE2_SET
+    use_calculator: true
+    unreliable: true
 # -
 #   type: var
-#   var_name: L:MIXTURE2_Pos
-# -
-#   type: var
-#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
+#   var_name: L:PHASE_ANIM
 # -
 #   type: var
 #   var_name: L:GTN750_HSI_GSI_NEEDLE
 # -
 #   type: var
-#   var_name: L:MIXTURE1_Pos
+#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
+  -
+    type: NumSet
+    var_name: L:MIXTURE1_Pos
+    var_units: Number
+    var_type: f64
+    multiply_by: 327.68
+    add_by: -16384
+    event_name: AXIS_MIXTURE1_SET
+    use_calculator: true
+    unreliable: true
 # -
 #   type: var
 #   var_name: L:BATTERY_DEAD
@@ -1977,6 +2035,7 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -1984,6 +2043,7 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE2_SET
+    use_calculator: true
     unreliable: true
 
   - # Fuel
@@ -2122,13 +2182,3 @@ ignore:
   - EFBTABLET#CAMERANEXT
   - EFBTABLET#CAMERAPREV
   - EFBTABLET#RETURNTABLET
-
-  - Transponder0
-  - Transponder1
-  - Transponder2
-  - Transponder3
-  - Transponder4
-  - Transponder5
-  - Transponder6
-  - Transponder7
-  - TransponderVFR

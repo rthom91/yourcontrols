@@ -28,6 +28,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 35
+    use_calculator: true
 
   - # Interior
     type: NumSet

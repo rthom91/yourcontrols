@@ -27,6 +27,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
     unreliable: true
   -
     type: ToggleSwitch
@@ -34,15 +35,16 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
 
   - # Fuel
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:2
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_PUMP_ON
-    off_event_name: FUELSYSTEM_PUMP_OFF
+    event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 2
+    use_calculator: true
 
   - # Oil Radiator
     type: NumSet
@@ -60,6 +62,7 @@ shared:
     event_name: FUELSYSTEM_VALVE_SET
     event_param: 1
     index_reversed: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FUELSYSTEM VALVE SWITCH:2
@@ -68,6 +71,7 @@ shared:
     event_name: FUELSYSTEM_VALVE_SET
     event_param: 2
     index_reversed: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FUELSYSTEM VALVE SWITCH:3
@@ -76,6 +80,7 @@ shared:
     event_name: FUELSYSTEM_VALVE_SET
     event_param: 3
     index_reversed: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FUELSYSTEM VALVE SWITCH:4
@@ -84,6 +89,7 @@ shared:
     event_name: FUELSYSTEM_VALVE_SET
     event_param: 4
     index_reversed: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FUELSYSTEM VALVE SWITCH:5
@@ -92,6 +98,7 @@ shared:
     event_name: FUELSYSTEM_VALVE_SET
     event_param: 5
     index_reversed: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FUELSYSTEM VALVE SWITCH:6
@@ -100,33 +107,34 @@ shared:
     event_name: FUELSYSTEM_VALVE_SET
     event_param: 6
     index_reversed: true
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT BEACON:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: BEACON_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT LANDING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
   -
     type: NumSet
     var_name: A:LIGHT LANDING:3
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 3
 

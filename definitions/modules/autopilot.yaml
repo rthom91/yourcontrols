@@ -1,3 +1,7 @@
+# This file provides the essentials for a functioning autopilot but may not work well.
+# Every aircraft is coded differently and may only respond to specific vars and events.
+# Use of this file is not recommended. Best to fine-tune AP in a corresponding profile.
+
 shared:
   -
     type: ToggleSwitch
@@ -13,12 +17,7 @@ shared:
     var_units: Bool
     var_type: i32
     event_name: AUTOPILOT_DISENGAGE_SET
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT DISENGAGED
-    var_units: Bool
-    var_type: bool
-    event_name: AUTOPILOT_DISENGAGE_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT HEADING LOCK
@@ -74,6 +73,7 @@ shared:
     var_type: bool
     event_name: AP_PANEL_SPEED_HOLD
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AUTOPILOT AIRSPEED HOLD VAR:1
@@ -81,7 +81,32 @@ shared:
     var_type: f64
     event_name: AP_SPD_VAR_SET
     event_param: 1
+    condition:
+      var:
+        var_name: A:AUTOPILOT MANAGED SPEED IN MACH
+        var_units: Bool
+        var_type: bool
+      equals:
+        Bool: false
     cancel_h_events: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:AUTOPILOT MACH HOLD VAR:1
+    var_units: Mach
+    var_type: f64
+    multiply_by: 100
+    event_name: AP_MACH_VAR_SET
+    event_param: 1
+    condition:
+      var:
+        var_name: A:AUTOPILOT MANAGED SPEED IN MACH
+        var_units: Bool
+        var_type: bool
+      equals:
+        Bool: true
+    cancel_h_events: true
+    unreliable: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT MANAGED SPEED IN MACH
@@ -114,12 +139,6 @@ shared:
     event_name: AP_BC_HOLD
     cancel_h_events: true
     use_calculator: true
-  -
-    type: var
-    var_name: A:AUTOPILOT PITCH HOLD REF
-    var_units: Degrees
-    var_type: f64
-    unreliable: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT FLIGHT DIRECTOR ACTIVE:1
@@ -161,12 +180,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: AUTO_THROTTLE_ARM
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT TAKEOFF POWER ACTIVE
     var_units: Bool
     var_type: bool
     event_name: AUTO_THROTTLE_TO_GA
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT NAV1 LOCK
@@ -181,6 +202,7 @@ shared:
     var_units: Number
     var_type: i32
     event_name: AP_MAX_BANK_SET
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT YAW DAMPER

@@ -7,23 +7,23 @@
     },
     {
       "path": "html_ui/YourControls/HTMLEvents.js",
-      "size": 3426,
-      "date": 133778440261750646
+      "size": 3491,
+      "date": 134144626764813010
     },
     {
       "path": "html_ui/YourControls/HTMLTrigger.js",
       "size": 1069,
-      "date": 133778440359037552
+      "date": 134144612682520145
     },
     {
       "path": "html_ui/YourControls/Main.js",
-      "size": 2652,
-      "date": 133778440522226960
+      "size": 2714,
+      "date": 134144759835385528
     },
     {
       "path": "html_ui/YourControls/Network.js",
       "size": 2611,
-      "date": 133778440593810776
+      "date": 134144612219192796
     },
     {
       "path": "modules/YourControlGauge.wasm",

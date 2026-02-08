@@ -1,62 +1,41 @@
 # Version 3.0.65
 
 include:
-  - definitions/modules/navigation.yaml
   - definitions/modules/physics_rad.yaml
   - definitions/modules/radios.yaml
-  - definitions/modules/transponder.yaml
 
 shared:
-  - # Brakes
+  - # Brakes (axis curve?)
     type: NumSet
     var_name: A:BRAKE LEFT POSITION EX1
     var_units: Position 32k
-    var_type: i32
+    var_type: f64
     add_by: -16384
     event_name: AXIS_LEFT_BRAKE_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
     var_name: A:BRAKE RIGHT POSITION EX1
     var_units: Position 32k
-    var_type: i32
+    var_type: f64
     add_by: -16384
     event_name: AXIS_RIGHT_BRAKE_SET
-    unreliable: true
-
-  - # Trim
-    type: NumSet
-    var_name: A:RUDDER TRIM PCT
-    var_units: Position 16k
-    var_type: f64
-    event_name: RUDDER_TRIM_SET_EX1
-    unreliable: true
-  -
-    type: NumSet
-    var_name: A:ELEVATOR TRIM PCT
-    var_units: Position 16k
-    var_type: f64
-    event_name: ELEVATOR_TRIM_SET
-    unreliable: true
-  -
-    type: NumSet
-    var_name: A:AILERON TRIM PCT
-    var_units: Position 16k
-    var_type: f64
-    event_name: AILERON_TRIM_SET_EX1
+    use_calculator: true
     unreliable: true
 
   - # General
-    type: ToggleSwitch
+    type: NumSet
     var_name: A:IS SLEW ACTIVE
     var_units: Bool
-    var_type: bool
+    var_type: i32
     event_name: SLEW_TOGGLE
+    use_calculator: true
   -
-    type: ToggleSwitch
+    type: NumSet
     var_name: A:PUSHBACK ATTACHED
     var_units: Bool
-    var_type: bool
+    var_type: i32
     event_name: TOGGLE_PUSHBACK
     cancel_h_events: true
     use_calculator: true
@@ -64,6 +43,44 @@ shared:
     type: ProgramActionEvent
     event_name: TOGGLE_LAUNCH_BAR_SWITCH
     action: TransferControls
+
+  - # Transponder
+    type: NumSet
+    var_name: A:TRANSPONDER IDENT:1
+    var_units: Bool
+    var_type: i32
+    event_name: XPNDR_IDENT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:TRANSPONDER CODE:1
+    var_units: Bco16
+    var_type: i32
+    event_name: XPNDR_SET
+    event_param: 1
+
+  - # Trim
+    type: NumSet
+    var_name: A:AILERON TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: AILERON_TRIM_SET_EX1
+    use_calculator: true
+    unreliable: true
+  -
+    type: var
+    var_name: A:ELEVATOR TRIM POSITION
+    var_units: Radians
+    var_type: f64
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:RUDDER TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: RUDDER_TRIM_SET_EX1
+    use_calculator: true
+    unreliable: true
 
 # - # LVAR's
 #   type: var
@@ -3226,7 +3243,7 @@ shared:
     type: var
     var_name: L:switch_376_73X
     unreliable: true
-  - # FLIGHT DIRECTOR (F/D) Switch Collins/Honeywell
+  - # CPT FLIGHT DIRECTOR Switch Collins/Honeywell
     type: ToggleSwitch
     var_name: L:switch_378_73X
     event_name: ROTOR_BRAKE
@@ -3236,15 +3253,15 @@ shared:
 # - # MA Annunciator Collins/Honeywell
 #   type: var
 #   var_name: L:switch_379_73X
-# - # AUTOTHROTTLE (A/T) ARM Light Collins/Honeywell
+# - # AUTOTHROTTLE ARM Light Collins/Honeywell
 #   type: var
 #   var_name: L:switch_3801_73X
-  - # AUTOTHROTTLE (A/T) ARM Switch Collins/Honeywell
+  - # AUTOTHROTTLE ARM Switch Collins/Honeywell
     type: ToggleSwitch
     var_name: L:switch_380_73X
     event_name: ROTOR_BRAKE
     event_param: 38001
-    on_condition_value: 100
+    on_condition_value: 100 # Inverted
     use_calculator: true
   - # N1 Switch Collins/Honeywell
     type: NumSet
@@ -3475,7 +3492,7 @@ shared:
     event_param: 40601
     on_condition_value: 100
     use_calculator: true
-  - # FLIGHT DIRECTOR (F/D) Right Switch Collins/Honeywell
+  - # FO FLIGHT DIRECTOR Switch Collins/Honeywell
     type: ToggleSwitch
     var_name: L:switch_407_73X
     event_name: ROTOR_BRAKE
@@ -4001,7 +4018,7 @@ shared:
     up_event_param: 46702
     down_event_name: ROTOR_BRAKE
     down_event_param: 46701
-    increment_by: 2
+    increment_by: 1
     use_calculator: true
   - # FUEL FLOW Switch
     type: NumIncrement
@@ -5722,13 +5739,11 @@ shared:
 #   type: var
 #   var_name: L:switch_692_73X
   - # Parking Brake Lever
-    type: NumSet
+    type: ToggleSwitch
     var_name: L:switch_693_73X
-    var_units: Number
-    var_type: f64
-    multiply_by: -0.03
-    add_by: 69304
     event_name: ROTOR_BRAKE
+    event_param: 69301
+    on_condition_value: 100
     use_calculator: true
   - # Left Overheat Detector OVHT DET Switch
     type: NumIncrement
@@ -9425,7 +9440,7 @@ shared:
   -
     type: var
     var_name: L:tablet_power_btn_FO
-  -
+  - # Brightness
     type: var
     var_name: L:TabletSensorCA
     unreliable: true
@@ -9954,7 +9969,7 @@ shared:
     var_type: f64
     event_name: "#84137"
     is_user_event: true
-  - # Won't go negative - Fix this ancient crap PMDG
+  -
     type: NumSet
     var_name: L:ngx_VSwindow
     var_units: Number
@@ -9962,57 +9977,57 @@ shared:
     add_by: 10000
     event_name: "#84138"
     is_user_event: true
-  -
-    type: var
-    var_name: L:ngx_MCP_ATArm
-  -
-    type: var
-    var_name: L:ngx_MCP_FDLeft
-  -
-    type: var
-    var_name: L:ngx_MCP_FDRight
-  -
-    type: var
-    var_name: L:ngx_MCP_VNav
-  -
-    type: var
-    var_name: L:ngx_MCP_LNav
-  -
-    type: var
-    var_name: L:ngx_MCP_VORLock
-  -
-    type: var
-    var_name: L:ngx_MCP_N1
-  -
+# -
+#   type: var
+#   var_name: L:ngx_MCP_ATArm
+# -
+#   type: var
+#   var_name: L:ngx_MCP_FDLeft
+# -
+#   type: var
+#   var_name: L:ngx_MCP_FDRight
+# -
+#   type: var
+#   var_name: L:ngx_MCP_VNav
+# -
+#   type: var
+#   var_name: L:ngx_MCP_LNav
+# -
+#   type: var
+#   var_name: L:ngx_MCP_VORLock
+# -
+#   type: var
+#   var_name: L:ngx_MCP_N1
+  - # To know if AT on
     type: var
     var_name: L:ngx_MCP_Speed
-  -
-    type: var
-    var_name: L:ngx_MCP_LvlChg
-  -
-    type: var
-    var_name: L:ngx_MCP_HdgSel
-  -
-    type: var
-    var_name: L:ngx_MCP_App
-  -
-    type: var
-    var_name: L:ngx_MCP_AltHold
-  -
-    type: var
-    var_name: L:ngx_MCP_VS
-  -
+# -
+#   type: var
+#   var_name: L:ngx_MCP_LvlChg
+# -
+#   type: var
+#   var_name: L:ngx_MCP_HdgSel
+# -
+#   type: var
+#   var_name: L:ngx_MCP_App
+# -
+#   type: var
+#   var_name: L:ngx_MCP_AltHold
+# -
+#   type: var
+#   var_name: L:ngx_MCP_VS
+  - # To know AP is on
     type: var
     var_name: L:ngx_MCP_CMDA
   -
     type: var
     var_name: L:ngx_MCP_CMDB
-  -
-    type: var
-    var_name: L:ngx_MCP_CWSA
-  -
-    type: var
-    var_name: L:ngx_MCP_CWSB
+# -
+#   type: var
+#   var_name: L:ngx_MCP_CWSA
+# -
+#   type: var
+#   var_name: L:ngx_MCP_CWSB
 # -
 #   type: var
 #   var_name: L:7X7XleftMLGoleo
@@ -10243,6 +10258,14 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE1_SET
+    condition:
+      var:
+        var_name: L:ngx_MCP_Speed
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -10250,8 +10273,40 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE2_SET
+    condition:
+      var:
+        var_name: L:ngx_MCP_Speed
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+    use_calculator: true
     unreliable: true
   -
+    type: NumSet
+    var_name: L:yokes_L_R_capt
+    var_units: Number
+    var_type: f64
+    multiply_by: -16384
+    add_by: 16384
+    event_name: AXIS_AILERONS_SET
+    condition:
+      var:
+        var_name: L:ngx_MCP_CMDA
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+      and:
+        var:
+          var_name: L:ngx_MCP_CMDB
+          var_units: Number
+          var_type: f64
+        equals:
+          F64: 0.0
+    use_calculator: true
+    unreliable: true
+  - # DO NOT use calculator
     type: NumSet
     var_name: A:ELEVATOR POSITION
     var_units: Position 16k
@@ -10261,21 +10316,22 @@ master:
     unreliable: true
   -
     type: NumSet
-    var_name: A:AILERON POSITION
-    var_units: Position 16k
+    var_name: L:NGXRudderPedals
+    var_units: Number
     var_type: f64
-    multiply_by: -1
-    event_name: AXIS_AILERONS_SET
-    unreliable: true
-  -
-    type: NumSet
-    var_name: A:RUDDER POSITION
-    var_units: Position 16k
-    var_type: f64
-    multiply_by: -1
+    multiply_by: -327.68
+    add_by: 16384
     event_name: AXIS_RUDDER_SET
     use_calculator: true
     unreliable: true
+  -
+    type: event
+    event_name: BAROMETRIC
+    use_calculator: true
+  -
+    type: event
+    event_name: TOGGLE_JETWAY
+    use_calculator: true
 
 ignore:
   - PMDGTablet#efb_preferences_brightness

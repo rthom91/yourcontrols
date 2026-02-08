@@ -1,5 +1,7 @@
+# This file provides a basic setup for a glider. Most typically feature 3-5 ballast tanks.
+
 shared:
-  - # ASOBO_HANDLING_Push_Tow_Release
+  -
     type: NumSet
     var_name: A:TOW RELEASE HANDLE
     var_units: Percent
@@ -7,8 +9,7 @@ shared:
     event_name: TOW_PLANE_RELEASE
     use_calculator: true
     unreliable: true
-
-  - # ASOBO_HANDLING_Switch_Water_Ballast_Template
+  -
     type: ToggleSwitch
     var_name: A:WATER BALLAST VALVE:1
     var_units: Bool

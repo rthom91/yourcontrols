@@ -1,4 +1,4 @@
-const clickEvents = ["click", "mouseup", "mousedown"].map(eventType => {
+const clickEvents = ["mousedown", "mouseup", "click"].map(eventType => {
 	let evt = new MouseEvent(eventType, {
 		cancelable: true,
 		bubbles: true

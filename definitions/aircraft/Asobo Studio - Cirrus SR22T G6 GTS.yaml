@@ -1,15 +1,12 @@
-# Version 0.2.18
+# Version 0.2.19
 
 include:
   - definitions/modules/Instruments/AS_G1000.yaml
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
-  - definitions/modules/electrical.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
+  - definitions/modules/magnetos.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
@@ -17,6 +14,84 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Avionics
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:23
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 23
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:24
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 24
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 2
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: i32
+    event_name: ALTERNATOR_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:2
+    var_units: Bool
+    var_type: i32
+    event_name: ALTERNATOR_SET
+    event_param: 2
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: STARTER1_SET
+    use_calculator: true
+
+  - # Fuel
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
+
   - # Interior
     type: NumSet
     var_name: A:LIGHT GLARESHIELD:1
@@ -32,6 +107,7 @@ shared:
     event_name: GLARESHIELD_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PANEL:1
@@ -47,6 +123,7 @@ shared:
     event_name: PANEL_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:1
@@ -97,6 +174,35 @@ shared:
     event_name: CABIN_LIGHTS_SET
     event_param: 7
 
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT WING:1
+    var_units: Bool
+    var_type: i32
+    event_name: WING_LIGHTS_SET
+    event_param: 1
+
   - # LVAR's (trimmed)
     type: var
     var_name: L:SunVisor_Right
@@ -109,6 +215,7 @@ shared:
     var_units: Number
     var_type: f64
     event_name: MIXTURE1_SET
+    use_calculator: true
     unreliable: true
   -
     type: var
@@ -194,6 +301,48 @@ shared:
 # -
 #   type: var
 #   var_name: L:WT1000_TKS_QtyRight
+# -
+#   type: var
+#   var_name: L:C1_HEAD_TEMP
+# -
+#   type: var
+#   var_name: L:C2_HEAD_TEMP
+# -
+#   type: var
+#   var_name: L:C3_HEAD_TEMP
+# -
+#   type: var
+#   var_name: L:C4_HEAD_TEMP
+# -
+#   type: var
+#   var_name: L:C5_HEAD_TEMP
+# -
+#   type: var
+#   var_name: L:C6_HEAD_TEMP
+# -
+#   type: var
+#   var_name: L:T1_INLET_TEMP
+# -
+#   type: var
+#   var_name: L:T2_INLET_TEMP
+# -
+#   type: var
+#   var_name: L:C1_EXHAUST_TEMP
+# -
+#   type: var
+#   var_name: L:C2_EXHAUST_TEMP
+# -
+#   type: var
+#   var_name: L:C3_EXHAUST_TEMP
+# -
+#   type: var
+#   var_name: L:C4_EXHAUST_TEMP
+# -
+#   type: var
+#   var_name: L:C5_EXHAUST_TEMP
+# -
+#   type: var
+#   var_name: L:C6_EXHAUST_TEMP
   -
     type: var
     var_name: L:WT1000_TKS_TankMode
@@ -205,4 +354,5 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE1_SET
+    use_calculator: true
     unreliable: true

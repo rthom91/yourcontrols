@@ -1,22 +1,15 @@
-# Version 1.0.2
+# Version 1.2.1
 
 include:
+  - definitions/modules/Instruments/AS_GNS430.yaml
   - definitions/modules/Instruments/AS_GTN650.yaml
   - definitions/modules/Instruments/AS_GTX330.yaml
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot.yaml
-  - definitions/modules/controls_rotor.yaml
-  - definitions/modules/electrical.yaml
-  - definitions/modules/engines_rotor.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
-  - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
-  - definitions/modules/rotorcraft.yaml
-  - definitions/modules/safety.yaml
-  - definitions/modules/trim.yaml
 
 shared:
   - # Deice
@@ -32,6 +25,7 @@ shared:
     var_units: Bool
     var_type: i32
     event_name: ANTI_ICE_TOGGLE_ENG1
+    use_calculator: true
 
   - # Doors
     type: ToggleSwitch
@@ -39,7 +33,8 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 1
+    event_param: 0
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -47,6 +42,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -54,6 +50,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -61,6 +58,47 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STARTER1
+    use_calculator: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM PUMP SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 1
+    use_calculator: true
 
   - # Key
     type: ToggleSwitch
@@ -68,6 +106,29 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TURBINE_IGNITION_SWITCH_TOGGLE
+    event_param: 1
+    use_calculator: true
+
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
     event_param: 1
 
   - # Interior
@@ -85,12 +146,40 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN
     var_units: Bool
     var_type: i32
     event_name: CABIN_LIGHTS_SET
+
+  - # Rotor
+    type: ToggleSwitch
+    var_name: A:ROTOR BRAKE ACTIVE
+    var_units: Bool
+    var_type: bool
+    event_name: ROTOR_BRAKE_TOGGLE
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:ROTOR LATERAL TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ROTOR_LATERAL_TRIM_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ROTOR LONGITUDINAL TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ROTOR_LONGITUDINAL_TRIM_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: event
+    event_name: ROTOR_TRIM_RESET
 
   - # Guns
     type: event
@@ -201,9 +290,16 @@ shared:
   -
     type: var
     var_name: L:BB_CFG_ITT_HOTSTART_ENGINE_FAILURE_ENABLED
+  -
+    type: var
+    var_name: L:530F_TwistThrottle
+    interpolate: Default
 # -
 #   type: var
 #   var_name: L:LOCAL_milliBar_to_inHg
+# -
+#   type: var
+#   var_name: L:1:ENTER_AIRCRAFT
 # -
 #   type: var
 #   var_name: L:530F_GunsActive
@@ -234,9 +330,24 @@ shared:
 # -
 #   type: var
 #   var_name: L:530F_RHFNFlashrotate
-# -
-#   type: var
-#   var_name: L:530F_IsMarketplace
+  -
+    type: var
+    var_name: L:530F_SpSwitch_4
+  -
+    type: var
+    var_name: L:530F_SpSwitch_5
+  -
+    type: var
+    var_name: L:530F_SpSwitch_7
+  -
+    type: var
+    var_name: L:530F_SpSwitch_3
+  -
+    type: var
+    var_name: L:530F_SpSwitch_2
+  -
+    type: var
+    var_name: L:530F_SpSwitch_9
 # -
 #   type: var
 #   var_name: L:530F_MuzzleFlash
@@ -245,7 +356,13 @@ shared:
 #   var_name: L:530F_MuzzleFlash_Slow
   -
     type: var
+    var_name: L:530F_NavSwitch_1
+  -
+    type: var
     var_name: L:530F_Cabin_Heat_ON
+  -
+    type: var
+    var_name: L:530F_Cubby_IsOpen
   -
     type: var
     var_name: L:530F_WarnLightDim_ON
@@ -263,7 +380,13 @@ shared:
     var_name: L:530F_Utility_Power_ON
   -
     type: var
+    var_name: L:530F_SpSwitch_1
+  -
+    type: var
     var_name: L:530F_REIGN_Test_ON
+  -
+    type: var
+    var_name: L:530F_SpSwitch_6
   -
     type: var
     var_name: L:530F_Fault_Test_ON
@@ -272,8 +395,7 @@ shared:
     var_name: L:530F_IdleRelease
   -
     type: var
-    var_name: L:530F_ThrottleGrip
-    interpolate: Default
+    var_name: L:530F_Pedal_Adjustment
   -
     type: var
     var_name: L:530F_RotorBrakeForceOn
@@ -294,6 +416,24 @@ shared:
     var_name: L:XMLVAR_Pass_Volume
 # -
 #   type: var
+#   var_name: L:530F_Autostart_Active
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Stage
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Active
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Stage
+# -
+#   type: var
+#   var_name: L:530F_TwistThrottle_Prev
+# -
+#   type: var
+#   var_name: L:TEST_Throttle_Pos
+# -
+#   type: var
 #   var_name: L:LIGHTING_LANDING_1
 # -
 #   type: var
@@ -309,6 +449,12 @@ shared:
 #   var_name: L:INSTRUMENT_Altimeter_1
 # -
 #   type: var
+#   var_name: L:AS430_MapZoomRange
+# -
+#   type: var
+#   var_name: L:AS430_SelectedSource
+# -
+#   type: var
 #   var_name: L:AS650_NAV_Freq_Modify
 # -
 #   type: var
@@ -321,16 +467,141 @@ shared:
 #   var_name: L:XMLVAR_ADF_Frequency_10_Khz
 # -
 #   type: var
+#   var_name: L:530F_SwitchFlag
+# -
+#   type: var
+#   var_name: L:530F_SIM_IS2024
+# -
+#   type: var
+#   var_name: L:530F_RotorVibration
+# -
+#   type: var
 #   var_name: L:530F_Throttle_Init
 # -
 #   type: var
 #   var_name: L:530F_ThrottleState
 # -
 #   type: var
-#   var_name: L:ENG FUEL VALVE:1
+#   var_name: L:530F_Autostart_Abort
+# -
+#   type: var
+#   var_name: L:530F_Autostart_ElapsedTime
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Timer_1
+  -
+    type: var
+    var_name: L:530F_Temp_Realism_Setting
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Timer_2
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Timer_3
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Timer_4
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Timer_5
+# -
+#   type: var
+#   var_name: L:530F_Autostart_Timer_6
+# -
+#   type: var
+#   var_name: L:S64F_Autostart_Active
+# -
+#   type: var
+#   var_name: L:S64F_Autostart_Stage
+# -
+#   type: var
+#   var_name: L:530F_Autostop_ElapsedTime
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Timer_1
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Timer_2
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Timer_3
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Timer_4
+# -
+#   type: var
+#   var_name: L:530F_Autostop_Timer_5
 # -
 #   type: var
 #   var_name: L:530F_EngOutWarn_ON
 # -
 #   type: var
+#   var_name: L:530F_Accel_UpDown
+# -
+#   type: var
+#   var_name: L:530F_Accel_FwdAft
+# -
+#   type: var
+#   var_name: L:AS430_CDI_Source_1
+# -
+#   type: var
 #   var_name: L:BB_OUT_ITT_TEMP
+# -
+#   type: var
+#   var_name: L:530F_Accel_RightLeft
+# -
+#   type: var
+#   var_name: L:AS430_ManualBrightness_Value_1
+# -
+#   type: var
+#   var_name: L:AS430_ManualBrightness_Enabled_1
+# -
+#   type: var
+#   var_name: L:YourControlsPanelId
+# -
+#   type: var
+#   var_name: L:EVENTS_ID
+# -
+#   type: var
+#   var_name: L:BB_OUT_HOTSTART_FLAG
+# -
+#   type: var
+#   var_name: L:530F_IsMarketplace
+
+master:
+  -
+    type: NumSet
+    var_name: A:YOKE X POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_CYCLIC_LATERAL_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:YOKE Y POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_CYCLIC_LONGITUDINAL_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:COLLECTIVE HANDLE POSITION
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_COLLECTIVE_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:TAIL ROTOR PEDAL POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_RUDDER_SET
+    use_calculator: true
+    unreliable: true

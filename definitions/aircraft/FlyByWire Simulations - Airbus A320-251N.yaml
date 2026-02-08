@@ -2,16 +2,30 @@
 
 include:
   - definitions/modules/general.yaml
-  - definitions/modules/navigation.yaml
-  - definitions/modules/radios.yaml
 
 shared:
+  - # Altimeters
+    type: NumSet
+    var_name: A:KOHLSMAN SETTING MB:1
+    var_units: Millibars scaler 16
+    var_type: f64
+    event_name: KOHLSMAN_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:KOHLSMAN SETTING MB:2
+    var_units: Millibars scaler 16
+    var_type: f64
+    event_name: KOHLSMAN_SET
+    event_param: 2
+
   - # AntiSkid
     type: ToggleSwitch
     var_name: A:ANTISKID BRAKES ACTIVE
     var_units: Bool
     var_type: bool
     event_name: ANTISKID_BRAKES_TOGGLE
+    use_calculator: true
 
   - # Autopilot
     type: ToggleSwitch
@@ -36,13 +50,13 @@ shared:
     var_type: i32
     event_name: AP_ALT_VAR_SET_ENGLISH
     event_param: 3
-    cancel_h_events: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT MANAGED SPEED IN MACH
     var_units: Bool
     var_type: bool
     event_name: AP_MANAGED_SPEED_IN_MACH_TOGGLE
+    use_calculator: true
 
   - # Engine Ignition
     type: NumSet
@@ -50,29 +64,31 @@ shared:
     var_units: Enum
     var_type: i32
     event_name: TURBINE_IGNITION_SWITCH_SET1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TURB ENG IGNITION SWITCH EX1:2
     var_units: Enum
     var_type: i32
     event_name: TURBINE_IGNITION_SWITCH_SET2
+    use_calculator: true
 
   - # Engine Masters
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:1
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:2
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 2
+    use_calculator: true
 
   - # Electrical
     type: ToggleSwitch
@@ -108,6 +124,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:9
@@ -115,6 +132,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 9
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:10
@@ -122,6 +140,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 10
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:2
@@ -129,6 +148,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:3
@@ -136,6 +156,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:5
@@ -143,6 +164,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 5
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:6
@@ -150,6 +172,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 6
+    use_calculator: true
 
   - # Lighting Overhead
     type: NumSet
@@ -354,6 +377,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT
     event_param: 1
     cancel_h_events: true
+    use_calculator: true
   - # FWD R Cabin Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -362,6 +386,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT
     event_param: 2
     cancel_h_events: true
+    use_calculator: true
   - # AFT L Cabin Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -370,6 +395,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT
     event_param: 3
     cancel_h_events: true
+    use_calculator: true
   - # AFT R Cabin Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -378,6 +404,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT
     event_param: 4
     cancel_h_events: true
+    use_calculator: true
   - # AFT R Cargo Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:4
@@ -386,6 +413,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT
     event_param: 5
     cancel_h_events: true
+    use_calculator: true
   - # FWD R Cargo Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:5
@@ -394,6 +422,7 @@ shared:
     event_name: TOGGLE_AIRCRAFT_EXIT
     event_param: 6
     cancel_h_events: true
+    use_calculator: true
   - # GPU Truck
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:8
@@ -403,91 +432,189 @@ shared:
     cancel_h_events: true
     use_calculator: true
 
-  - # Transponder
-    type: NumSet
-    var_name: A:TRANSPONDER CODE:1
-    var_units: Bco16
-    var_type: i32
-    event_name: XPNDR_SET
-    event_param: 1
-  -
-    type: ToggleSwitch
-    var_name: A:TRANSPONDER IDENT:1
-    var_units: Bool
-    var_type: bool
-    event_name: XPNDR_IDENT_ON
-    off_event_name: XPNDR_IDENT_OFF
-    event_param: 1
-
   - # Lights
     type: NumSet
     var_name: A:LIGHT TAXI:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT TAXI:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 2
   -
     type: NumSet
     var_name: A:LIGHT TAXI:3
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 3
   -
     type: NumSet
     var_name: A:LIGHT LANDING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
   -
     type: NumSet
     var_name: A:LIGHT LANDING:3
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 3
   -
     type: NumSet
     var_name: A:LIGHT NAV:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: NAV_LIGHTS_SET
     event_param: 0
   -
     type: NumSet
     var_name: A:LIGHT LOGO:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LOGO_LIGHTS_SET
     event_param: 0
   -
     type: NumSet
     var_name: A:LIGHT BEACON
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: BEACON_LIGHTS_SET
   -
     type: NumSet
     var_name: A:LIGHT WING:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: WING_LIGHTS_SET
     event_param: 0
+
+  - # Navigation
+    type: NumSet
+    var_name: A:NAV OBS:1
+    var_units: Degrees
+    var_type: f64
+    event_name: VOR1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV OBS:2
+    var_units: Degrees
+    var_type: f64
+    event_name: VOR2_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV OBS:3
+    var_units: Degrees
+    var_type: f64
+    event_name: VOR3_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV OBS:4
+    var_units: Degrees
+    var_type: f64
+    event_name: VOR4_SET
+    use_calculator: true
+
+  - # Radios
+    type: NumSet
+    var_name: A:ADF ACTIVE FREQUENCY:1
+    var_units: Frequency ADF BCD32
+    var_type: i32
+    event_name: ADF_ACTIVE_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:ADF ACTIVE FREQUENCY:2
+    var_units: Frequency ADF BCD32
+    var_type: i32
+    event_name: ADF2_ACTIVE_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:COM ACTIVE FREQUENCY:1
+    var_units: Hz
+    var_type: i32
+    event_name: COM_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:COM ACTIVE FREQUENCY:2
+    var_units: Hz
+    var_type: i32
+    event_name: COM2_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:COM ACTIVE FREQUENCY:3
+    var_units: Hz
+    var_type: i32
+    event_name: COM3_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:COM STANDBY FREQUENCY:1
+    var_units: Hz
+    var_type: i32
+    event_name: COM_STBY_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:COM STANDBY FREQUENCY:2
+    var_units: Hz
+    var_type: i32
+    event_name: COM2_STBY_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:COM STANDBY FREQUENCY:3
+    var_units: Hz
+    var_type: i32
+    event_name: COM3_STBY_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV ACTIVE FREQUENCY:1
+    var_units: Hz
+    var_type: i32
+    event_name: NAV1_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV ACTIVE FREQUENCY:2
+    var_units: Hz
+    var_type: i32
+    event_name: NAV2_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV ACTIVE FREQUENCY:3
+    var_units: Hz
+    var_type: i32
+    event_name: NAV3_RADIO_SET_HZ
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:NAV ACTIVE FREQUENCY:4
+    var_units: Hz
+    var_type: i32
+    event_name: NAV4_RADIO_SET_HZ
+    use_calculator: true
 
   - # Seatbelts
     type: ToggleSwitch
@@ -495,6 +622,46 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE
+    use_calculator: true
+
+  - # Transponder
+    type: NumSet
+    var_name: A:TRANSPONDER IDENT:1
+    var_units: Bool
+    var_type: i32
+    event_name: XPNDR_IDENT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:TRANSPONDER CODE:1
+    var_units: Bco16
+    var_type: i32
+    event_name: XPNDR_SET
+    event_param: 1
+
+  - # Trim
+    type: NumSet
+    var_name: A:ELEVATOR TRIM PCT
+    var_units: Percent scaler 16k
+    var_type: f64
+    event_name: ELEVATOR_TRIM_SET
+    condition:
+      var:
+        var_name: A:SIM ON GROUND
+        var_units: Bool
+        var_type: bool
+      equals:
+        Bool: true
+    unreliable: true
+# - # Conflicts with rudder/pedals
+#   type: NumSet
+#   var_name: L:A32NX_RUDDER_TRIM_1_COMMANDED_POSITION
+#   var_units: Degrees
+#   var_type: f64
+#   multiply_by: 819.2 # -20 to 20
+#   event_name: RUDDER_TRIM_SET_EX1
+#   use_calculator: true
+#   unreliable: true
 
   - # Wipers
     type: ToggleSwitch
@@ -503,6 +670,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 77
+    use_calculator: true
   -
     type: NumSet
     var_name: A:CIRCUIT POWER SETTING:77
@@ -518,6 +686,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 80
+    use_calculator: true
   -
     type: NumSet
     var_name: A:CIRCUIT POWER SETTING:80
@@ -527,22 +696,7 @@ shared:
     event_param: 80
     index_reversed: true
 
-  - # Trim
-    type: NumSet
-    var_name: A:RUDDER TRIM PCT
-    var_units: Percent scaler 16k
-    var_type: f64
-    event_name: RUDDER_TRIM_SET_EX1
-    unreliable: true
-  -
-    type: NumSet
-    var_name: A:ELEVATOR TRIM PCT
-    var_units: Percent scaler 16k
-    var_type: f64
-    event_name: ELEVATOR_TRIM_SET
-    unreliable: true
-
-  - # Take control priority
+  - # YC control priority
     type: ProgramAction
     action: TakeControls
     var_name: L:A32NX_PRIORITY_TAKEOVER:1
@@ -984,9 +1138,9 @@ shared:
   -
     type: var
     var_name: L:A32NX_PAGES_PRINTED
-# -
-#   type: var
-#   var_name: L:A32NX_PRINT_PAGE_OFFSET
+  -
+    type: var
+    var_name: L:A32NX_PRINT_PAGE_OFFSET
   -
     type: var
     var_name: L:A32NX_DISCARD_PAGE
@@ -1623,9 +1777,11 @@ shared:
   -
     type: var
     var_name: L:A32NX_PANEL_DCDU_L_BRIGHTNESS
+    unreliable: true
   -
     type: var
     var_name: L:A32NX_PANEL_DCDU_R_BRIGHTNESS
+    unreliable: true
   -
     type: var
     var_name: L:A32NX_OVHD_ELEC_BAT_1_PB_IS_AUTO
@@ -1665,21 +1821,21 @@ shared:
   -
     type: CustomCalculator
     get: (L:LIGHTING_STROBE_0) 2 ==
-    set: 0 (>K:STROBES_OFF)
+    set: 0 (>K:STROBES_SET)
     condition:
       equals:
         F64: 1.0
   -
     type: CustomCalculator
     get: (L:LIGHTING_STROBE_0) 1 ==
-    set: 0 (>K:STROBES_ON)
+    set: 1 (>K:STROBES_SET)
     condition:
       equals:
         F64: 1.0
   -
     type: CustomCalculator
     get: (L:LIGHTING_STROBE_0) 0 ==
-    set: 0 (>K:STROBES_ON)
+    set: 1 (>K:STROBES_SET)
     condition:
       equals:
         F64: 1.0
@@ -2024,6 +2180,7 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_COM_1_Volume_VHF_L
+    unreliable: true
 # -
 #   type: var
 #   var_name: L:A32NX_ELEC_DC_2_BUS_IS_POWERED
@@ -2033,6 +2190,7 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_COM_1_Volume_VHF_C
+    unreliable: true
 # -
 #   type: var
 #   var_name: L:A32NX_ELEC_DC_1_BUS_IS_POWERED
@@ -2042,6 +2200,7 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_COM_1_Volume_VHF_R
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_VOICE_Switch_Down
@@ -2078,18 +2237,23 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_NAV_L_VOR1_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_VOR1_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_VOR2_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_VOR2_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_MKR_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_MKR_Switch_Down
@@ -2099,24 +2263,29 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_NAV_L_ILS_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_ILS_Switch_Down
   -
     type: var
     var_name: L:XMLVAR_NAV_L_MLS_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_MLS_Switch_Down
   -
     type: var
     var_name: L:XMLVAR_NAV_L_ADF1_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_ADF1_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_L_ADF2_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_RMP_R_NavLockOff
@@ -2126,36 +2295,43 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_COM_2_Volume_VHF_L
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_COM_2_VHF_C_Switch_Down
   -
     type: var
     var_name: L:XMLVAR_COM_2_Volume_VHF_C
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_COM_2_VHF_R_Switch_Down
   -
     type: var
     var_name: L:XMLVAR_COM_2_Volume_VHF_R
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_MKR_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_ILS_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_ILS_Switch_Down
   -
     type: var
     var_name: L:XMLVAR_NAV_R_MLS_Volume
+    unreliable: true
   -
     type: var
     var_name: L:XMLVAR_NAV_R_MLS_Switch_Down
   -
     type: var
     var_name: L:XMLVAR_NAV_R_ADF2_Volume
+    unreliable: true
   -
     type: var
     var_name: L:A32NX_TRANSPONDER_SYSTEM
@@ -2234,12 +2410,12 @@ shared:
     event_name: SPOILERS_SET
     use_calculator: true
     unreliable: true
-  -
-    type: var
-    var_name: L:A32NX_PRINTER_TOGGLE
-  -
-    type: var
-    var_name: L:A32NX_PRINTER_ACTIVE
+# -
+#   type: var
+#   var_name: L:A32NX_PRINTER_TOGGLE
+# -
+#   type: var
+#   var_name: L:A32NX_PRINTER_ACTIVE
   -
     type: var
     var_name: L:A32NX_PRINTER_TEAR
@@ -2373,11 +2549,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_BRAKE_ALTN_LEFT_PRESS
-  -
-    type: var
-    var_name: L:A32NX_EFB_BRIGHTNESS
-    cancel_h_events: true
-    unreliable: true
+# - # Keep disabled
+#   type: var
+#   var_name: L:A32NX_EFB_BRIGHTNESS
 # -
 #   type: var
 #   var_name: L:A32NX_MCDU_L_ANNUNC_FAIL
@@ -2574,12 +2748,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_OVHD_HYD_EPUMPY_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_COND_PACK_1_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_OVHD_COND_PACK_2_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_COND_PACK_1_PB_HAS_FAULT
+# -
+#   type: var
+#   var_name: L:A32NX_OVHD_COND_PACK_2_PB_HAS_FAULT
   -
     type: var
     var_name: L:A32NX_OVHD_COND_HOT_AIR_PB_HAS_FAULT
@@ -2613,36 +2787,36 @@ shared:
   -
     type: var
     var_name: L:A32NX_OVHD_PRESS_MODE_SEL_PB_HAS_FAULT
-  -
-    type: var
-    var_name: L:A32NX_AUTOPILOT_AUTOLAND_WARNING
-  -
-    type: var
-    var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_CAPT_GREEN_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_CAPT_GREEN_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_CAPT_RED_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_CAPT_RED_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_FO_GREEN_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_FO_GREEN_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_FO_RED_ON
-  -
-    type: var
-    var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_FO_RED_ON
-  - # temporary AP1 to AP2 fix (H-event allowed)
-    type: var
-    var_name: L:A32NX_AUTOPILOT_2_ACTIVE
+# -
+#   type: var
+#   var_name: L:A32NX_AUTOPILOT_AUTOLAND_WARNING
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_CAPT_GREEN_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_CAPT_GREEN_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_CAPT_RED_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_CAPT_RED_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_FO_GREEN_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_FO_GREEN_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_1_PRIORITY_LIGHT_FO_RED_ON
+# -
+#   type: var
+#   var_name: L:A32NX_FCDC_2_PRIORITY_LIGHT_FO_RED_ON
+# -
+#   type: var
+#   var_name: L:A32NX_AUTOPILOT_2_ACTIVE
   -
     type: CustomCalculator
     get: (L:A32NX_AUTOTHRUST_STATUS) 0 ==
@@ -3058,9 +3232,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_FG_ALTITUDE_CONSTRAINT
-# -
-#   type: var
-#   var_name: L:A32NX_AIRLINER_TO_FLEX_TEMP
+  -
+    type: var
+    var_name: L:A32NX_AIRLINER_TO_FLEX_TEMP
 # -
 #   type: var
 #   var_name: L:A32NX_AUTOTHRUST_MODE
@@ -3450,9 +3624,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_FM1_MISSED_EO_ACC_ALT
-# -
-#   type: var
-#   var_name: L:A32NX_AIRLINER_CRUISE_ALTITUDE
+  -
+    type: var
+    var_name: L:A32NX_AIRLINER_CRUISE_ALTITUDE
 # -
 #   type: var
 #   var_name: L:A32NX_FG_AVAIL
@@ -3628,9 +3802,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_REALISTIC_TILLER_ENABLED
-  -
-    type: var
-    var_name: L:A32NX_FDR_ENABLED
+# -
+#   type: var
+#   var_name: L:A32NX_FDR_ENABLED
   -
     type: var
     var_name: L:A32NX_FO_SYNC_EFIS_ENABLED
@@ -4342,24 +4516,24 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_ELEC_DC_HOT_2_BUS_IS_POWERED
-  -
-    type: var
-    var_name: L:A32NX_HYD_YELLOW_SYSTEM_1_SECTION_PRESSURE_SWITCH
-  -
-    type: var
-    var_name: L:A32NX_HYD_GREEN_SYSTEM_1_SECTION_PRESSURE_SWITCH
-  -
-    type: var
-    var_name: L:A32NX_HYD_BLUE_SYSTEM_1_SECTION_PRESSURE_SWITCH
+# -
+#   type: var
+#   var_name: L:A32NX_HYD_YELLOW_SYSTEM_1_SECTION_PRESSURE_SWITCH
+# -
+#   type: var
+#   var_name: L:A32NX_HYD_GREEN_SYSTEM_1_SECTION_PRESSURE_SWITCH
+# -
+#   type: var
+#   var_name: L:A32NX_HYD_BLUE_SYSTEM_1_SECTION_PRESSURE_SWITCH
 # -
 #   type: var
 #   var_name: L:A32NX_THROTTLE_MAPPING_INPUT:1
 # -
 #   type: var
 #   var_name: L:A32NX_THROTTLE_MAPPING_LOADED_CONFIG:1
-# -
-#   type: var
-#   var_name: L:A32NX_THROTTLE_MAPPING_USE_REVERSE_ON_AXIS:1
+  -
+    type: var
+    var_name: L:A32NX_THROTTLE_MAPPING_USE_REVERSE_ON_AXIS:1
 # -
 #   type: var
 #   var_name: L:A32NX_THROTTLE_MAPPING_USE_TOGA_ON_AXIS:1
@@ -4411,9 +4585,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_THROTTLE_MAPPING_LOADED_CONFIG:2
-# -
-#   type: var
-#   var_name: L:A32NX_THROTTLE_MAPPING_USE_REVERSE_ON_AXIS:2
+  -
+    type: var
+    var_name: L:A32NX_THROTTLE_MAPPING_USE_REVERSE_ON_AXIS:2
 # -
 #   type: var
 #   var_name: L:A32NX_THROTTLE_MAPPING_USE_TOGA_ON_AXIS:2
@@ -4474,9 +4648,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A320_Neo_FCU_VS_SET_DATA
-  -
-    type: var
-    var_name: L:FBW_PILOT_SEAT
+# -
+#   type: var
+#   var_name: L:FBW_PILOT_SEAT
 # -
 #   type: var
 #   var_name: L:A32NX_PAUSE_DETECTED
@@ -5501,9 +5675,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_BLUE_PUMP_1_SECTION_PRESSURE
-  -
-    type: var
-    var_name: L:A32NX_HYD_BLUE_PUMP_1_SECTION_PRESSURE_SWITCH
+# -
+#   type: var
+#   var_name: L:A32NX_HYD_BLUE_PUMP_1_SECTION_PRESSURE_SWITCH
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_GREEN_RESERVOIR_LEVEL
@@ -5522,9 +5696,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_GREEN_PUMP_1_SECTION_PRESSURE
-  -
-    type: var
-    var_name: L:A32NX_HYD_GREEN_PUMP_1_SECTION_PRESSURE_SWITCH
+# -
+#   type: var
+#   var_name: L:A32NX_HYD_GREEN_PUMP_1_SECTION_PRESSURE_SWITCH
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_YELLOW_RESERVOIR_LEVEL
@@ -5543,9 +5717,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_YELLOW_PUMP_1_SECTION_PRESSURE
-  -
-    type: var
-    var_name: L:A32NX_HYD_YELLOW_PUMP_1_SECTION_PRESSURE_SWITCH
+# -
+#   type: var
+#   var_name: L:A32NX_HYD_YELLOW_PUMP_1_SECTION_PRESSURE_SWITCH
 # -
 #   type: var
 #   var_name: L:A32NX_HYD_GREEN_EDPUMP_ACTIVE
@@ -6033,9 +6207,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:A32NX_FM2_DISCRETE_WORD_2
-  -
-    type: var
-    var_name: L:A32NX_COMPANY_MSG_COUNT
+# -
+#   type: var
+#   var_name: L:A32NX_COMPANY_MSG_COUNT
 # -
 #   type: var
 #   var_name: L:A32NX_NO_SMOKING_MEMO
@@ -6213,7 +6387,6 @@ shared:
       equals:
         Bool: false
     use_calculator: true
-    unreliable: true
   -
     type: NumSet
     var_name: L:A32NX_AUTOPILOT_SPEED_SELECTED
@@ -6229,10 +6402,9 @@ shared:
       equals:
         Bool: true
     use_calculator: true
-    unreliable: true
-  -
-    type: var
-    var_name: L:A32NX_PAUSE_AT_TOD_ARMED
+# -
+#   type: var
+#   var_name: L:A32NX_PAUSE_AT_TOD_ARMED
 # -
 #   type: var
 #   var_name: L:A32NX_PFD_TARGET_ALTITUDE
@@ -6260,12 +6432,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:A320_Neo_CDU_State
-  -
-    type: var
-    var_name: L:A32NX_EFIS_L_MAP_PARTLY_DISPLAYED
-  -
-    type: var
-    var_name: L:A32NX_EFIS_R_MAP_PARTLY_DISPLAYED
+# -
+#   type: var
+#   var_name: L:A32NX_EFIS_L_MAP_PARTLY_DISPLAYED
+# -
+#   type: var
+#   var_name: L:A32NX_EFIS_R_MAP_PARTLY_DISPLAYED
 # -
 #   type: var
 #   var_name: L:A32NX_FM_VNAV_TRIGGER_STEP_DELETED
@@ -6336,6 +6508,7 @@ shared:
     var_type: bool
     event_name: A32NX.FCU_SPD_PUSH
     off_event_name: A32NX.FCU_SPD_PULL
+    is_user_event: true
     use_calculator: true
   -
     type: ToggleSwitch
@@ -6344,6 +6517,7 @@ shared:
     var_type: bool
     event_name: A32NX.FCU_HDG_PUSH
     off_event_name: A32NX.FCU_HDG_PULL
+    is_user_event: true
     use_calculator: true
 # -
 #   type: var
@@ -6352,19 +6526,22 @@ shared:
 #   type: var
 #   var_name: L:A32NX_FM_HEADING_SYNC
   -
-    type: ToggleSwitch
+    type: NumSet
     var_name: L:A32NX_FCU_ALT_MANAGED
     var_units: Bool
-    var_type: bool
+    var_type: i32
     event_name: A32NX.FCU_ALT_PUSH
-    off_event_name: A32NX.FCU_ALT_PULL
     use_calculator: true
 # -
 #   type: var
 #   var_name: L:A320_NE0_FCU_STATE
-# - # Not needed and causes conflict
-#   type: var
-#   var_name: L:A32NX_FCU_VS_MANAGED
+  -
+    type: NumSet
+    var_name: L:A32NX_FCU_VS_MANAGED
+    var_units: Bool
+    var_type: i32
+    event_name: A32NX.FCU_ALT_PULL
+    use_calculator: true
 # -
 #   type: var
 #   var_name: L:RMP_ScreenLuminosity
@@ -6498,29 +6675,39 @@ master:
     type: var
     var_name: A:ELEVATOR POSITION
     var_units: Position 16k
-    var_type: f64
+    var_type: i32
     interpolate: Default
   -
     type: var
     var_name: A:AILERON POSITION
     var_units: Position 16k
-    var_type: f64
+    var_type: i32
     interpolate: Invert
   -
     type: var
     var_name: A:RUDDER POSITION
     var_units: Position 16k
-    var_type: f64
+    var_type: i32
     interpolate: Default
 
   - # Throttles
-    type: var
-    var_name: L:A32NX_AUTOTHRUST_TLA:1
-    interpolate: Default
+    type: NumSet
+    var_name: L:A32NX_THROTTLE_MAPPING_INPUT:1
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: 16384
+    event_name: THROTTLE1_SET
+    use_calculator: true
+    unreliable: true
   -
-    type: var
-    var_name: L:A32NX_AUTOTHRUST_TLA:2
-    interpolate: Default
+    type: NumSet
+    var_name: L:A32NX_THROTTLE_MAPPING_INPUT:2
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: 16384
+    event_name: THROTTLE2_SET
+    use_calculator: true
+    unreliable: true
 
   - # Fuel
     type: var
@@ -6560,18 +6747,22 @@ master:
     interpolate: Default
 
 ignore:
+  - AP_KNOB_Up
+  - AP_KNOB_Down
+
   - A32NX_RMP_L_INNER_KNOB_TURNED_CLOCKWISE
   - A32NX_RMP_L_INNER_KNOB_TURNED_ANTICLOCKWISE
   - A32NX_RMP_L_OUTER_KNOB_TURNED_CLOCKWISE
   - A32NX_RMP_L_OUTER_KNOB_TURNED_ANTICLOCKWISE
+  - A32NX_RMP_L_TRANSFER_BUTTON_PRESSED
   - A32NX_RMP_R_INNER_KNOB_TURNED_CLOCKWISE
   - A32NX_RMP_R_INNER_KNOB_TURNED_ANTICLOCKWISE
   - A32NX_RMP_R_OUTER_KNOB_TURNED_CLOCKWISE
   - A32NX_RMP_R_OUTER_KNOB_TURNED_ANTICLOCKWISE
+  - A32NX_RMP_R_TRANSFER_BUTTON_PRESSED
 
   - A320_Neo_FCU_AP_1_PUSH
 # - A320_Neo_FCU_AP_2_PUSH (workaround to force AP1->AP2)
-  - A320_Neo_FCU_ALT_PUSH
   - A320_Neo_FCU_SPEED_INC
   - A320_Neo_FCU_SPEED_DEC
   - A320_Neo_FCU_SPEED_SET
@@ -6623,6 +6814,8 @@ ignore:
 # EFB Payload
   - EFB#1153451578
   - EFB#1153451579
+# EFB Power
+  - EFB#-2004273658
 # EFB Deboard
   - EFB#589481587
   - EFB#55380869

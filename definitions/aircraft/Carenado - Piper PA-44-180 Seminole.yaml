@@ -1,4 +1,4 @@
-# Version 2.0.0
+# Version 2.0.2
 
 include:
   - definitions/modules/Instruments/AS_GNS530.yaml
@@ -7,7 +7,6 @@ include:
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/electrical.yaml
   - definitions/modules/engines.yaml
   - definitions/modules/fuel.yaml
@@ -20,6 +19,30 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:2
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG2
+    use_calculator: true
+    unreliable: true
+
   - # Doors
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:0
@@ -27,6 +50,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -34,6 +58,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -41,39 +66,40 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT LANDING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT NAV:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: NAV_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT RECOGNITION:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RECOGNITION_LIGHTS_SET
     event_param: 1
   -
     type: ToggleSwitch
     var_name: A:LIGHT BEACON
     var_units: Bool
-    var_type: f64
+    var_type: bool
     event_name: TOGGLE_BEACON_LIGHTS
   -
     type: ToggleSwitch
     var_name: A:LIGHT STROBE
     var_units: Bool
-    var_type: f64
+    var_type: bool
     event_name: STROBES_TOGGLE
 
   - # Interior
@@ -91,6 +117,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT PANEL:2
@@ -106,6 +133,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 4
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:1
@@ -121,6 +149,7 @@ shared:
     event_name: CABIN_LIGHTS_POWER_SETTING_SET
     event_param: 1
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:2
@@ -158,10 +187,10 @@ shared:
     var_name: L:GAUGE_AUTOPILOTO_INIT
 # -
 #   type: var
-#   var_name: L:VS_MODE_ON
+#   var_name: L:VS_MODE_ON 
 # -
 #   type: var
-#   var_name: L:VS_DISPLAY_ON
+#   var_name: L:VS_DISPLAY_ON 
   -
     type: var
     var_name: L:AUTOPILOTO_TIME_ON_FD
@@ -456,9 +485,9 @@ shared:
   -
     type: var
     var_name: L:CARENADO_GNS_GTNXI_VIS
-# -
-#   type: var
-#   var_name: L:GTN750XI_INT_HIDDEN
+  -
+    type: var
+    var_name: L:GTN750XI_INT_HIDDEN
 # -
 #   type: var
 #   var_name: L:XMLVAR_GPS_DISABLED_AS530_1
@@ -1011,45 +1040,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:LOCAL_milliBar_to_inHg
-# -
-#   type: var
-#   var_name: L:AS530_ManualBrightness_Value_1
-# -
-#   type: var
-#   var_name: L:AS530_ManualBrightness_Enabled_1
-# -
-#   type: var
-#   var_name: L:XMLVAR_ADF_Frequency_10_Khz
-# -
-#   type: var
-#   var_name: L:XMLVAR_AudioPanel_1
-  -
-    type: var
-    var_name: L:ASD_SWITCH_TEST_PA44_SEMINOLE
-# -
-#   type: var
-#   var_name: L:XMLVAR_LTS_Test
   -
     type: var
     var_name: L:AP_ALT_HOLD_PUSH
-  -
-    type: var
-    var_name: L:AircraftInit
 # -
 #   type: var
 #   var_name: L:YokePilot
-# -
-#   type: var
-#   var_name: L:YokeCopilot
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden2
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverFlapsHidden
 # -
 #   type: var
 #   var_name: L:HANDLING_ElevatorTrim
@@ -1058,17 +1054,13 @@ shared:
 #   var_name: L:DME_DUMMY_KNOB_SOUND
   -
     type: var
-    var_name: L:_ButtonAnimVar
-    unreliable: true
-  -
-    type: var
     var_name: L:_ButtonAnimVar_IsDown
 # -
 #   type: var
 #   var_name: L:_ButtonAnimVar_MinReleaseTime
   -
     type: var
-    var_name: L:XMLVAR_PUSH_PRIMER_L
+    var_name: L:ASD_SWITCH_TEST_PA44_SEMINOLE
   -
     type: var
     var_name: L:XMLVAR_PUSH_PRIMER_L_IsDown
@@ -1077,16 +1069,10 @@ shared:
 #   var_name: L:XMLVAR_PUSH_PRIMER_L_MinReleaseTime
   -
     type: var
-    var_name: L:XMLVAR_PUSH_PRIMER_R
-  -
-    type: var
     var_name: L:XMLVAR_PUSH_PRIMER_R_IsDown
 # -
 #   type: var
 #   var_name: L:XMLVAR_PUSH_PRIMER_R_MinReleaseTime
-# -
-#   type: var
-#   var_name: L:ParkingBrake_Position
   -
     type: var
     var_name: L:ASD_COVER_SWITCH_DUMMY1
@@ -1099,3 +1085,141 @@ shared:
   -
     type: var
     var_name: L:ASD_COVER_SWITCH_DUMMY4
+# -
+#   type: var
+#   var_name: L:GTNXION_REMOVE_FLTPLAN
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_LKnobInc
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_LKnobDec
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_LKnobCRSR
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_RKnobInnerInc
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_RKnobInnerDec
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_RKnobCRSR
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_RKnobOuterInc
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_RKnobOuterDec
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_HomeKey
+# -
+#   type: var
+#   var_name: L:TDSGTNXI750U1_DTOKey
+# -
+#   type: var
+#   var_name: L:AS530_Default_MapZoomRange
+# -
+#   type: var
+#   var_name: L:AS530_SelectedSource
+# -
+#   type: var
+#   var_name: L:XMLVAR_ADF_Frequency_10_Khz
+# -
+#   type: var
+#   var_name: L:XMLVAR_AudioPanel_1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
+# -
+#   type: var
+#   var_name: L:HANDLING_RudderTrim
+# -
+#   type: var
+#   var_name: L:LANDING_GEAR_Gear
+# -
+#   type: var
+#   var_name: L:DEICE_Pitot_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_LANDING_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_NAV_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_RECOGNITION_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_CABIN_2
+# -
+#   type: var
+#   var_name: L:LIGHTING_CABIN_1
+# -
+#   type: var
+#   var_name: L:ParkingBrake_Position
+# -
+#   type: var
+#   var_name: L:LIGHTING_PANEL_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_PANEL_2
+# -
+#   type: var
+#   var_name: L:XMLVAR_IE_Throttle_VR_Handled
+# -
+#   type: var
+#   var_name: L:XMLVAR_IE_Throttle_VR_Value
+# -
+#   type: var
+#   var_name: L:INSTRUMENT_Altimeter_1
+# -
+#   type: var
+#   var_name: L:INSTRUMENT_Course_1
+# -
+#   type: var
+#   var_name: L:INSTRUMENT_Course_2
+# -
+#   type: var
+#   var_name: L:INSTRUMENT_ADF
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_STATE
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_ACTIVATION_TIME
+  -
+    type: var
+    var_name: L:AircraftInit
+# -
+#   type: var
+#   var_name: L:_ButtonAnimVar
+# -
+#   type: var
+#   var_name: L:XMLVAR_PUSH_PRIMER_L
+# -
+#   type: var
+#   var_name: L:XMLVAR_PUSH_PRIMER_R
+# -
+#   type: var
+#   var_name: L:GTN750_HSI_GSI_NEEDLE
+# -
+#   type: var
+#   var_name: L:AS530_ManualBrightness_Value_1
+# -
+#   type: var
+#   var_name: L:AS530_ManualBrightness_Enabled_1
+# -
+#   type: var
+#   var_name: L:XMLVAR_LTS_Test
+# -
+#   type: var
+#   var_name: L:YokeCopilot

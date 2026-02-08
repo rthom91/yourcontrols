@@ -6,6 +6,7 @@ shared:
     var_type: i32
     event_name: ADF_ACTIVE_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:ADF ACTIVE FREQUENCY:2
@@ -13,6 +14,7 @@ shared:
     var_type: i32
     event_name: ADF2_ACTIVE_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:ADF STANDBY FREQUENCY:1
@@ -20,6 +22,7 @@ shared:
     var_type: i32
     event_name: ADF_STBY_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:ADF STANDBY FREQUENCY:2
@@ -27,38 +30,39 @@ shared:
     var_type: i32
     event_name: ADF2_STBY_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:ADF SOUND:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_ADF_IDENT_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:ADF SOUND:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_ADF2_IDENT_SET
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:ADF VOLUME:1
     var_units: Percent
-    var_type: i32
-    up_event_name: ADF_VOLUME_INC
-    down_event_name: ADF_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: ADF_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:ADF VOLUME:2
     var_units: Percent
-    var_type: i32
-    up_event_name: ADF2_VOLUME_INC
-    down_event_name: ADF2_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: ADF2_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
 
   - # COM
     type: NumSet
@@ -67,6 +71,7 @@ shared:
     var_type: i32
     event_name: COM_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM ACTIVE FREQUENCY:2
@@ -74,6 +79,7 @@ shared:
     var_type: i32
     event_name: COM2_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM ACTIVE FREQUENCY:3
@@ -81,6 +87,7 @@ shared:
     var_type: i32
     event_name: COM3_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM STANDBY FREQUENCY:1
@@ -88,6 +95,7 @@ shared:
     var_type: i32
     event_name: COM_STBY_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM STANDBY FREQUENCY:2
@@ -95,6 +103,7 @@ shared:
     var_type: i32
     event_name: COM2_STBY_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM STANDBY FREQUENCY:3
@@ -102,6 +111,7 @@ shared:
     var_type: i32
     event_name: COM3_STBY_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM1 STORED FREQUENCY
@@ -109,6 +119,7 @@ shared:
     var_type: i32
     event_name: COM1_STORED_FREQUENCY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM2 STORED FREQUENCY
@@ -116,6 +127,7 @@ shared:
     var_type: i32
     event_name: COM2_STORED_FREQUENCY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM3 STORED FREQUENCY
@@ -123,27 +135,31 @@ shared:
     var_type: i32
     event_name: COM3_STORED_FREQUENCY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM VOLUME:1
     var_units: Percent
-    var_type: i32
+    var_type: f64
     event_name: COM1_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM VOLUME:2
     var_units: Percent
-    var_type: i32
+    var_type: f64
     event_name: COM2_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM VOLUME:3
     var_units: Percent
-    var_type: i32
+    var_type: f64
     event_name: COM3_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:COM TEST:1
@@ -151,6 +167,7 @@ shared:
     var_type: bool
     event_name: RADIO_COMMNAV1_TEST_TOGGLE
     cancel_h_events: true
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:COM TEST:2
@@ -158,6 +175,7 @@ shared:
     var_type: bool
     event_name: RADIO_COMMNAV2_TEST_TOGGLE
     cancel_h_events: true
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:COM TEST:3
@@ -165,6 +183,7 @@ shared:
     var_type: bool
     event_name: RADIO_COMMNAV3_TEST_TOGGLE
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM SPACING MODE:1
@@ -172,6 +191,7 @@ shared:
     var_type: i32
     event_name: COM_1_SPACING_MODE_SWITCH
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM SPACING MODE:2
@@ -179,6 +199,7 @@ shared:
     var_type: i32
     event_name: COM_2_SPACING_MODE_SWITCH
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM SPACING MODE:3
@@ -186,63 +207,56 @@ shared:
     var_type: i32
     event_name: COM_3_SPACING_MODE_SWITCH
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM RECEIVE ALL
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: COM_RECEIVE_ALL_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM RECEIVE EX1:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: COM1_RECEIVE_SELECT
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM RECEIVE EX1:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: COM2_RECEIVE_SELECT
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COM RECEIVE EX1:3
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: COM3_RECEIVE_SELECT
     cancel_h_events: true
+    use_calculator: true
 
   - # DME
     type: NumSet
     var_name: A:DME SOUND:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_DME1_IDENT_SET
     cancel_h_events: true
-  -
-    type: ToggleSwitch
-    var_name: A:DME SOUND:1
-    var_units: Bool
-    var_type: bool
-    event_name: RADIO_DME1_IDENT_TOGGLE
-    cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:DME SOUND:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_DME2_IDENT_SET
     cancel_h_events: true
-  -
-    type: ToggleSwitch
-    var_name: A:DME SOUND:2
-    var_units: Bool
-    var_type: bool
-    event_name: RADIO_DME2_IDENT_TOGGLE
-    cancel_h_events: true
+    use_calculator: true
 
   - # NAV
     type: NumSet
@@ -251,6 +265,7 @@ shared:
     var_type: i32
     event_name: NAV1_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV ACTIVE FREQUENCY:2
@@ -258,6 +273,7 @@ shared:
     var_type: i32
     event_name: NAV2_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV ACTIVE FREQUENCY:3
@@ -265,6 +281,7 @@ shared:
     var_type: i32
     event_name: NAV3_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV ACTIVE FREQUENCY:4
@@ -272,6 +289,7 @@ shared:
     var_type: i32
     event_name: NAV4_RADIO_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV STANDBY FREQUENCY:1
@@ -279,6 +297,7 @@ shared:
     var_type: i32
     event_name: NAV1_STBY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV STANDBY FREQUENCY:2
@@ -286,6 +305,7 @@ shared:
     var_type: i32
     event_name: NAV2_STBY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV STANDBY FREQUENCY:3
@@ -293,6 +313,7 @@ shared:
     var_type: i32
     event_name: NAV3_STBY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV STANDBY FREQUENCY:4
@@ -300,98 +321,71 @@ shared:
     var_type: i32
     event_name: NAV4_STBY_SET_HZ
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV SOUND:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_VOR1_IDENT_SET
     cancel_h_events: true
-  -
-    type: ToggleSwitch
-    var_name: A:NAV SOUND:1
-    var_units: Bool
-    var_type: bool
-    event_name: RADIO_VOR1_IDENT_TOGGLE
-    cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV SOUND:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_VOR2_IDENT_SET
     cancel_h_events: true
-  -
-    type: ToggleSwitch
-    var_name: A:NAV SOUND:2
-    var_units: Bool
-    var_type: bool
-    event_name: RADIO_VOR2_IDENT_TOGGLE
-    cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV SOUND:3
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_VOR3_IDENT_SET
     cancel_h_events: true
-  -
-    type: ToggleSwitch
-    var_name: A:NAV SOUND:3
-    var_units: Bool
-    var_type: bool
-    event_name: RADIO_VOR3_IDENT_TOGGLE
-    cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:NAV SOUND:4
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: RADIO_VOR4_IDENT_SET
     cancel_h_events: true
+    use_calculator: true
   -
-    type: ToggleSwitch
-    var_name: A:NAV SOUND:4
-    var_units: Bool
-    var_type: bool
-    event_name: RADIO_VOR4_IDENT_TOGGLE
-    cancel_h_events: true
-  -
-    type: NumIncrement
+    type: NumSet
     var_name: A:NAV VOLUME:1
     var_units: Percent
-    var_type: i32
-    up_event_name: NAV1_VOLUME_INC
-    down_event_name: NAV1_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: NAV1_VOLUME_SET_EX1
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:NAV VOLUME:2
     var_units: Percent
-    var_type: i32
-    up_event_name: NAV2_VOLUME_INC
-    down_event_name: NAV2_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: NAV2_VOLUME_SET_EX1
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:NAV VOLUME:3
     var_units: Percent
-    var_type: i32
-    up_event_name: NAV3_VOLUME_INC
-    down_event_name: NAV3_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: NAV3_VOLUME_SET_EX1
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:NAV VOLUME:4
     var_units: Percent
-    var_type: i32
-    up_event_name: NAV4_VOLUME_INC
-    down_event_name: NAV4_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: NAV4_VOLUME_SET_EX1
     cancel_h_events: true
+    use_calculator: true
 
   - # TACAN
     type: NumSet
@@ -400,6 +394,7 @@ shared:
     var_type: i32
     event_name: TACAN1_ACTIVE_CHANNEL_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN ACTIVE CHANNEL:2
@@ -407,6 +402,7 @@ shared:
     var_type: i32
     event_name: TACAN2_ACTIVE_CHANNEL_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN STANDBY CHANNEL:1
@@ -414,6 +410,7 @@ shared:
     var_type: i32
     event_name: TACAN1_STANDBY_CHANNEL_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN STANDBY CHANNEL:2
@@ -421,6 +418,7 @@ shared:
     var_type: i32
     event_name: TACAN2_STANDBY_CHANNEL_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN ACTIVE MODE:1
@@ -428,6 +426,7 @@ shared:
     var_type: i32
     event_name: TACAN1_ACTIVE_MODE_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN ACTIVE MODE:2
@@ -435,6 +434,7 @@ shared:
     var_type: i32
     event_name: TACAN2_ACTIVE_MODE_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN STANDBY MODE:1
@@ -442,6 +442,7 @@ shared:
     var_type: i32
     event_name: TACAN1_STANDBY_MODE_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TACAN STANDBY MODE:2
@@ -449,34 +450,32 @@ shared:
     var_type: i32
     event_name: TACAN2_STANDBY_MODE_SET
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:TACAN VOLUME:1
     var_units: Percent
-    var_type: i32
-    up_event_name: TACAN1_VOLUME_INC
-    down_event_name: TACAN1_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: TACAN1_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumIncrement
+    type: NumSet
     var_name: A:TACAN VOLUME:2
     var_units: Percent
-    var_type: i32
-    up_event_name: TACAN2_VOLUME_INC
-    down_event_name: TACAN2_VOLUME_DEC
-    increment_by: 2
+    var_type: f64
+    event_name: TACAN2_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
 
   - # Audio Panel
-    type: NumIncrement
+    type: NumSet
     var_name: A:AUDIO PANEL VOLUME
     var_units: Percent
-    var_type: i32
-    up_event_name: AUDIO_PANEL_VOLUME_INC
-    down_event_name: AUDIO_PANEL_VOLUME_DEC
-    increment_by: 1
+    var_type: f64
+    event_name: AUDIO_PANEL_VOLUME_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:PILOT TRANSMITTER TYPE
@@ -484,6 +483,7 @@ shared:
     var_type: i32
     event_name: PILOT_TRANSMITTER_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:COPILOT TRANSMITTER TYPE
@@ -491,6 +491,7 @@ shared:
     var_type: i32
     event_name: COPILOT_TRANSMITTER_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:SPEAKER ACTIVE
@@ -498,6 +499,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_SPEAKER
     cancel_h_events: true
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERCOM SYSTEM ACTIVE
@@ -505,6 +507,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_ICS
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:INTERCOM MODE
@@ -512,13 +515,15 @@ shared:
     var_type: i32
     event_name: INTERCOM_MODE_SET
     cancel_h_events: true
+    use_calculator: true
   -
-    type: NumSet
+    type: ToggleSwitch
     var_name: A:MARKER SOUND:1
     var_units: Bool
-    var_type: f64
+    var_type: bool
     event_name: MARKER_SOUND_TOGGLE
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:MARKER BEACON TEST MUTE
@@ -526,6 +531,7 @@ shared:
     var_type: i32
     event_name: MARKER_BEACON_TEST_MUTE
     cancel_h_events: true
+    use_calculator: true
   -
     type: NumSet
     var_name: A:MARKER BEACON SENSITIVITY HIGH
@@ -533,3 +539,4 @@ shared:
     var_type: i32
     event_name: MARKER_BEACON_SENSITIVITY_HIGH
     cancel_h_events: true
+    use_calculator: true

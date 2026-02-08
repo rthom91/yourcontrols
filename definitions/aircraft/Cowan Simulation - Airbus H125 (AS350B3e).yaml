@@ -1,23 +1,19 @@
-# Version 2.1.0
+# Version 3.2.0
 
 include:
-  - definitions/modules/Instruments/AS_G3X.yaml
+  - definitions/modules/Instruments/WT_G3X_Touch.yaml
   - definitions/modules/Instruments/AS_GNS430.yaml
   - definitions/modules/Instruments/AS_GNS530.yaml
   - definitions/modules/Instruments/AS_GTN650.yaml
-  - definitions/modules/Instruments/AS_GTX330.yaml
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/Instruments/TDS_GTNXi.yaml
-  - definitions/modules/controls_rotor.yaml
   - definitions/modules/electrical.yaml
-  - definitions/modules/engines_rotor.yaml
   - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
-  - definitions/modules/rotorcraft.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/trim.yaml
 
@@ -29,6 +25,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 15
+    use_calculator: true
 
   - # Deice
     type: NumSet
@@ -45,6 +42,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:2
@@ -52,6 +50,16 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 2
+    use_calculator: true
+
+  - # Ignition (Starter)
+    type: ToggleSwitch
+    var_name: A:TURB ENG IGNITION SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: TURBINE_IGNITION_SWITCH_TOGGLE
+    event_param: 1
+    use_calculator: true
 
   - # Gyrocompass
     type: ToggleSwitch
@@ -60,13 +68,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 29
-
-  - # Horn
-    type: ToggleSwitch
-    var_name: A:MASTER WARNING ACTIVE
-    var_units: Bool
-    var_type: bool
-    event_name: MASTER_WARNING_TOGGLE
+    use_calculator: true
 
   - # Hydraulics
     type: NumSet
@@ -81,7 +83,7 @@ shared:
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
 
@@ -169,6 +171,40 @@ shared:
     event_param: 7
     index_reversed: true
 
+  - # Rotor
+    type: NumSet
+    var_name: A:ROTOR BRAKE HANDLE POS
+    var_units: Position 16k
+    var_type: f64
+    event_name: AXIS_ROTOR_BRAKE_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ROTOR LATERAL TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ROTOR_LATERAL_TRIM_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ROTOR LONGITUDINAL TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ROTOR_LONGITUDINAL_TRIM_SET
+    use_calculator: true
+    unreliable: true
+
+  - # Twist
+    type: NumSet
+    var_name: A:HELICOPTER MASTER THROTTLE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: HELICOPTER_THROTTLE1_SET
+    use_calculator: true
+    unreliable: true
+
   - # Payload
     type: var
     var_name: A:PAYLOAD STATION WEIGHT:11
@@ -208,18 +244,6 @@ shared:
   -
     type: var
     var_name: A:PAYLOAD STATION WEIGHT:17
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:18
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:19
     var_units: Pounds
     var_type: f64
     unreliable: true
@@ -323,9 +347,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:CSH125_WeightStation_17
-# -
-#   type: var
-#   var_name: L:CSH125_WeightStation_18
   -
     type: var
     var_name: L:annAirFilter
@@ -390,9 +411,19 @@ shared:
     type: var
     var_name: L:COWANSIM_Throttle_1_Lever_Percent
     interpolate: Default
+  -
+    type: var
+    var_name: L:CS_H125_Decision_Height
+    interpolate: Default
 # -
 #   type: var
 #   var_name: L:LOCAL_milliBar_to_inHg
+# -
+#   type: var
+#   var_name: L:ROTOR:1
+# -
+#   type: var
+#   var_name: L:ROTOR:2
   -
     type: var
     var_name: L:floatsArmed
@@ -404,31 +435,55 @@ shared:
     var_name: L:floatsBlown
   -
     type: var
-    var_name: L:ventFrontR
+    var_name: L:CS_H125_exitBaggageR
   -
     type: var
-    var_name: L:exitBaggageR
+    var_name: L:CS_H125_exitBaggageLAft
   -
     type: var
-    var_name: L:exitBaggageL
-  -
-    type: var
-    var_name: L:exitBaggageLAft
+    var_name: L:CS_H125_exitRearL
   -
     type: var
     var_name: L:ventFrontL
+  -
+    type: var
+    var_name: L:CS_H125_exitFrontL
+  -
+    type: var
+    var_name: L:CS_H125_exitBaggageL
+  -
+    type: var
+    var_name: L:CS_H125_exitFrontR
+  -
+    type: var
+    var_name: L:ventFrontR
+  -
+    type: var
+    var_name: L:CS_H125_exitRearR
+  -
+    type: var
+    var_name: L:CSH125_DoorFLhide
+  -
+    type: var
+    var_name: L:CSH125_DoorFRhide
+# -
+#   type: var
+#   var_name: L:AP_Longitudinal_Command
 # -
 #   type: var
 #   var_name: L:COWANSIM_Throttle_1_Lever_Position
 # -
 #   type: var
 #   var_name: L:HANDLING_LATERAL_LONGITUDINAL_Trim_Position
-  -
-    type: var
-    var_name: L:trimRelease
-  -
-    type: var
-    var_name: L:trimRelease2
+# -
+#   type: var
+#   var_name: L:COWANSIM_Cyclic_X_Position
+# -
+#   type: var
+#   var_name: L:AP_Lateral_Command
+# -
+#   type: var
+#   var_name: L:COWANSIM_Cyclic_Y_Position
   -
     type: var
     var_name: L:latchR1
@@ -483,9 +538,9 @@ shared:
   -
     type: var
     var_name: L:vemdCurs
-  -
-    type: var
-    var_name: L:vemdFlightRun
+# -
+#   type: var
+#   var_name: L:vemdFlightRun
   -
     type: var
     var_name: L:vemdEewCorr
@@ -528,13 +583,19 @@ shared:
     var_name: L:mirroDeice
 # -
 #   type: var
+#   var_name: L:XMLVAR_GPS_DISABLED_AS530_1
+# -
+#   type: var
+#   var_name: L:TDSGTNXI_INSTALLED
+# -
+#   type: var
 #   var_name: L:XMLVAR_GPS_DISABLED_GTN750
 # -
 #   type: var
 #   var_name: L:TDSGTNXI_InactiveVar
 # -
 #   type: var
-#   var_name: L:XMLVAR_GPS_DISABLED_AS530_1
+#   var_name: L:PMS50_GTN750_INSTALLED
   -
     type: var
     var_name: L:switchBlowFloatsCover
@@ -621,6 +682,9 @@ shared:
     var_name: L:h125MirrorDown
   -
     type: var
+    var_name: L:CS_Force_Trim_Release
+  -
+    type: var
     var_name: L:COWANSIM_Throttle_1_Position
     interpolate: Default
 # -
@@ -647,9 +711,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Course_2
-# -
-#   type: var
-#   var_name: L:MFD_Main_MapZoomRange
 # -
 #   type: var
 #   var_name: L:LIGHTING_CABIN_1
@@ -714,10 +775,16 @@ shared:
 #   var_name: L:LIGHTING_WING_1
 # -
 #   type: var
-#   var_name: L:exteriorSound
+#   var_name: L:CS_Force_Trim_Release_Max_Time
 # -
 #   type: var
-#   var_name: L:CSH125_WeightStation_19
+#   var_name: L:CS_Force_Trim_Release_Timer
+# -
+#   type: var
+#   var_name: L:CS_S76C_AP_Att_Hold_Holds_Heading
+# -
+#   type: var
+#   var_name: L:exteriorSound
   -
     type: var
     var_name: L:buttonAnnTest
@@ -759,22 +826,19 @@ shared:
 #   var_name: L:vemdFlightTime
 # -
 #   type: var
+#   var_name: L:WTG3X_Screen_Backlight:1
+# -
+#   type: var
 #   var_name: L:hornCaution285
 # -
 #   type: var
 #   var_name: L:hornCaution310
 # -
 #   type: var
-#   var_name: L:PMS50_GTN650_INSTALLED
+#   var_name: L:XMLVAR_GPS_DISABLED_AS430_2
 # -
 #   type: var
-#   var_name: L:PMS50_GTN750_INSTALLED
-# -
-#   type: var
-#   var_name: L:TDSGTNXI_INSTALLED
-# -
-#   type: var
-#   var_name: L:XMLVAR_GPS_DISABLED_AS430_1
+#   var_name: L:XMLVAR_GPS_DISABLED_GTN650
 # -
 #   type: var
 #   var_name: L:AS430_ManualBrightness_Value_1
@@ -796,6 +860,15 @@ shared:
   -
     type: var
     var_name: L:latchL3Aft
+# -
+#   type: var
+#   var_name: L:CS_HeliSAS_Lights_Green
+# -
+#   type: var
+#   var_name: L:CS_HeliSAS_Lights_White
+# -
+#   type: var
+#   var_name: L:PMS50_GTN650_INSTALLED
   -
     type: var
     var_name: L:starterSwitch
@@ -808,3 +881,42 @@ shared:
   -
     type: var
     var_name: L:switchHornMute
+
+master:
+  -
+    type: var
+    var_name: L:COWANSIM_Cyclic_X_Position
+    unreliable: true
+  -
+    type: var
+    var_name: L:COWANSIM_Cyclic_Y_Position
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:TAIL ROTOR PEDAL POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_RUDDER_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:COLLECTIVE HANDLE POSITION
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_COLLECTIVE_SET
+    use_calculator: true
+    unreliable: true
+
+ignore:
+  - Transponder0
+  - Transponder1
+  - Transponder2
+  - Transponder3
+  - Transponder4
+  - Transponder5
+  - Transponder6
+  - Transponder7
+  - TransponderVFR

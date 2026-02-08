@@ -16,6 +16,10 @@ class YourControlsHTMLEvents {
 				return
 			}
 
+			if (e.button !== 0) { // Left-click only
+				return
+			}
+
 			let currentWorking = e.target
 
 			while (currentWorking.id == "" && currentWorking != null) {

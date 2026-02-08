@@ -1,9 +1,43 @@
-# Version 1.1.5 (based on Asobo A320)
+# Version 1.1.0 (based on Asobo A320)
 
 include:
   - definitions/aircraft/Asobo Studio - Airbus A320neo.yaml
 
 shared:
+  - # Bleeds
+    type: NumSet
+    var_name: A:BLEED AIR ENGINE:3
+    var_units: Bool
+    var_type: i32
+    event_name: ENGINE_BLEED_AIR_SOURCE_SET
+    event_param: 3
+    index_reversed: true
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:BLEED AIR ENGINE:4
+    var_units: Bool
+    var_type: i32
+    event_name: ENGINE_BLEED_AIR_SOURCE_SET
+    event_param: 4
+    index_reversed: true
+    use_calculator: true
+
+  - # Deice
+    type: ToggleSwitch
+    var_name: A:ENG ANTI ICE:3
+    var_units: Bool
+    var_type: bool
+    event_name: ANTI_ICE_TOGGLE_ENG3
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:ENG ANTI ICE:4
+    var_units: Bool
+    var_type: bool
+    event_name: ANTI_ICE_TOGGLE_ENG4
+    use_calculator: true
+
   - # 4L Cabin Door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:6
@@ -31,7 +65,7 @@ shared:
     event_param: 11
     cancel_h_events: true
     use_calculator: true
-  - # 3R Cabin Door (stacked contact point)
+  - # 3R Cabin Door (stacked)
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:11
     var_units: Bool
@@ -40,7 +74,7 @@ shared:
     event_param: 12
     cancel_h_events: true
     use_calculator: true
-  - # 3R Cabin Door (stacked contact point)
+  - # 3R Cabin Door (stacked)
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:12
     var_units: Bool
@@ -52,9 +86,31 @@ shared:
 
   - # APU BAT
     type: CustomCalculator
-    get: 12 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:6, Bool)
-    set: 6 12 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
-  - # EXT B
+    get: 15 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:12, Bool)
+    set: 12 15 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
+  - # BAT 1
+    type: CustomCalculator
+    get: 13 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:10, Bool)
+    set: 10 13 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
+  - # BAT 2
+    type: CustomCalculator
+    get: 14 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:11, Bool)
+    set: 11 14 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:3
+    var_units: Bool
+    var_type: i32
+    event_name: ALTERNATOR_SET
+    event_param: 3
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:4
+    var_units: Bool
+    var_type: i32
+    event_name: ALTERNATOR_SET
+    event_param: 4
+  -
     type: NumSet
     var_name: A:EXTERNAL POWER ON:2
     var_units: Bool
@@ -63,7 +119,7 @@ shared:
     event_param: 2
     index_reversed: true
 
-  - # Fuel APU master
+  - # Engine masters
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:4
     var_units: Bool
@@ -71,25 +127,34 @@ shared:
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 4
     use_calculator: true
-  -
+
+  - # Fuel APU master
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:5
+    var_name: A:FUELSYSTEM VALVE SWITCH:9
     var_units: Bool
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 5
+    event_param: 9
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:10
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 10
     use_calculator: true
 
   - # Fuel APU start
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM PUMP SWITCH:9
+    var_name: A:FUELSYSTEM PUMP SWITCH:11
     var_units: Bool
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
-    event_param: 9
+    event_param: 11
     use_calculator: true
 
-  - # Fuel OVHD center
+  - # Fuel OVHD right
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:7
     var_units: Bool
@@ -106,54 +171,80 @@ shared:
     event_param: 8
     use_calculator: true
 
-  - # Fuel jettison
+  - # Fuel OVHD center
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:13
+    var_name: A:FUELSYSTEM PUMP SWITCH:9
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 13
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 9
     use_calculator: true
   -
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:14
+    var_name: A:FUELSYSTEM PUMP SWITCH:10
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 14
-    use_calculator: true
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:15
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 15
-    use_calculator: true
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:16
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 16
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 10
     use_calculator: true
 
-  - # Fuel Xfers
+  - # Fuel OVHD Xfeeds
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:23
+    var_name: A:FUELSYSTEM VALVE SWITCH:5
     var_units: Bool
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 23
+    event_param: 5
     use_calculator: true
   -
     type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:24
+    var_name: A:FUELSYSTEM VALVE SWITCH:6
     var_units: Bool
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 24
+    event_param: 6
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:7
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 7
+    use_calculator: true
+
+  - # Fuel jettison
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:20
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 20
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:21
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 21
+    use_calculator: true
+
+  - # Fuel XFR's
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:28
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 28
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:29
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 29
     use_calculator: true
 
   - # Interior
@@ -185,6 +276,23 @@ shared:
     event_name: CABIN_LIGHTS_SET
     event_param: 6
 
+  - # Wipers
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:74
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 74
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:CIRCUIT POWER SETTING:74
+    var_units: Percent
+    var_type: f64
+    event_name: ELECTRICAL_CIRCUIT_POWER_SETTING_SET
+    event_param: 74
+    index_reversed: true
+
 # - # LVAR's
 #   type: var
 #   var_name: L:XMLVAR_SpawnOnRunway
@@ -194,6 +302,12 @@ shared:
   -
     type: var
     var_name: L:LVFR_ADIRS_FORCE_ALIGN
+  -
+    type: var
+    var_name: L:LVFR_Source_Nav1
+  -
+    type: var
+    var_name: L:LVFR_Source_Nav2
 # -
 #   type: var
 #   var_name: L:LVFR_FLIGHT_PHASE
@@ -205,10 +319,25 @@ shared:
     var_name: L:LVFR_AUDIO_PAX_LANGUAGE
   -
     type: var
+    var_name: L:LVFR_IRS_1_SWITCH_STATE
+  -
+    type: var
+    var_name: L:LVFR_IRS_2_SWITCH_STATE
+  -
+    type: var
+    var_name: L:LVFR_IRS_3_SWITCH_STATE
+  -
+    type: var
     var_name: L:XMLVAR_ELEC_BATSWITCH_State
   -
     type: var
     var_name: L:EFB_ON
+# -
+#   type: var
+#   var_name: L:XMLVAR_Throttle3Position
+# -
+#   type: var
+#   var_name: L:XMLVAR_Throttle4Position
   -
     type: var
     var_name: L:LVFR_CHRONO_RUN_SWITCH_STATE
@@ -228,12 +357,6 @@ shared:
     type: var
     var_name: L:KNOB_OVHD_AIRCOND_BULK
     unreliable: true
-  -
-    type: var
-    var_name: L:LVFR_Source_Nav1
-  -
-    type: var
-    var_name: L:LVFR_Source_Nav2
   -
     type: var
     var_name: L:Shade_Cockpit_L_Viz
@@ -266,13 +389,7 @@ shared:
     var_name: L:LVFR_R_READ_LIGHT
   -
     type: var
-    var_name: L:LVFR_IRS_1_SWITCH_STATE
-  -
-    type: var
-    var_name: L:LVFR_IRS_2_SWITCH_STATE
-  -
-    type: var
-    var_name: L:LVFR_IRS_3_SWITCH_STATE
+    var_name: L:FLIGHT_DECK_DOOR
 # -
 #   type: var
 #   var_name: L:XMLVAR_IE_Throttle_Reverser_VR_Handled
@@ -284,28 +401,49 @@ shared:
 #   var_name: L:ELECTRICAL_ExternalPower_2
 # -
 #   type: var
+#   var_name: L:XML_Airbus_Throttle3_TOGA
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle3_Flex_MCT
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle3_Climb
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle3_Idle
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle3_Rev
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle3_Value
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle4_TOGA
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle4_Flex_MCT
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle4_Climb
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle4_Idle
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle4_Rev
+# -
+#   type: var
+#   var_name: L:XML_Airbus_Throttle4_Value
+# -
+#   type: var
+#   var_name: L:CCCCC
+# -
+#   type: var
 #   var_name: L:LVFR_FUEL_TARGET_CG
 # -
 #   type: var
-#   var_name: L:LVFR_FUEL_O
-# -
-#   type: var
 #   var_name: L:LVFR_FUEL_CENTER_TRANSFER_RUNNING
-# -
-#   type: var
-#   var_name: L:LVFR_FUEL_A
-# -
-#   type: var
-#   var_name: L:LVFR_FUEL_B
-# -
-#   type: var
-#   var_name: L:LVFR_FUEL_C
-# -
-#   type: var
-#   var_name: L:LVFR_FUEL_D
-# -
-#   type: var
-#   var_name: L:LVFR_FUEL_E
 # -
 #   type: var
 #   var_name: L:LVFR_FUEL_OUTER_TRANSFER_RUNNING
@@ -348,6 +486,21 @@ shared:
 # -
 #   type: var
 #   var_name: L:LVFR_RMI
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverThrottleHidden3
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverThrottleHidden4
+# -
+#   type: var
+#   var_name: L:LVFR_ADIRS1_STATE
+# -
+#   type: var
+#   var_name: L:LVFR_ADIRS2_STATE
+# -
+#   type: var
+#   var_name: L:LVFR_ADIRS3_STATE
   -
     type: var
     var_name: L:LVFR_GPWS_LIGHT
@@ -366,15 +519,6 @@ shared:
   -
     type: var
     var_name: L:LVFR_OVHD_GPWS_BTN_FLAP_3_MODE
-# -
-#   type: var
-#   var_name: L:LVFR_ADIRS1_STATE
-# -
-#   type: var
-#   var_name: L:LVFR_ADIRS2_STATE
-# -
-#   type: var
-#   var_name: L:LVFR_ADIRS3_STATE
 # -
 #   type: var
 #   var_name: L:LVFR_Airbus_MFD_ScreenLuminosity
@@ -557,6 +701,18 @@ shared:
 #   var_name: L:AIRLINER_CRUISE_ALTITUDE
 # -
 #   type: var
+#   var_name: L:LVFR_DMER_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_DMER_State
+# -
+#   type: var
+#   var_name: L:LVFR_DMEL_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:LVFR_DMEL_State
+# -
+#   type: var
 #   var_name: L:A320_v1
 # -
 #   type: var
@@ -567,6 +723,24 @@ shared:
   -
     type: var
     var_name: L:LVFR_CDU_MDA
+
+master:
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG THROTTLE LEVER POSITION:3
+    var_units: Position 16k
+    var_type: f64
+    event_name: THROTTLE3_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG THROTTLE LEVER POSITION:4
+    var_units: Position 16k
+    var_type: f64
+    event_name: THROTTLE4_SET
+    use_calculator: true
+    unreliable: true
 
 ignore:
   - LVFR_Airbus_CDU_AP_INC_SPEED

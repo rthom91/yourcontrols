@@ -32,6 +32,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:2
@@ -39,12 +40,14 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 2
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG ANTI ICE POSITION:1
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -52,16 +55,8 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG2
+    use_calculator: true
     unreliable: true
-
-  - # EFIS
-    type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:3
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 3
-    cancel_h_events: true
 
   - # Fuel
     type: ToggleSwitch
@@ -70,6 +65,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:4
@@ -77,6 +73,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 4
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:7
@@ -84,6 +81,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 7
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:8
@@ -91,6 +89,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 8
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:9
@@ -98,6 +97,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 9
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:10
@@ -105,6 +105,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 10
+    use_calculator: true
   -
     type: NumSet
     var_name: A:FUELSYSTEM JUNCTION SETTING:3
@@ -126,7 +127,7 @@ shared:
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
 

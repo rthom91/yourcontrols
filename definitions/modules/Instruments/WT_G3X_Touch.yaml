@@ -1,5 +1,5 @@
 # Garmin G3X Touch by Working Title.
-# Version 0.5.2
+# Version 0.6.1
 
 shared:
   - # Autopilot
@@ -19,56 +19,6 @@ shared:
     unreliable: true
   -
     type: NumSet
-    var_name: A:AUTOPILOT ALTITUDE LOCK VAR:1
-    var_units: Feet
-    var_type: i32
-    event_name: AP_ALT_VAR_SET_ENGLISH
-    event_param: 1
-    interpolate: Default
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT BACKCOURSE HOLD
-    var_units: Bool
-    var_type: bool
-    event_name: AP_BC_HOLD_ON
-    off_event_name: AP_BC_HOLD_OFF
-  -
-    type: NumSet
-    var_name: A:AUTOPILOT DISENGAGED
-    var_units: Bool
-    var_type: i32
-    event_name: AUTOPILOT_DISENGAGE_SET
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT FLIGHT DIRECTOR ACTIVE:1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_FLIGHT_DIRECTOR
-    event_param: 1
-    use_calculator: true
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT FLIGHT LEVEL CHANGE
-    var_units: Bool
-    var_type: bool
-    event_name: FLIGHT_LEVEL_CHANGE_ON
-    off_event_name: FLIGHT_LEVEL_CHANGE_OFF
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT HEADING LOCK
-    var_units: Bool
-    var_type: bool
-    event_name: AP_PANEL_HEADING_HOLD
-  -
-    type: NumSet
-    var_name: A:AUTOPILOT HEADING LOCK DIR:1
-    var_units: Degrees
-    var_type: f64
-    event_name: HEADING_BUG_SET
-    event_param: 1
-    interpolate: Default
-  -
-    type: NumSet
     var_name: A:AUTOPILOT MACH HOLD VAR:1
     var_units: Mach
     var_type: f64
@@ -84,44 +34,90 @@ shared:
         Bool: true
     unreliable: true
   -
+    type: NumSet
+    var_name: A:AUTOPILOT ALTITUDE LOCK VAR:1
+    var_units: Feet
+    var_type: i32
+    event_name: AP_ALT_VAR_SET_ENGLISH
+    event_param: 1
+  -
+    type: ToggleSwitch
+    var_name: A:AUTOPILOT BACKCOURSE HOLD
+    var_units: Bool
+    var_type: bool
+    event_name: AP_BC_HOLD
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:AUTOPILOT DISENGAGED
+    var_units: Bool
+    var_type: i32
+    event_name: AUTOPILOT_DISENGAGE_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:AUTOPILOT FLIGHT DIRECTOR ACTIVE
+    var_units: Bool
+    var_type: i32
+    event_name: TOGGLE_FLIGHT_DIRECTOR
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:AUTOPILOT FLIGHT LEVEL CHANGE
+    var_units: Bool
+    var_type: bool
+    event_name: FLIGHT_LEVEL_CHANGE
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:AUTOPILOT HEADING LOCK
+    var_units: Bool
+    var_type: bool
+    event_name: AP_HDG_HOLD
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:AUTOPILOT HEADING LOCK DIR:1
+    var_units: Degrees
+    var_type: f64
+    event_name: HEADING_BUG_SET
+    event_param: 1
+  -
     type: ToggleSwitch
     var_name: A:AUTOPILOT MANAGED SPEED IN MACH
     var_units: Bool
     var_type: bool
-    event_name: AP_MANAGED_SPEED_IN_MACH_ON
-    off_event_name: AP_MANAGED_SPEED_IN_MACH_OFF
+    event_name: AP_MANAGED_SPEED_IN_MACH_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT MASTER
     var_units: Bool
     var_type: bool
-    event_name: AUTOPILOT_ON
-    off_event_name: AUTOPILOT_OFF
+    event_name: AP_MASTER
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AUTOPILOT MAX BANK ID
     var_units: Number
     var_type: i32
     event_name: AP_MAX_BANK_SET
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT NAV1 LOCK
     var_units: Bool
     var_type: bool
-    event_name: AP_NAV1_HOLD_ON
-    off_event_name: AP_NAV1_HOLD_OFF
+    event_name: AP_NAV1_HOLD
+    is_user_event: true
+    use_calculator: true
   -
-    type: var
-    var_name: A:AUTOPILOT PITCH HOLD REF
-    var_units: Degrees
-    var_type: f64
-    unreliable: true
-  -
-    type: ToggleSwitch
+    type: NumSet
     var_name: A:AUTOPILOT VERTICAL HOLD
     var_units: Bool
-    var_type: bool
-    event_name: AP_VS_HOLD
+    var_type: i32
+    event_name: AP_VS_SET
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AUTOPILOT VERTICAL HOLD VAR:1
@@ -129,27 +125,13 @@ shared:
     var_type: i32
     event_name: AP_VS_VAR_SET_ENGLISH
     event_param: 1
-    interpolate: Default
   -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT WING LEVELER
-    var_units: Bool
-    var_type: bool
-    event_name: AP_WING_LEVELER
-  -
-    type: ToggleSwitch
+    type: NumSet
     var_name: A:AUTOPILOT YAW DAMPER
     var_units: Bool
-    var_type: bool
-    event_name: YAW_DAMPER_ON
-    off_event_name: YAW_DAMPER_OFF
-  -
-    type: ToggleSwitch
-    var_name: A:GPS DRIVES NAV1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_GPS_DRIVES_NAV1
-    cancel_h_events: true
+    var_type: i32
+    event_name: YAW_DAMPER_SET
+    use_calculator: true
 
   - # Events no simvar
     type: event
@@ -177,12 +159,11 @@ shared:
     var_type: i32
     cancel_h_events: true
   -
-    type: ToggleSwitch
+    type: NumSet
     var_name: A:TRANSPONDER IDENT:1
     var_units: Bool
-    var_type: bool
-    event_name: XPNDR_IDENT_ON
-    off_event_name: XPNDR_IDENT_OFF
+    var_type: i32
+    event_name: XPNDR_IDENT_SET
     event_param: 1
     cancel_h_events: true
   -
@@ -243,47 +224,7 @@ shared:
 #   type: var
 #   var_name: L:WTFltTimer_Value_g3x:2
 
-# - # Ignore
-#   type: var
-#   var_name: L:G3XTouch_1_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:G3XTouch_1_State
-# -
-#   type: var
-#   var_name: L:G3XTouch_2_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:G3XTouch_2_State
-# -
-#   type: var
-#   var_name: L:WTG3XTouch_1_Avionics_Status
-# -
-#   type: var
-#   var_name: L:WTG3XTouch_2_Avionics_Status
-# -
-#   type: var
-#   var_name: L:WTG3X_Screen_Backlight:1
-# -
-#   type: var
-#   var_name: L:WTG3X_Screen_Backlight:2
-# -
-#   type: var
-#   var_name: L:WTG3X_Auto_Backlight
-# -
-#   type: var
-#   var_name: L:G3X_Fuel_Burned
-# -
-#   type: var
-#   var_name: L:G3X_Fuel_Remaining
-
 ignore:
   - AP_KNOB
   - AP_KNOB_Up
   - AP_KNOB_Down
-  - Generic_Autopilot_Manual_Off
-
-  - AS3X_Touch_1_Knob_Inner_L_INC
-  - AS3X_Touch_1_Knob_Inner_L_DEC
-  - AS3X_Touch_1_Knob_Outer_L_INC
-  - AS3X_Touch_1_Knob_Outer_L_DEC

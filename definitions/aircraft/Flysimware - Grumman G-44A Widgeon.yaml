@@ -24,6 +24,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 21
+    use_calculator: true
 
   - # Deice
     type: ToggleSwitch
@@ -37,12 +38,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ENG ANTI ICE:2
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG2
+    use_calculator: true
 
   - # Electrical
     type: ToggleSwitch
@@ -51,6 +54,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
@@ -70,12 +74,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_ELECT_FUEL_PUMP1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:GENERAL ENG FUEL PUMP SWITCH:2
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_ELECT_FUEL_PUMP2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUEL CROSS FEED
@@ -89,12 +95,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:GENERAL ENG STARTER:2
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER2
+    use_calculator: true
 
   - # Interior
     type: ToggleSwitch
@@ -207,9 +215,9 @@ shared:
   -
     type: var
     var_name: L:DME_RMT
-  -
-    type: var
-    var_name: L:XMLVAR_AudioPanel
+# -
+#   type: var
+#   var_name: L:XMLVAR_AudioPanel
 # -
 #   type: var
 #   var_name: L:XMLVAR_ELT_STATE

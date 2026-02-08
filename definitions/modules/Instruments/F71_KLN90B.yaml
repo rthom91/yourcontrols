@@ -50,6 +50,3 @@ shared:
 # -
 #   type: var
 #   var_name: L:KLN90B_State
-
-ignore:
-  - KLN90B#-445178212 # Keyboard input

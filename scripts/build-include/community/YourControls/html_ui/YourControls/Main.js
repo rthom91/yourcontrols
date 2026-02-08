@@ -30,32 +30,32 @@ class YourControlsHandler {
 	onMessage(data) {
 		switch (data.type) {
 			case "input": {
-				YourControlsHTMLTrigger.setInput(document.getElementById(data.id), data.value)
+				YourControlsHTMLTrigger.setInput(document.getElementById(data.id), data.value);
 				break;
 			}
 			case "time": {
 				if (this.canProcess()) {
-					SimVar.SetSimVarValue("K:ZULU_HOURS_SET", "Number", data.hour)
-					SimVar.SetSimVarValue("K:ZULU_MINUTES_SET", "Number", data.minute)
-					SimVar.SetSimVarValue("K:ZULU_DAY_SET", "Number", data.day)
-					SimVar.SetSimVarValue("K:ZULU_YEAR_SET", "Number", data.year)
+					SimVar.SetSimVarValue("K:ZULU_YEAR_SET", "number", data.year);
+					SimVar.SetSimVarValue("K:ZULU_DAY_SET", "number", data.day);
+					SimVar.SetSimVarValue("K:ZULU_HOURS_SET", "number", data.hour);
+					SimVar.SetSimVarValue("K:ZULU_MINUTES_SET", "number", data.minute);
 				}
 				break;
 			}
 			case "requestTime": {
-				if (!this.canProcess()) {
-					break
-				}
-				const hour = SimVar.GetSimVarValue("E:ZULU TIME", "Hours")
-				const minute = Math.ceil((hour % 1) * 60)
+				if (!this.canProcess()) break;
+
+				const totalSeconds = SimVar.GetSimVarValue("E:ZULU TIME", "seconds");
+				const minute = Math.floor((totalSeconds % 3600) / 60);
+				const hour = Math.floor(totalSeconds / 3600) % 24;
 
 				this.net.sendObjectAsJSON({
 					type: "time",
 					minute: minute,
-					hour: Math.floor(hour),
-					day: SimVar.GetSimVarValue("E:ZULU DAY OF YEAR", "Number"),
-					year: SimVar.GetSimVarValue("E:ZULU YEAR", "Number")
-				})
+					hour: hour,
+					day: SimVar.GetSimVarValue("E:ZULU DAY OF YEAR", "number"),
+					year: SimVar.GetSimVarValue("E:ZULU YEAR", "number")
+				});
 				break;
 			}
 		}

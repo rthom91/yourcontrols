@@ -7,4 +7,5 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE1_SET
+    use_calculator: true
     unreliable: true

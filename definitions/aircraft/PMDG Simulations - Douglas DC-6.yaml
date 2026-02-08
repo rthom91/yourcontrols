@@ -2,21 +2,38 @@
 
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
-  - definitions/modules/controls.yaml
+  - definitions/modules/Instruments/AS_KT76C.yaml
   - definitions/modules/general.yaml
   - definitions/modules/magnetos.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/radios.yaml
-  - definitions/modules/transponder.yaml
-  - definitions/modules/trim.yaml
 
 shared:
-  - # Brake
+  - # Brakes
     type: ToggleSwitch
     var_name: A:BRAKE PARKING POSITION
     var_units: Bool
     var_type: bool
     event_name: PARKING_BRAKES
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:BRAKE LEFT POSITION EX1
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_LEFT_BRAKE_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:BRAKE RIGHT POSITION EX1
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_RIGHT_BRAKE_SET
+    use_calculator: true
+    unreliable: true
 
   - # Main Cabin Exit
     type: ToggleSwitch
@@ -25,6 +42,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   - # Front Cabin Exit
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -32,6 +50,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   - # Cargo Holds
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -39,6 +58,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   - # Front Cabin Exit Air Stairs
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -46,6 +66,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
   - # CA Window
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:4
@@ -53,6 +74,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 5
+    use_calculator: true
   - # FO Window
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:5
@@ -60,6 +82,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 6
+    use_calculator: true
   - # Cargo Doors/Main Cabin Exit
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:6
@@ -67,6 +90,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 7
+    use_calculator: true
 
   - # GPS
     type: ToggleSwitch
@@ -75,6 +99,36 @@ shared:
     var_type: bool
     event_name: TOGGLE_GPS_DRIVES_NAV1
     cancel_h_events: true
+    use_calculator: true
+
+  - # Trim
+    type: NumSet
+    var_name: A:AILERON TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: AILERON_TRIM_SET
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ELEVATOR TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ELEVATOR_TRIM_SET
+    condition:
+      var:
+        var_name: L:dc6_434_obj
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:RUDDER TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: RUDDER_TRIM_SET
+    unreliable: true
 
   - # LVAR's
     type: var
@@ -995,10 +1049,10 @@ shared:
   -
     type: var
     var_name: L:ADFFreqChk
-  -
+  - # Settable (no var)
     type: var
     var_name: L:ADFStbyFreq
-  -
+  - # Settable (no var)
     type: var
     var_name: L:ADFActiveFreq
   -
@@ -5627,55 +5681,55 @@ shared:
     event_name: ROTOR_BRAKE
     event_param: 7901
     use_calculator: true
-  - # ADF XFR Button
+  - # ADF XFR Button (animation)
     type: var
     var_name: L:dc6_135_obj
-  - # ADF FLT Button
+  - # ADF FLT Button (animation)
     type: var
     var_name: L:dc6_136_obj
-  - # ADF RST Button
+  - # ADF RST Button (animation)
     type: var
     var_name: L:dc6_137_obj
-  - # ADF FRQ Outer
+  - # ADF FRQ Outer (animation)
     type: var
     var_name: L:dc6_139_obj
-  - # ADF FRQ Inner
+  - # ADF FRQ Inner (animation)
     type: var
     var_name: L:dc6_140_obj
-  - # COM2 XFR Button
+  - # COM2 XFR Button (animation)
     type: var
     var_name: L:dc6_164_obj
-  - # COM2 FRQ Outer
+  - # COM2 FRQ Outer (animation)
     type: var
     var_name: L:dc6_165_obj
-  - # COM2 FRQ Inner
+  - # COM2 FRQ Inner (animation)
     type: var
     var_name: L:dc6_166_obj
-  - # NAV2 XFR Button
+  - # NAV2 XFR Button (animation)
     type: var
     var_name: L:dc6_169_obj
-  - # NAV2 FRQ Outer
+  - # NAV2 FRQ Outer (animation)
     type: var
     var_name: L:dc6_170_obj
-  - # NAV2 FRQ Inner
+  - # NAV2 FRQ Inner (animation)
     type: var
     var_name: L:dc6_171_obj
-  - # COM1 XFR Button
+  - # COM1 XFR Button (animation)
     type: var
     var_name: L:dc6_467_obj
-  - # COM1 FRQ Outer
+  - # COM1 FRQ Outer (animation)
     type: var
     var_name: L:dc6_468_obj
-  - # COM1 FRQ Inner
+  - # COM1 FRQ Inner (animation)
     type: var
     var_name: L:dc6_469_obj
-  - # NAV1 XFR Button
+  - # NAV1 XFR Button (animation)
     type: var
     var_name: L:dc6_473_obj
-  - # NAV1 FRQ Outer
+  - # NAV1 FRQ Outer (animation)
     type: var
     var_name: L:dc6_474_obj
-  - # NAV1 FRQ Inner
+  - # NAV1 FRQ Inner (animation)
     type: var
     var_name: L:dc6_475_obj
 # -
@@ -5687,10 +5741,10 @@ shared:
 # -
 #   type: var
 #   var_name: L:IncrCAKohlsman
-  - # CPT VOR1 knob
+  - # CPT VOR1 knob (animation)
     type: var
     var_name: L:dc6_288_obj
-  - # CPT ADF Card knob
+  - # CPT ADF knob (animation)
     type: var
     var_name: L:dc6_310_obj
 # -
@@ -5699,10 +5753,10 @@ shared:
 # -
 #   type: var
 #   var_name: L:IncrFOKohlsman
-  - # FO VOR2 knob
+  - # FO VOR2 knob (animation)
     type: var
     var_name: L:dc6_377_obj
-  - # FO ADF Card knob
+  - # FO ADF knob (animation)
     type: var
     var_name: L:dc6_390_obj
 # -
@@ -6060,35 +6114,68 @@ shared:
 #   var_name: L:WasmInstrument_State
 
 master:
-  - # CPT Throttle Engine 1
+  - # Controls
+    type: NumSet
+    var_name: A:AILERON POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_AILERONS_SET
+    condition:
+      var:
+        var_name: L:dc6_434_obj
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ELEVATOR POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_ELEVATOR_SET
+    condition:
+      var:
+        var_name: L:dc6_434_obj
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:RUDDER PEDAL POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_RUDDER_SET
+    condition:
+      var:
+        var_name: L:dc6_434_obj
+        var_units: Number
+        var_type: f64
+      equals:
+        F64: 0.0
+    use_calculator: true
+    unreliable: true
+
+  - # Throttles (CPT/FO inherited)
     type: var
     var_name: L:dc6_511_obj
     interpolate: Default
-  - # CPT Throttle Engine 2
+  -
     type: var
     var_name: L:dc6_512_obj
     interpolate: Default
-  - # CPT Throttle Engine 3
+  -
     type: var
     var_name: L:dc6_513_obj
     interpolate: Default
-  - # CPT Throttle Engine 4
+  -
     type: var
     var_name: L:dc6_514_obj
     interpolate: Default
-# - # FO Throttle Engine 1 (inherited)
-#   type: var
-#   var_name: L:dc6_5111_obj
-#   interpolate: Default
-# - # FO Throttle Engine 2 (inherited)
-#   type: var
-#   var_name: L:dc6_5121_obj
-#   interpolate: Default
-# - # FO Throttle Engine 3 (inherited)
-#   type: var
-#   var_name: L:dc6_5131_obj
-#   interpolate: Default
-# - # FO Throttle Engine 4 (inherited)
-#   type: var
-#   var_name: L:dc6_5141_obj
-#   interpolate: Default

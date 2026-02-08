@@ -1,17 +1,11 @@
-# Version 0.1.120 / 1.0.2 Enhanced
+# Version 0.1.122 / 1.0.3 Enhanced
 
 include:
   - definitions/modules/Instruments/AS_G3000.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/electrical.yaml
-  - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
-  - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
-  - definitions/modules/pressurization.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/trim.yaml
@@ -37,12 +31,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:WINDSHIELD DEICE SWITCH
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:1
@@ -50,46 +46,25 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG ANTI ICE POSITION:1
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
     unreliable: true
 
-  - # Front left door
+  - # Electrical
     type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:2
+    var_name: A:EXTERNAL POWER ON:1
     var_units: Bool
     var_type: bool
-    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 3
-  - # Rear left door
-    type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 2
-  - # GPU Truck
-    type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:0
-    var_units: Bool
-    var_type: bool
-    event_name: REQUEST_POWER_SUPPLY
-    use_calculator: true
-
-  - # R PFD Altimeter
-    type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:3
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 3
-    cancel_h_events: true
-
-  - # STBY Gen
+    event_name: TOGGLE_EXTERNAL_POWER
+    event_param: 1
+    index_reversed: true
+  - # ST-BY
     type: CustomCalculator
     get: 5 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:12, Bool)
     set: 12 5 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
@@ -98,7 +73,133 @@ shared:
     get: 5 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:20, Bool)
     set: 20 5 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
 
-  - # Taxi light
+  - # Engine
+    type: NumSet
+    var_name: A:BLEED AIR SOURCE CONTROL
+    var_units: Enum
+    var_type: i32
+    event_name: BLEED_AIR_SOURCE_CONTROL_SET
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:PANEL AUTO FEATHER SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AUTOFEATHER_ARM
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: STARTER1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:TURB ENG IGNITION SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: TURBINE_IGNITION_SWITCH_SET1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MIXTURE LEVER POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: MIXTURE1_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG PROPELLER LEVER POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: PROP_PITCH1_SET
+    use_calculator: true
+    unreliable: true
+
+  - # Fuel
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_FUEL_VALVE_ENG1
+    use_calculator: true
+
+  - # Front left door
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 3
+    use_calculator: true
+  - # Rear left door
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 2
+    use_calculator: true
+  - # GPU Truck
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:0
+    var_units: Bool
+    var_type: bool
+    event_name: REQUEST_POWER_SUPPLY
+    use_calculator: true
+
+  - # Handling
+    type: NumSet
+    var_name: A:BRAKE PARKING POSITION
+    var_units: Bool
+    var_type: i32
+    event_name: PARKING_BRAKE_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:FLAPS HANDLE PERCENT
+    var_units: Position 16k
+    var_type: f64
+    event_name: FLAPS_CONTINUOUS_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: var
+    var_name: A:FLAPS HANDLE INDEX
+    var_units: Number
+    var_type: f64
+  -
+    type: NumSet
+    var_name: A:GEAR HANDLE POSITION
+    var_units: Bool
+    var_type: i32
+    event_name: GEAR_SET
+    use_calculator: true
+
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT TAXI:1
+    var_units: Bool
+    var_type: i32
+    event_name: TAXI_LIGHTS_SET
+    event_param: 1
+  -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:2
     var_units: Percent
@@ -107,11 +208,53 @@ shared:
     index_reversed: true
   -
     type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LANDING:2
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 2
+  -
+    type: NumSet
     var_name: A:LIGHT POTENTIOMETER:10
     var_units: Percent
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_10_SET
     index_reversed: true
+  -
+    type: NumSet
+    var_name: A:LIGHT LOGO:1
+    var_units: Bool
+    var_type: i32
+    event_name: LOGO_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT WING:1
+    var_units: Bool
+    var_type: i32
+    event_name: WING_LIGHTS_SET
+    event_param: 1
 
   - # Interior
     type: NumSet
@@ -133,6 +276,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 14
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN
@@ -168,6 +312,18 @@ shared:
     get: 19 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:17, Bool)
     set: 17 19 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
 
+  - # Pressurization
+    type: ToggleSwitch
+    var_name: A:PRESSURIZATION DUMP SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: PRESSURIZATION_PRESSURE_DUMP_SWITCH
+    use_calculator: true
+
+  - # TOGA (enforce)
+    type: event
+    event_name: AUTO_THROTTLE_TO_GA
+
   - # LVAR's
     type: var
     var_name: L:XMLVAR_LANDING_TAXI_OFF_Switch_Position
@@ -180,18 +336,30 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_Elec_Generator_Switch_State
+# -
+#   type: var
+#   var_name: L:Esp_Roll_Control_Axis_Force
+# -
+#   type: var
+#   var_name: L:WTAP_Garmin_Approach_Mode_On
   -
     type: var
     var_name: L:XMLVAR_Elec_CrashBar_State
 # -
 #   type: var
 #   var_name: L:WT_TOGA_ACTIVE
+# -
+#   type: var
+#   var_name: L:Esp_Pitch_Control_Axis_Force
   -
     type: var
     var_name: L:XMLVAR_Elec_Source_Switch_State
 # -
 #   type: var
 #   var_name: L:XMLVAR_VNAVButtonValue
+# -
+#   type: var
+#   var_name: L:WTAP_Garmin_Nav_Mode_On
 # -
 #   type: var
 #   var_name: L:HANDLING_ElevatorTrim
@@ -210,9 +378,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_Starter_IsHeld
-  -
-    type: var
-    var_name: L:XMLVAR_Ignition
+# - # Unsettable
+#   type: var
+#   var_name: L:XMLVAR_Ignition
   -
     type: var
     var_name: L:XMLVar_Pilot_Door_Handle_Position
@@ -221,9 +389,9 @@ shared:
     type: var
     var_name: L:XMLVar_Cabin_Door_Handle_Position
     unreliable: true
-  -
-    type: var
-    var_name: L:XMLVAR_BoostFuelPump
+# - # Unsettable
+#   type: var
+#   var_name: L:XMLVAR_BoostFuelPump
 # -
 #   type: var
 #   var_name: L:LIGHTING_LANDING_1
@@ -502,49 +670,10 @@ shared:
 #   var_name: L:XMLVAR_NEXTGEN_FLIGHTPLAN_ENABLED
 # -
 #   type: var
-#   var_name: L:WT_MINIMUMS_MODE
-# -
-#   type: var
-#   var_name: L:XMLVAR_Baro1_ForcedToSTD
-# -
-#   type: var
-#   var_name: L:XMLVAR_Baro1_SavedPressure
-# -
-#   type: var
-#   var_name: L:WTAP_GP_Approach_Mode
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Obs_Active
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Obs_Course
-# -
-#   type: var
-#   var_name: L:WTFltTimer_Value:2
-# -
-#   type: var
 #   var_name: L:WTG3000_PFD_1_ScreenLuminosity
 # -
 #   type: var
 #   var_name: L:WTG3000_PFD_1_State
-# -
-#   type: var
-#   var_name: L:WT3000_Fuel_Burned
-# -
-#   type: var
-#   var_name: L:WT3000_Fuel_Remaining
-# -
-#   type: var
-#   var_name: L:WTG3000_Weight_Fuel_Aircraft_Weight
-# -
-#   type: var
-#   var_name: L:WT_Tbm930_Stby_Gen_Current
-# -
-#   type: var
-#   var_name: L:WT_Tbm930_Main_Gen_Current
-# -
-#   type: var
-#   var_name: L:WT_Tbm930_Battery_Current
 # -
 #   type: var
 #   var_name: L:WTG3000_PFD_2_ScreenLuminosity
@@ -587,6 +716,51 @@ shared:
 # -
 #   type: var
 #   var_name: L:WTG3000_GTC_2_State
+# -
+#   type: var
+#   var_name: L:WT_MINIMUMS_MODE
+# -
+#   type: var
+#   var_name: L:XMLVAR_Baro1_ForcedToSTD
+# -
+#   type: var
+#   var_name: L:XMLVAR_Baro1_SavedPressure
+# -
+#   type: var
+#   var_name: L:WTAP_GP_Approach_Mode
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Obs_Active
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Obs_Course
+# -
+#   type: var
+#   var_name: L:WTFltTimer_Value:2
+# -
+#   type: var
+#   var_name: L:WT3000_Fuel_Burned
+# -
+#   type: var
+#   var_name: L:WT3000_Fuel_Remaining
+# -
+#   type: var
+#   var_name: L:WTG3000_Weight_Fuel_Aircraft_Weight
+# -
+#   type: var
+#   var_name: L:WT_Tbm930_Stby_Gen_Current
+# -
+#   type: var
+#   var_name: L:WT_Tbm930_Main_Gen_Current
+# -
+#   type: var
+#   var_name: L:WT_Tbm930_Battery_Current
+# -
+#   type: var
+#   var_name: L:Glasscockpits_FPLHaveOrigin
+# -
+#   type: var
+#   var_name: L:Glasscockpits_FPLHaveDestination
   -
     type: var
     var_name: L:XMLVAR_Baro3_ForcedToSTD
@@ -641,19 +815,16 @@ shared:
 #   var_name: L:WTG3000_Weight_Fuel_Holding_Fuel
 # -
 #   type: var
+#   var_name: L:WTG3000_Weight_Fuel_Excess_Fuel
+# -
+#   type: var
 #   var_name: L:WTG3000_Auto_Backlight
 # -
 #   type: var
-#   var_name: L:Glasscockpits_FPLHaveOrigin
-# -
-#   type: var
-#   var_name: L:Glasscockpits_FPLHaveDestination
+#   var_name: L:WT_Tbm930_Battery_Load
 # -
 #   type: var
 #   var_name: L:WT1000_AP_G1000_INSTALLED
-# -
-#   type: var
-#   var_name: L:WT_Tbm930_Battery_Load
   -
     type: var
     var_name: L:XMLVAR_Source_Switch_State
@@ -680,14 +851,20 @@ shared:
 #   var_name: L:WTG3000_GTC_2_Avionics_Status
 # -
 #   type: var
+#   var_name: L:YourControlsServerRunning
+# -
+#   type: var
 #   var_name: L:HUD_AP_SELECTED_SPEED
 # -
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_ALTITUDE
 
-ignore:
-# XPNDR Box
-  - WTG3000_GTC_1#-1082943814
-  - WTG3000_GTC_1#-1083241709
-  - WTG3000_GTC_2#-1082943814
-  - WTG3000_GTC_2#-1083241709
+master:
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG THROTTLE LEVER POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: THROTTLE1_SET
+    use_calculator: true
+    unreliable: true

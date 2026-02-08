@@ -7,13 +7,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: AP_MASTER
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT HEADING LOCK
     var_units: Bool
     var_type: bool
-    event_name: AP_HDG_HOLD_ON
-    off_event_name: AP_HDG_HOLD_OFF
+    event_name: AP_HDG_HOLD
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AUTOPILOT HEADING LOCK DIR:1
@@ -21,14 +22,13 @@ shared:
     var_type: f64
     event_name: HEADING_BUG_SET
     event_param: 1
-    interpolate: Default
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT ALTITUDE LOCK
     var_units: Bool
     var_type: bool
-    event_name: AP_ALT_HOLD_ON
-    off_event_name: AP_ALT_HOLD_OFF
+    event_name: AP_ALT_HOLD
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AUTOPILOT ALTITUDE LOCK VAR:1
@@ -37,12 +37,12 @@ shared:
     event_name: AP_ALT_VAR_SET_ENGLISH
     event_param: 1
   -
-    type: ToggleSwitch
+    type: NumSet
     var_name: A:AUTOPILOT VERTICAL HOLD
     var_units: Bool
-    var_type: bool
-    event_name: AP_VS_ON
-    off_event_name: AP_VS_OFF
+    var_type: i32
+    event_name: AP_VS_SET
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AUTOPILOT VERTICAL HOLD VAR:1
@@ -50,42 +50,36 @@ shared:
     var_type: i32
     event_name: AP_VS_VAR_SET_ENGLISH
     event_param: 1
-    interpolate: Default
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT NAV1 LOCK
     var_units: Bool
     var_type: bool
     event_name: AP_NAV1_HOLD
+    is_user_event: true
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT APPROACH HOLD
     var_units: Bool
     var_type: bool
-    event_name: AP_APR_HOLD_ON
-    off_event_name: AP_APR_HOLD_OFF
+    event_name: AP_APR_HOLD
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT BACKCOURSE HOLD
     var_units: Bool
     var_type: bool
-    event_name: AP_BC_HOLD_ON
-    off_event_name: AP_BC_HOLD_OFF
+    event_name: AP_BC_HOLD
+    use_calculator: true
   -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT WING LEVELER
-    var_units: Bool
-    var_type: bool
-    event_name: AP_WING_LEVELER_ON
-    off_event_name: AP_WING_LEVELER_OFF
-
-  - # Temporary
     type: ToggleSwitch
     var_name: A:GPS DRIVES NAV1
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_GPS_DRIVES_NAV1
     cancel_h_events: true
+    use_calculator: true
 
 ignore:
   - KAP140_Push_AP

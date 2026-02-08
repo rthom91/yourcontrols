@@ -1,15 +1,12 @@
-# Version 0.1.98
+# Version 0.1.100
 
 include:
-  - definitions/modules/Instruments/AS_G3000.yaml
+  - definitions/modules/Instruments/WT_PL21.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
-  - definitions/modules/pressurization.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/trim.yaml
@@ -22,6 +19,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 23
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:24
@@ -29,31 +27,53 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 24
+    use_calculator: true
 
-  - # Battery
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:2
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 2
+  -
+    type: ToggleSwitch
+    var_name: A:ENG ANTI ICE:1
+    var_units: Bool
+    var_type: bool
+    event_name: ANTI_ICE_TOGGLE_ENG1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:ENG ANTI ICE:2
+    var_units: Bool
+    var_type: bool
+    event_name: ANTI_ICE_TOGGLE_ENG2
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:STRUCTURAL DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
+
+  - # Electrical
     type: ToggleSwitch
     var_name: A:ELECTRICAL MASTER BATTERY:1
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
-
-  - # Comm Power
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:28
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 28
+    use_calculator: true
   -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:30
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 30
-
-  - # Generators
     type: ToggleSwitch
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
     var_units: Bool
@@ -65,73 +85,66 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_ALTERNATOR2
-
-  - # STBY FTL
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:49
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 49
-
-  - # Passenger
-    type: ToggleSwitch
-    var_name: A:CABIN SEATBELTS ALERT SWITCH
-    var_units: Bool
-    var_type: bool
-    event_name: CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE
   -
-    type: ToggleSwitch
-    var_name: A:CABIN NO SMOKING ALERT SWITCH
-    var_units: Bool
-    var_type: bool
-    event_name: CABIN_NO_SMOKING_ALERT_SWITCH_TOGGLE
-
-  - # Starters
     type: ToggleSwitch
     var_name: A:GENERAL ENG STARTER:1
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:GENERAL ENG STARTER:2
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER2
+    use_calculator: true
 
-  - # Deice
+  - # Fuel
     type: NumSet
-    var_name: A:PITOT HEAT SWITCH:1
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
     var_units: Enum
     var_type: i32
-    event_name: PITOT_HEAT_SET
-    event_param: 1
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
   -
     type: NumSet
-    var_name: A:PITOT HEAT SWITCH:2
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:2
     var_units: Enum
     var_type: i32
-    event_name: PITOT_HEAT_SET
-    event_param: 2
+    event_name: ELECT_FUEL_PUMP2_SET
+    use_calculator: true
   -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Enum
+    var_type: i32
+    event_name: SET_FUEL_VALVE_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL VALVE:2
+    var_units: Enum
+    var_type: i32
+    event_name: SET_FUEL_VALVE_ENG2
+    use_calculator: true
+
+  - # Fuel crossfeed
     type: ToggleSwitch
-    var_name: A:ENG ANTI ICE:1
+    var_name: A:CIRCUIT SWITCH ON:45
     var_units: Bool
     var_type: bool
-    event_name: ANTI_ICE_TOGGLE_ENG1
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 45
+    use_calculator: true
   -
     type: ToggleSwitch
-    var_name: A:ENG ANTI ICE:2
+    var_name: A:CIRCUIT SWITCH ON:46
     var_units: Bool
     var_type: bool
-    event_name: ANTI_ICE_TOGGLE_ENG2
-  -
-    type: ToggleSwitch
-    var_name: A:STRUCTURAL DEICE SWITCH
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_STRUCTURAL_DEICE
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 46
+    use_calculator: true
 
   - # GPU Truck
     type: ToggleSwitch
@@ -148,13 +161,28 @@ shared:
     event_name: REQUEST_POWER_SUPPLY
     use_calculator: true
 
-  - # Pulse lights
-    type: NumSet
-    var_name: A:LIGHT LANDING:2
+  - # Passenger
+    type: ToggleSwitch
+    var_name: A:CABIN SEATBELTS ALERT SWITCH
     var_units: Bool
-    var_type: f64
-    event_name: LANDING_LIGHTS_SET
-    event_param: 2
+    var_type: bool
+    event_name: CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:CABIN NO SMOKING ALERT SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: CABIN_NO_SMOKING_ALERT_SWITCH_TOGGLE
+    use_calculator: true
+
+  - # Pressurization
+    type: ToggleSwitch
+    var_name: A:PRESSURIZATION DUMP SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: PRESSURIZATION_PRESSURE_DUMP_SWITCH
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -171,6 +199,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:1
@@ -186,6 +215,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 5
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:2
@@ -201,6 +231,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 6
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:3
@@ -216,8 +247,66 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 4
     index_reversed: true
+    unreliable: true
 
-  - # Glasscockpit
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT TAXI:1
+    var_units: Bool
+    var_type: i32
+    event_name: TAXI_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LOGO:1
+    var_units: Bool
+    var_type: i32
+    event_name: LOGO_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT BEACON:1
+    var_units: Bool
+    var_type: i32
+    event_name: BEACON_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT RECOGNITION:1
+    var_units: Bool
+    var_type: i32
+    event_name: RECOGNITION_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT WING:1
+    var_units: Bool
+    var_type: i32
+    event_name: WING_LIGHTS_SET
+    event_param: 1
+
+  - # Screens
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:15
     var_units: Percent
@@ -225,6 +314,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 15
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:16
@@ -233,6 +323,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 16
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:17
@@ -241,6 +332,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 17
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:18
@@ -249,11 +341,18 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 18
     index_reversed: true
+    unreliable: true
 
-# - # LVAR's
-#   type: var
-#   var_name: L:WT_TOGA_ACTIVE
-  -
+  - # STBY FTL
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:49
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 49
+    use_calculator: true
+
+  - # LVAR's
     type: var
     var_name: L:XMLVAR_Exclusive_Light_Last_Changed
   -
@@ -262,12 +361,18 @@ shared:
   -
     type: var
     var_name: L:PASSENGER_KNOB_AIR_1
+    unreliable: true
   -
     type: var
     var_name: L:PASSENGER_KNOB_HEAT_1
+    unreliable: true
   -
     type: var
     var_name: L:PASSENGER_KNOB_AIR_3
+    unreliable: true
+# -
+#   type: var
+#   var_name: L:WT_TOGA_ACTIVE
 # -
 #   type: var
 #   var_name: L:XMLVAR_VNAVButtonValue
@@ -277,9 +382,11 @@ shared:
   -
     type: var
     var_name: L:PASSENGER_KNOB_AIR_2
+    unreliable: true
   -
     type: var
     var_name: L:PASSENGER_KNOB_HEAT_2
+    unreliable: true
   -
     type: var
     var_name: L:CJ4_EMER_LIGHT_ARMED
@@ -420,10 +527,10 @@ shared:
 #   var_name: L:CJ4_MFD_ScreenLuminosity
 # -
 #   type: var
-#   var_name: L:XMLVAR_ThrottlePosition_2
+#   var_name: L:XMLVAR_ThrottlePosition_1
 # -
 #   type: var
-#   var_name: L:XMLVAR_ThrottlePosition_1
+#   var_name: L:XMLVAR_ThrottlePosition_2
 # -
 #   type: var
 #   var_name: L:XMLVAR_LTS_Test
@@ -447,61 +554,19 @@ shared:
 #   var_name: L:WT_MINIMUMS_MODE
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Path_Mode
+#   var_name: L:WT21_STALL_WARNING
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Alt_Capture_Type
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Constraint_Leg_Index
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Next_Constraint_Altitude
-# -
-#   type: var
-#   var_name: L:WTAP_VNAV_Required_VS
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Vector_Anticipation_Distance
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_TOD_Leg_Index
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_TOD_Distance_In_Leg
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Distance_To_TOD
+#   var_name: L:XMLVAR_NEXTGEN_FLIGHTPLAN_ENABLED
 # -
 #   type: var
 #   var_name: L:FMC_EXEC_ACTIVE
   -
     type: var
-    var_name: L:WT_CMU_DATALINK_RCVD
-# -
-#   type: var
-#   var_name: L:WTWT21_LNavData_Tracked_Leg_End_Distance
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Distance_To_BOD
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_FPA
-# -
-#   type: var
-#   var_name: L:WT_LNavData_Destination_Distance
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_BOD_Leg_Index
-# -
-#   type: var
-#   var_name: L:WT21_STALL_WARNING
-# -
-#   type: var
-#   var_name: L:XMLVAR_NEXTGEN_FLIGHTPLAN_ENABLED
+    var_name: L:WT21_DISPLAY_MSG
   -
     type: var
-    var_name: L:WT_CJ4_DISPLAY_MSG
+    var_name: L:WT_CMU_DATALINK_RCVD
 
 master:
   -
@@ -510,6 +575,7 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -517,8 +583,5 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE2_SET
+    use_calculator: true
     unreliable: true
-
-ignore:
-  - Generic_Upr_RANGE_INC
-  - Generic_Upr_RANGE_DEC

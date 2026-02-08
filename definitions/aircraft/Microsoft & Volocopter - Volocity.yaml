@@ -369,6 +369,7 @@ master:
     var_type: f64
     multiply_by: -1
     event_name: AXIS_AILERONS_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -377,6 +378,7 @@ master:
     var_type: f64
     multiply_by: -1
     event_name: AXIS_ELEVATOR_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -385,4 +387,5 @@ master:
     var_type: f64
     multiply_by: -1
     event_name: AXIS_RUDDER_SET
+    use_calculator: true
     unreliable: true

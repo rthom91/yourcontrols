@@ -1,4 +1,4 @@
-# For legacy use only. Do not use for aircraft using new fuel system (i.e. A:FUELSYSTEM TANK LEVEL:X).
+# Only use for aircraft using new fuel system (i.e. A:FUELSYSTEM TANK LEVEL:X).
 
 shared:
   -
@@ -65,67 +65,61 @@ shared:
 master:
   -
     type: var
-    var_name: A:FUEL TANK CENTER LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:1
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK CENTER2 LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:2
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK CENTER3 LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:3
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK EXTERNAL1 LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:4
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK EXTERNAL2 LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:5
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK LEFT AUX LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:6
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK LEFT MAIN LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:7
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK LEFT TIP LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:8
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK RIGHT AUX LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:9
     var_units: Percent
     var_type: f64
     unreliable: true
   -
     type: var
-    var_name: A:FUEL TANK RIGHT MAIN LEVEL
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUEL TANK RIGHT TIP LEVEL
+    var_name: A:FUELSYSTEM TANK LEVEL:10
     var_units: Percent
     var_type: f64
     unreliable: true

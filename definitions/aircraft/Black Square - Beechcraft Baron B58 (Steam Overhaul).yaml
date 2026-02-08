@@ -8,12 +8,9 @@ include:
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
@@ -28,6 +25,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 22
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:23
@@ -35,6 +33,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 23
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:24
@@ -42,6 +41,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 24
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:31
@@ -49,6 +49,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 31
+    use_calculator: true
 
   - # Avionics
     type: ToggleSwitch
@@ -57,37 +58,103 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 59
-
-  - # Battery
-    type: ToggleSwitch
-    var_name: A:ELECTRICAL MASTER BATTERY:1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_MASTER_BATTERY
-    event_param: 1
+    use_calculator: true
 
   - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:2
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 2
+  -
+    type: ToggleSwitch
+    var_name: A:PROP DEICE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PROPELLER_DEICE
+    event_param: 1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:ENG ANTI ICE:1
+    var_units: Bool
+    var_type: i32
+    event_name: ANTI_ICE_SET_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:ENG ANTI ICE:2
+    var_units: Bool
+    var_type: i32
+    event_name: ANTI_ICE_SET_ENG2
+    use_calculator: true
+
+  - # Deice airframe
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:27
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 27
-  -
+    use_calculator: true
+
+  - # Deice stall
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:39
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 39
+    use_calculator: true
+
+  - # Deice windshield
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:35
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 35
+    use_calculator: true
 
-  - # Fuel
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: SET_STARTER1_HELD
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:2
+    var_units: Bool
+    var_type: i32
+    event_name: SET_STARTER2_HELD
+    use_calculator: true
+
+  - # Fuel pumps
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:4
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 4
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:5
@@ -95,28 +162,90 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 5
+    use_calculator: true
+
+  - # Fuel tanks
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
   -
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:2
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_2_SET
+    use_calculator: true
+
+  - # Fuel vent
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:38
     var_units: Bool
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 38
-  -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:39
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 39
+    use_calculator: true
 
   - # Lights
     type: NumSet
+    var_name: A:LIGHT WING:1
+    var_units: Bool
+    var_type: i32
+    event_name: WING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT BEACON:1
+    var_units: Bool
+    var_type: i32
+    event_name: BEACON_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT TAXI:1
+    var_units: Bool
+    var_type: i32
+    event_name: TAXI_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
+
+  - # Window
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:0
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 0
+    use_calculator: true
 
 # - # LVAR's (trimmed)
 #   type: var
@@ -210,18 +339,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_PilotCws_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_PilotCws_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_PilotCws_LeftLeaveToRun
   -
     type: var
     var_name: L:var_CoPilotCws_IsDown
 # -
 #   type: var
 #   var_name: L:var_CoPilotCws_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_CoPilotCws_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_CoPilotCws_LeftLeaveToRun
   -
     type: var
     var_name: L:var_yokeChronoMode_L
@@ -264,9 +393,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_AnnunciatorTestButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_AnnunciatorTestButton_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_AnnunciatorTestButton_LeftLeaveToRun
   -
     type: var
     var_name: L:starterKnobReturnTime_L
@@ -326,9 +455,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_pressurizationTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_pressurizationTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_pressurizationTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_doorSealPrimaryInflate
@@ -338,9 +467,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_doorSealStandbyInflate_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_doorSealStandbyInflate_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_doorSealStandbyInflate_LeftLeaveToRun
   -
     type: var
     var_name: L:TipTankTransferSwitch_L
@@ -353,9 +482,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_CoTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_CoTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_CoTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_FreshAirKnob
@@ -455,9 +584,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_KmaMarkerTest_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_KmaMarkerTest_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_KmaMarkerTest_LeftLeaveToRun
   -
     type: var
     var_name: L:var_AS340_1_1
@@ -482,9 +611,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_AudioTestButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_AudioTestButton_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_AudioTestButton_LeftLeaveToRun
 # -
 #   type: var
 #   var_name: L:GTN750_Vol
@@ -537,9 +666,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:var_RNAV_CHECKMODE_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_RNAV_CHECKMODE_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_RNAV_CHECKMODE_LeftLeaveToRun
   -
     type: var
     var_name: L:var_radarMode
@@ -788,23 +917,21 @@ shared:
   -
     type: var
     var_name: L:var_switchGroundingFailure_2
-  -
-    type: var
-    var_name: L:var_startupComplete
+# -
+#   type: var
+#   var_name: L:var_startupComplete
   -
     type: var
     var_name: L:var_startupCount
   -
     type: var
     var_name: L:var_PartialVacuumFailure
-  -
-    type: var
-    var_name: L:var_starterInUseSeconds_L
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_starterInUseSeconds_R
-    unreliable: true
+# -
+#   type: var
+#   var_name: L:var_starterInUseSeconds_L
+# -
+#   type: var
+#   var_name: L:var_starterInUseSeconds_R
 # -
 #   type: var
 #   var_name: L:var_batteryTempCounter
@@ -880,12 +1007,12 @@ shared:
   -
     type: var
     var_name: L:NAV_2_KNOB_PULLED
-  -
-    type: var
-    var_name: L:var_JpiAlarm_1
-  -
-    type: var
-    var_name: L:var_JpiAlarm_2
+# -
+#   type: var
+#   var_name: L:var_JpiAlarm_1
+# -
+#   type: var
+#   var_name: L:var_JpiAlarm_2
 # -
 #   type: var
 #   var_name: L:var_fuelInCylinders_L

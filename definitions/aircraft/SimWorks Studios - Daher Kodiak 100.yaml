@@ -36,6 +36,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
     unreliable: true
   -
     type: ToggleSwitch
@@ -43,12 +44,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:WINDSHIELD DEICE SWITCH
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:1
@@ -56,60 +59,55 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 1
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT BEACON:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: BEACON_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT STROBE:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: STROBES_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT NAV:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: NAV_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT TAXI:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT WING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: WING_LIGHTS_SET
     event_param: 1
   -
     type: ToggleSwitch
     var_name: A:LIGHT RECOGNITION
     var_units: Bool
-    var_type: f64
+    var_type: bool
     event_name: TOGGLE_RECOGNITION_LIGHTS
   -
     type: ToggleSwitch
     var_name: A:LIGHT LOGO
     var_units: Bool
-    var_type: f64
+    var_type: bool
     event_name: TOGGLE_LOGO_LIGHTS
-  -
-    type: NumSet
-    var_name: A:LIGHT LANDING
-    var_units: Bool
-    var_type: f64
-    event_name: LANDING_LIGHTS_SET
 
   - # Interior
     type: NumSet
@@ -172,22 +170,12 @@ shared:
     event_param: 21
     index_reversed: true
 
-  - # EFD Altimeter
-    type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:3
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 3
-    cancel_h_events: true
-
   - # Pilot door handle
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:1
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 1
   - # Pilot door
     type: ToggleSwitch
@@ -196,13 +184,13 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   - # Copilot door handle
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:2
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 2
   - # Copilot door
     type: ToggleSwitch
@@ -211,6 +199,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   - # Storm window
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -218,13 +207,13 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   - # Rear top door handle
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:3
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 3
   - # Rear top door
     type: ToggleSwitch
@@ -233,13 +222,13 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
   - # Rear bottom door handle
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:4
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 4
   - # Rear bottom door
     type: ToggleSwitch
@@ -248,6 +237,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 5
+    use_calculator: true
   - # Skydive door
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:5
@@ -255,6 +245,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 6
+    use_calculator: true
 
   - # Payload
     type: var

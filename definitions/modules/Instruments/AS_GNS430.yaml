@@ -38,9 +38,10 @@ shared:
     type: var
     var_name: L:XMLVAR_GPS_DISABLED_AS430_2
 
-# - # Ignore
-#   type: var
-#   var_name: L:AS430_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS430_State
+ignore:
+  - AS430_COMSWAP_Push
+  - AS430_NAVSWAP_Push
+  - AS430_LeftSmallKnob_Left
+  - AS430_LeftSmallKnob_Right
+  - AS430_LeftLargeKnob_Left
+  - AS430_LeftLargeKnob_Right

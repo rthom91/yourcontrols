@@ -1,4 +1,4 @@
-# Version 1.0.1
+# Version 1.0.4
 
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
@@ -7,7 +7,6 @@ include:
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/electrical.yaml
   - definitions/modules/engines.yaml
   - definitions/modules/fuel.yaml
@@ -21,6 +20,29 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
+    unreliable: true
+  -
+    type: ToggleSwitch
+    var_name: A:WINDSHIELD DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
+
   - # Doors
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:0
@@ -28,6 +50,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -35,6 +58,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -42,6 +66,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -49,6 +74,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -163,9 +189,9 @@ shared:
   -
     type: var
     var_name: L:CARENADO_GNS_GTNXI_VIS
-# -
-#   type: var
-#   var_name: L:GTN750XI_INT_HIDDEN
+  -
+    type: var
+    var_name: L:GTN750XI_INT_HIDDEN
 # -
 #   type: var
 #   var_name: L:XMLVAR_GPS_DISABLED_AS430_1
@@ -901,19 +927,7 @@ shared:
     unreliable: true
   -
     type: var
-    var_name: L:XMLVAR_Microphone_selector
-# -
-#   type: var
-#   var_name: L:AS430_ManualBrightness_Value_1
-# -
-#   type: var
-#   var_name: L:AS430_ManualBrightness_Enabled_1
-  -
-    type: var
     var_name: L:VAR_SAFETY_DOOR_SIDE
-# -
-#   type: var
-#   var_name: L:XMLVAR_ADF_Frequency_10_Khz
 # -
 #   type: var
 #   var_name: L:XMLVAR_Magneto_Starter_IsHeld
@@ -926,21 +940,6 @@ shared:
     var_name: L:ASD_SWITCH_PRIMER_ANN
 # -
 #   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverMixtureHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverFlapsHidden
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden2
-# -
-#   type: var
 #   var_name: L:XMLVAR_ElevatorTrim_Switch_YOKE
 # -
 #   type: var
@@ -948,31 +947,10 @@ shared:
 # -
 #   type: var
 #   var_name: L:HANDLING_ElevatorTrim
-# -
-#   type: var
-#   var_name: L:ParkingBrake_Position
   -
     type: var
     var_name: L:INSTRUMENT_Needle_EGT_BUG
     unreliable: true
-# -
-#   type: var
-#   var_name: L:XMLVAR_Hours_Delta
-# -
-#   type: var
-#   var_name: L:XMLVAR_Minutes_Delta
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_STATE
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_TEST_TIME
-  -
-    type: var
-    var_name: L:XMLVAR_Knob_turn_var
-  -
-    type: var
-    var_name: L:BTN_TOOGLE_BANK_MODE_PUSH
   -
     type: var
     var_name: L:VAR_SAFETY_DOOR_TOP
@@ -1077,6 +1055,9 @@ shared:
 #   var_name: L:AS430_SelectedSource
 # -
 #   type: var
+#   var_name: L:XMLVAR_ADF_Frequency_10_Khz
+# -
+#   type: var
 #   var_name: L:DEICE_Pitot_1
 # -
 #   type: var
@@ -1086,13 +1067,28 @@ shared:
 #   var_name: L:XMLVAR_IE_Throttle_VR_Value
 # -
 #   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
+# -
+#   type: var
 #   var_name: L:HANDLING_RudderTrim
+# -
+#   type: var
+#   var_name: L:ParkingBrake_Position
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Course_1
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Course_2
+# -
+#   type: var
+#   var_name: L:XMLVAR_Hours_Delta
+# -
+#   type: var
+#   var_name: L:XMLVAR_Minutes_Delta
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Altimeter_1
@@ -1122,6 +1118,12 @@ shared:
 #   var_name: L:LIGHTING_PANEL_2
 # -
 #   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_STATE
+# -
+#   type: var
 #   var_name: L:XMLVAR_ELT_ACTIVATION_TIME
   -
     type: var
@@ -1132,3 +1134,9 @@ shared:
   -
     type: var
     var_name: L:CARVAR_Cabin_Vent_Copilot
+  -
+    type: var
+    var_name: L:BTN_TOOGLE_BANK_MODE_PUSH
+  -
+    type: var
+    var_name: L:XMLVAR_Knob_turn_var

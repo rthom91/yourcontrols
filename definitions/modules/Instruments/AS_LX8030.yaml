@@ -13,10 +13,3 @@ shared:
   -
     type: var
     var_name: L:FLARM_WARNING_LEVEL
-
-# - # Ignore
-#   type: var
-#   var_name: L:AS8030_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS8030_State

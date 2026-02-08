@@ -24,6 +24,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 26
+    use_calculator: true
   - # Avionics 2
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:27
@@ -31,6 +32,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 27
+    use_calculator: true
   - # Avionics Bus Tie
     type: CustomCalculator
     get: 8 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:9, Bool)
@@ -47,6 +49,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
@@ -64,6 +67,13 @@ shared:
   -
     type: event
     event_name: ALTERNATOR_OFF
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: SET_STARTER1_HELD
+    use_calculator: true
 
   - # EPU Starter
     type: ToggleSwitch
@@ -77,21 +87,11 @@ shared:
     get: 12 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:1, Bool)
     set: 1 12 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
 
-  - # Starter
-    type: ToggleSwitch
-    var_name: A:GENERAL ENG STARTER:1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_STARTER1
-  -
-    type: event
-    event_name: SET_STARTER1_HELD
-
   - # Lights
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
 

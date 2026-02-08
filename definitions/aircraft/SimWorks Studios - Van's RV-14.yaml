@@ -27,6 +27,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 34
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -74,22 +75,12 @@ shared:
     event_param: 6
     index_reversed: true
 
-  - # EFD Altimeter
-    type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:3
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 3
-    cancel_h_events: true
-
   - # Canopy lock
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:7
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 7
   - # Canopy open
     type: ToggleSwitch
@@ -98,13 +89,13 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   - # Canopy ejection
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:6
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 6
 
   - # LVAR's (trimmed)

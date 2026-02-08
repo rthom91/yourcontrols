@@ -26,6 +26,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -33,6 +34,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -40,6 +42,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
 
   - # Interior
     type: NumSet

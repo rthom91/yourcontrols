@@ -6,6 +6,14 @@ master:
     var_type: f64
     multiply_by: -1
     event_name: AXIS_CYCLIC_LATERAL_SET
+    condition:
+      var:
+        var_name: A:AUTOPILOT MASTER
+        var_units: Bool
+        var_type: bool
+      equals:
+        Bool: false
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -14,12 +22,21 @@ master:
     var_type: f64
     multiply_by: -1
     event_name: AXIS_CYCLIC_LONGITUDINAL_SET
+    condition:
+      var:
+        var_name: A:AUTOPILOT MASTER
+        var_units: Bool
+        var_type: bool
+      equals:
+        Bool: false
+    use_calculator: true
     unreliable: true
-  - # AXIS_TAIL_ROTOR_SET is not working
+  -
     type: NumSet
     var_name: A:TAIL ROTOR PEDAL POSITION
     var_units: Position 16k
     var_type: f64
     multiply_by: -1
     event_name: AXIS_RUDDER_SET
+    use_calculator: true
     unreliable: true

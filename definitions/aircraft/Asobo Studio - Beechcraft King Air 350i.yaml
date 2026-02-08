@@ -24,6 +24,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 49
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:50
@@ -31,45 +32,52 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 50
+    use_calculator: true
 
   - # Deice
     type: NumSet
     var_name: A:PITOT HEAT SWITCH:1
-    var_units: Enum
+    var_units: Bool
     var_type: i32
     event_name: PITOT_HEAT_SET
     event_param: 1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:PITOT HEAT SWITCH:2
-    var_units: Enum
+    var_units: Bool
     var_type: i32
     event_name: PITOT_HEAT_SET
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ENG ANTI ICE:1
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ENG ANTI ICE:2
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:STRUCTURAL DEICE SWITCH
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:WINDSHIELD DEICE SWITCH
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:1
@@ -77,6 +85,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:2
@@ -84,6 +93,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 2
+    use_calculator: true
 
   - # Crossfeed
     type: ToggleSwitch
@@ -92,6 +102,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 52
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:53
@@ -99,12 +110,13 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 53
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
 
@@ -231,6 +243,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 54
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:55
@@ -238,6 +251,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 55
+    use_calculator: true
 
   - # LVAR's
     type: var

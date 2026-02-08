@@ -1,4 +1,4 @@
-# Version 2.0.0
+# Version 2.0.3
 
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
@@ -8,9 +8,7 @@ include:
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/lights.yaml
@@ -29,6 +27,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 26
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:27
@@ -36,6 +35,78 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 27
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:RECIP ENG ALTERNATE AIR POSITION:1
+    var_units: Bool
+    var_type: i32
+    event_name: ANTI_ICE_SET_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
+    unreliable: true
+  -
+    type: ToggleSwitch
+    var_name: A:PROP DEICE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PROPELLER_DEICE
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:STRUCTURAL DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
+
+  - # Doors
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 2
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 3
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:3
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 4
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:5
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 6
+    use_calculator: true
 
   - # Electrical
     type: ToggleSwitch
@@ -44,6 +115,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ELECTRICAL MASTER BATTERY:2
@@ -51,6 +123,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ELECTRICAL MASTER BATTERY:3
@@ -58,6 +131,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 3
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
@@ -72,6 +146,10 @@ shared:
     var_type: i32
     event_name: ALTERNATOR_SET
     event_param: 2
+  - # Stby Alternator
+    type: CustomCalculator
+    get: 10 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:3, Bool)
+    set: 3 10 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
   -
     type: NumSet
     var_name: A:EXTERNAL POWER ON:1
@@ -86,7 +164,8 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STARTER1
-  -
+    use_calculator: true
+  - # Stby Battery Bus
     type: CustomCalculator
     get: 1 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:6, Bool)
     set: 6 1 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
@@ -95,43 +174,18 @@ shared:
     get: 2 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:6, Bool)
     set: 6 2 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
 
-  - # Doors
-    type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 2
-  -
-    type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:2
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 3
-  -
-    type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:3
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 4
-  -
-    type: ToggleSwitch
-    var_name: A:INTERACTIVE POINT GOAL:5
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
-    event_param: 6
-
-  - # Pilot Altimeter
+  - # Fuel
     type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:3
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 3
-    cancel_h_events: true
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: i32
+    event_name: SET_FUEL_VALVE_ENG1
+    use_calculator: true
+  -
+    type: var
+    var_name: A:TURB ENG CONDITION LEVER POSITION:1
+    var_units: Enum
+    var_type: i32
 
   - # Interior
     type: NumSet
@@ -147,6 +201,21 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 21
+    index_reversed: true
+  -
+    type: NumSet
+    var_name: A:LIGHT PANEL:2
+    var_units: Bool
+    var_type: i32
+    event_name: PANEL_LIGHTS_SET
+    event_param: 2
+  -
+    type: NumSet
+    var_name: A:LIGHT POTENTIOMETER:22
+    var_units: Percent
+    var_type: f64
+    event_name: LIGHT_POTENTIOMETER_SET
+    event_param: 22
     index_reversed: true
   -
     type: NumSet
@@ -177,6 +246,21 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 24
+    index_reversed: true
+  - # INOP
+    type: NumSet
+    var_name: A:LIGHT PANEL:5
+    var_units: Bool
+    var_type: i32
+    event_name: PANEL_LIGHTS_SET
+    event_param: 5
+  - # INOP
+    type: NumSet
+    var_name: A:LIGHT POTENTIOMETER:7
+    var_units: Percent
+    var_type: f64
+    event_name: LIGHT_POTENTIOMETER_SET
+    event_param: 7
     index_reversed: true
   -
     type: NumSet
@@ -212,11 +296,12 @@ shared:
     event_name: CABIN_LIGHTS_SET
     event_param: 3
   -
-    type: ToggleSwitch
-    var_name: A:LIGHT GLARESHIELD
+    type: NumSet
+    var_name: A:LIGHT GLARESHIELD:1
     var_units: Bool
-    var_type: bool
-    event_name: GLARESHIELD_LIGHTS_TOGGLE
+    var_type: i32
+    event_name: GLARESHIELD_LIGHTS_SET
+    event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:4
@@ -232,12 +317,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CABIN NO SMOKING ALERT SWITCH
     var_units: Bool
     var_type: bool
     event_name: CABIN_NO_SMOKING_ALERT_SWITCH_TOGGLE
+    use_calculator: true
 
   - # LVAR's
     type: var
@@ -374,9 +461,9 @@ shared:
   -
     type: var
     var_name: L:CARENADO_GNS_GTNXI_VIS
-# -
-#   type: var
-#   var_name: L:GTN750XI_INT_HIDDEN
+  -
+    type: var
+    var_name: L:GTN750XI_INT_HIDDEN
 # -
 #   type: var
 #   var_name: L:XMLVAR_GPS_DISABLED_AS530_1
@@ -1133,9 +1220,9 @@ shared:
   -
     type: var
     var_name: L:ASD_BTN_PC12_TEST_LAMP
-  -
-    type: var
-    var_name: L:AM_ANUM_PC12_WARNING
+# -
+#   type: var
+#   var_name: L:AM_ANUM_PC12_WARNING
   -
     type: var
     var_name: L:PUSH_AM_ANUM_PC12_WARNING
@@ -1214,9 +1301,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:GAUGE_ANUM_MASTER_CAUTION
-  -
-    type: var
-    var_name: L:AM_ANUM_PC12_CAUTION
+# -
+#   type: var
+#   var_name: L:AM_ANUM_PC12_CAUTION
   -
     type: var
     var_name: L:PUSH_AM_ANUM_PC12_CAUTION
@@ -1391,86 +1478,7 @@ shared:
 #   var_name: L:LOCAL_milliBar_to_inHg
 # -
 #   type: var
-#   var_name: L:AS530_ManualBrightness_Value_1
-# -
-#   type: var
-#   var_name: L:AS530_ManualBrightness_Enabled_1
-# -
-#   type: var
-#   var_name: L:AS430_ManualBrightness_Value_2
-# -
-#   type: var
-#   var_name: L:AS430_ManualBrightness_Enabled_2
-# -
-#   type: var
-#   var_name: L:XMLVAR_ADF_Frequency_10_Khz
-# -
-#   type: var
-#   var_name: L:XMLVAR_AudioPanel_1
-  -
-    type: var
-    var_name: L:XMLVAR_EpsState
-  -
-    type: var
-    var_name: L:XMLVAR_SWITCH_INSTR_LIGHTING_ADVISORY
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_FIRE
-  -
-    type: var
-    var_name: L:ASD_SWITCH_PC12_INV
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_BOOTS_ON
-  -
-    type: var
-    var_name: L:ASD_KNOB_PC12_OXYGEN
-  -
-    type: var
-    var_name: L:LIGHTING_TAXI_1
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_SYS_ON
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_HEATING_CABIN
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_BOOTS_TIME
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_LH_WSH_MODE
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_RH_WSH_MODE
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_SYS_MODE
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_FANS_ON
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_FANS_MODE
-  -
-    type: var
-    var_name: L:ASD_SWITCH_PC12_EPS
-  -
-    type: var
-    var_name: L:ASD_SWITCH_PC12_GEN1_DIR
-# -
-#   type: var
-#   var_name: L:ParkingBrake_Position
-  -
-    type: var
-    var_name: L:_ButtonAnimVar
-    unreliable: true
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_CENTER_PANEL_TERR
-  -
-    type: var
-    var_name: L:XMLVAR_BTN_CENTER_PANEL_FLAP_OVR1
+#   var_name: L:_ButtonAnimVar
   -
     type: var
     var_name: L:XMLVAR_BTN_CENTER_PANEL_XPNDR1
@@ -1486,21 +1494,36 @@ shared:
   -
     type: var
     var_name: L:CARENADO_ENGINE_MENU_SELECTOR_PUSH
-# -
-#   type: var
-#   var_name: L:XMLVAR_UPPER_PANEL_PUSH_TEST_LAMP
+  -
+    type: var
+    var_name: L:XMLVAR_UPPER_PANEL_PUSH_TEST_LAMP
   -
     type: var
     var_name: L:ASD_BTN_PC12_PUSHER
-# -
-#   type: var
-#   var_name: L:DEICE_Airframe_1
-# -
-#   type: var
-#   var_name: L:XMLVAR_InertSep1_Deployment
-# -
-#   type: var
-#   var_name: L:XMLVAR_InertSep1_Active
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_BOOTS_TIME
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_LH_WSH_MODE
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_RH_WSH_MODE
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_SYS_ON
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_SYS_MODE
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_FANS_ON
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_FANS_MODE
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_COOLING_HEATING_CABIN
   -
     type: var
     var_name: L:XMLVAR_BTN_UPPER_PANEL_PASS_WING_NOSMKG
@@ -1509,13 +1532,10 @@ shared:
     var_name: L:XMLVAR_BTN_UPPER_PANEL_SEAT_ON
   -
     type: var
-    var_name: L:XMLVAR_STBYBattery_on
-  -
-    type: var
     var_name: L:XMLVAR_PANEL_SWITCH_EFIS
   -
     type: var
-    var_name: L:AircraftEpsInit
+    var_name: L:XMLVAR_EpsState
   -
     type: var
     var_name: L:XMLVAR_SWITCH_AHRS1_MODE
@@ -1536,9 +1556,6 @@ shared:
     var_name: L:XMLVAR_PANEL_TAPA_TEMPERATURE
   -
     type: var
-    var_name: L:AircraftCabinTemperatureInit
-  -
-    type: var
     var_name: L:XMLVAR_TemperatureCabinState
   -
     type: var
@@ -1554,19 +1571,10 @@ shared:
     var_name: L:XMLVAR_CONSOLA_TAPA_INTERRUPT
   -
     type: var
-    var_name: L:AircraftInterruptTrimInit
-  -
-    type: var
     var_name: L:XMLVAR_InterruptTrimState
   -
     type: var
-    var_name: L:AircraftInterruptFlapInit
-  -
-    type: var
     var_name: L:XMLVAR_InterruptFlapState
-  -
-    type: var
-    var_name: L:AircraftAlternateTabsInit
   -
     type: var
     var_name: L:XMLVAR_AlternateTabsState
@@ -1576,6 +1584,9 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_LEVER_MANUAL_OXYGENE
+  -
+    type: var
+    var_name: L:XMLVAR_SWITCH_INSTR_LIGHTING_ADVISORY
   -
     type: var
     var_name: L:WARNING_LOW_HEIGHT_TEST
@@ -1608,67 +1619,31 @@ shared:
     var_name: L:BUTTON_CLOCK_CTL
 # -
 #   type: var
-#   var_name: L:XMLVAR_YokeHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden2
-# -
-#   type: var
-#   var_name: L:XMLVAR_LTS_Test
-# -
-#   type: var
 #   var_name: L:XMLVAR_ElevatorTrim_Switch_YOKE
 # -
 #   type: var
 #   var_name: L:XMLVAR_ElevatorTrim_YOKE_SwitchStateTimer
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverFlapsHidden
   -
     type: var
     var_name: L:_ButtonAnimVar_IsDown
 # -
 #   type: var
 #   var_name: L:_ButtonAnimVar_MinReleaseTime
-  -
-    type: var
-    var_name: L:ASD_SWITCH_TEST_PC12_PILATUS
-  - # Keep enabled
+  - # Switch animation
     type: var
     var_name: L:LIGHTING_CABIN_1
-  -
+  - # Switch animation
     type: var
     var_name: L:LIGHTING_CABIN_2
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverPropellerHidden1
-# -
-#   type: var
-#   var_name: L:ENG FUEL VALVE:1
   -
     type: var
     var_name: L:Backup VOR Pointer1
   -
     type: var
     var_name: L:Backup VOR Pointer2
-# -
-#   type: var
-#   var_name: L:GTN750_HSI_GSI_NEEDLE
-# -
-#   type: var
-#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
   -
     type: var
     var_name: L:CUSTOM_HDG_BUG_COMPASS_COPILOT
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_STATE
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_TEST_TIME
   -
     type: var
     var_name: L:XMLVAR_CUSTOM_ANIM_ARM_PILOT
@@ -1684,9 +1659,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:GTNXION_REMOVE_FLTPLAN
-  -
-    type: var
-    var_name: L:XMLVAR_Autopilot_1_Status
   -
     type: var
     var_name: L:ST_Ventana
@@ -1833,6 +1805,15 @@ shared:
 #   var_name: L:AS430_SelectedSource
 # -
 #   type: var
+#   var_name: L:XMLVAR_ADF_Frequency_10_Khz
+# -
+#   type: var
+#   var_name: L:XMLVAR_AudioPanel_1
+# -
+#   type: var
+#   var_name: L:ParkingBrake_Position
+# -
+#   type: var
 #   var_name: L:LANDING_GEAR_Gear
 # -
 #   type: var
@@ -1843,6 +1824,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:LIGHTING_LANDING_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_TAXI_1
 # -
 #   type: var
 #   var_name: L:LIGHTING_NAV_1
@@ -1858,6 +1842,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:LIGHTING_WING_1
+# -
+#   type: var
+#   var_name: L:DEICE_Airframe_1
 # -
 #   type: var
 #   var_name: L:DEICE_Propeller_1
@@ -1879,6 +1866,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_Baro1_SavedPressure
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
 # -
 #   type: var
 #   var_name: L:LIGHTING_CABIN_3
@@ -1905,6 +1898,9 @@ shared:
 #   var_name: L:XMLVAR_IE_Throttle_VR_Value
 # -
 #   type: var
+#   var_name: L:ENG FUEL VALVE:1
+# -
+#   type: var
 #   var_name: L:INSTRUMENT_Altimeter_1
 # -
 #   type: var
@@ -1912,6 +1908,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Altimeter_3
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_STATE
 # -
 #   type: var
 #   var_name: L:XMLVAR_ELT_ACTIVATION_TIME
@@ -1935,6 +1937,90 @@ shared:
     var_name: L:Sunvisor1
 # -
 #   type: var
+#   var_name: L:XMLVAR_InertSep1_Deployment
+# -
+#   type: var
+#   var_name: L:XMLVAR_InertSep1_Active
+  -
+    type: var
+    var_name: L:AircraftEpsInit
+  -
+    type: var
+    var_name: L:AircraftCabinTemperatureInit
+  -
+    type: var
+    var_name: L:AircraftInterruptTrimInit
+  -
+    type: var
+    var_name: L:AircraftInterruptFlapInit
+  -
+    type: var
+    var_name: L:AircraftAlternateTabsInit
+  -
+    type: var
+    var_name: L:XMLVAR_Autopilot_1_Status
+# -
+#   type: var
+#   var_name: L:GTN750_HSI_GSI_NEEDLE
+# -
+#   type: var
+#   var_name: L:AS530_ManualBrightness_Value_1
+# -
+#   type: var
+#   var_name: L:AS530_ManualBrightness_Enabled_1
+# -
+#   type: var
+#   var_name: L:AS430_ManualBrightness_Value_2
+# -
+#   type: var
+#   var_name: L:AS430_ManualBrightness_Enabled_2
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_FIRE
+  -
+    type: var
+    var_name: L:ASD_SWITCH_PC12_INV
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_UPPER_PANEL_BOOTS_ON
+  -
+    type: var
+    var_name: L:ASD_KNOB_PC12_OXYGEN
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_CENTER_PANEL_TERR
+  -
+    type: var
+    var_name: L:XMLVAR_BTN_CENTER_PANEL_FLAP_OVR1
+  -
+    type: var
+    var_name: L:XMLVAR_STBYBattery_on
+# -
+#   type: var
+#   var_name: L:XMLVAR_LTS_Test
+  -
+    type: var
+    var_name: L:ASD_SWITCH_TEST_PC12_PILATUS
+  -
+    type: var
+    var_name: L:ASD_SWITCH_PC12_EPS
+  -
+    type: var
+    var_name: L:ASD_SWITCH_PC12_GEN1_DIR
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverFlapsHidden
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverThrottleHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverPropellerHidden1
+# -
+#   type: var
+#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
+# -
+#   type: var
 #   var_name: L:VAR_STARTER_SMOKE_STATE
   -
     type: var
@@ -1944,16 +2030,25 @@ shared:
 #   var_name: L:YourControlsPanelId
 # -
 #   type: var
+#   var_name: L:AS430_CDI_Source_1
+# -
+#   type: var
+#   var_name: L:ASwt430_CDI_Source_1
+# -
+#   type: var
 #   var_name: L:XMLVAR_NEXTGEN_FLIGHTPLAN_ENABLED
 # -
 #   type: var
+#   var_name: L:WTAP_LNav_Transition_Mode
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Along_Track_Speed
+# -
+#   type: var
+#   var_name: L:WTGarmin_LNavData_Egress_Distance
+# -
+#   type: var
 #   var_name: L:WT_LNavData_DTK_True
-# -
-#   type: var
-#   var_name: L:WT_LNavData_DTK_Mag
-# -
-#   type: var
-#   var_name: L:WT_LNavData_XTK
 # -
 #   type: var
 #   var_name: L:WTGarmin_LNavData_Next_DTK_True
@@ -1962,40 +2057,19 @@ shared:
 #   var_name: L:WTGarmin_LNavData_Next_DTK_Mag
 # -
 #   type: var
-#   var_name: L:WT_LNavData_CDI_Scale
-# -
-#   type: var
-#   var_name: L:WTGarmin_LNavData_CDI_Scale_Label
-# -
-#   type: var
 #   var_name: L:WT_LNavData_Waypoint_Bearing_True
-# -
-#   type: var
-#   var_name: L:WT_LNavData_Waypoint_Bearing_Mag
 # -
 #   type: var
 #   var_name: L:WT_LNavData_Waypoint_Distance
 # -
 #   type: var
-#   var_name: L:WT_LNavData_Destination_Distance
-# -
-#   type: var
-#   var_name: L:WTGarmin_LNavData_Egress_Distance
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Along_Track_Speed
-# -
-#   type: var
 #   var_name: L:WTGNS_ADSB_OPER
 # -
 #   type: var
-#   var_name: L:AS430_CDI_Source_1
+#   var_name: L:ASwt530_CDI_Source_1
 # -
 #   type: var
-#   var_name: L:XMLVAR_VNAVButtonValue
-# -
-#   type: var
-#   var_name: L:PMS50_GTN650_INSTALLED
+#   var_name: L:Garmin_Need_OBS_Convert_DirectTo
 # -
 #   type: var
 #   var_name: L:WTAP_LNav_DTK
@@ -2008,9 +2082,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:WTAP_LNav_Tracked_Leg_Index
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Transition_Mode
 # -
 #   type: var
 #   var_name: L:WTAP_LNav_Tracked_Vector_Index
@@ -2037,34 +2108,25 @@ shared:
 #   var_name: L:WTAP_LNav_Vector_Anticipation_Distance
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_State
+#   var_name: L:WT_LNavData_DTK_Mag
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Path_Mode
+#   var_name: L:WT_LNavData_XTK
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Path_Available
+#   var_name: L:WT_LNavData_CDI_Scale
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Constraint_Altitude
+#   var_name: L:WTGarmin_LNavData_CDI_Scale_Label
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Next_Constraint_Altitude
+#   var_name: L:WT_LNavData_Waypoint_Bearing_Mag
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_Target_Altitude
+#   var_name: L:WT_LNavData_Destination_Distance
 # -
 #   type: var
-#   var_name: L:WTAP_VNav_FPA
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Vertical_Deviation
-# -
-#   type: var
-#   var_name: L:WTAP_VNAV_Required_VS
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Alt_Capture_Type
+#   var_name: L:WTGarmin_LNavData_ToFrom
 # -
 #   type: var
 #   var_name: L:WTAP_GP_Service_Level
@@ -2079,10 +2141,94 @@ shared:
 #   var_name: L:WTAP_GP_FPA
 # -
 #   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Is_Valid:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Bank_Angle:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Dtk:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Xtk:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Tae:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_State:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Is_Active:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Path_Mode:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Armed_Climb_Mode:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Should_Activate_Climb_Mode:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Alt_Capture_Type:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Should_Capture_Alt:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Alt_To_Capture:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Vertical_Path_Is_Valid:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Vertical_Path_Fpa:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Vertical_Path_Deviation:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Glidepath_Approach_Has_Gp:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Glidepath_Is_Valid:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Glidepath_Can_Capture:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Path_Fpa:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Path_Deviation:0
+# -
+#   type: var
+#   var_name: L:XMLVAR_VNAVButtonValue
+# -
+#   type: var
+#   var_name: L:PMS50_GTN650_INSTALLED
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Obs_Active
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Obs_Course
+# -
+#   type: var
 #   var_name: L:WT_AP_FPA_Target:1
 # -
 #   type: var
+#   var_name: L:WTAP_VNav_Alt_Capture_Type
+# -
+#   type: var
 #   var_name: L:WT1000_AP_G1000_INSTALLED
+  -
+    type: var
+    var_name: L:EHSI_CDI_VIS
+# -
+#   type: var
+#   var_name: L:ASD_SWITCH_EFIS_POWER_TIMER
 # -
 #   type: var
 #   var_name: L:EX500_MFD_SPLASH_SCREEN_ST
@@ -2096,12 +2242,6 @@ shared:
     type: var
     var_name: L:EX500_MFD_BRT_ALPHA
     cancel_h_events: true
-  -
-    type: var
-    var_name: L:EHSI_CDI_VIS
-# -
-#   type: var
-#   var_name: L:ASD_SWITCH_EFIS_POWER_TIMER
 # -
 #   type: var
 #   var_name: L:GTN750_INT_ScreenLuminosity
@@ -2134,6 +2274,12 @@ shared:
 #   var_name: L:AS530_State
 # -
 #   type: var
+#   var_name: L:WTAP_VNav_Target_Altitude
+# -
+#   type: var
+#   var_name: L:WTAP_VNAV_Required_VS
+# -
+#   type: var
 #   var_name: L:WTAP_GP_Required_VS
 # -
 #   type: var
@@ -2147,12 +2293,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:AS330_State
-# -
-#   type: var
-#   var_name: L:Glasscockpits_FPLHaveOrigin
-# -
-#   type: var
-#   var_name: L:Glasscockpits_FPLHaveDestination
 # -
 #   type: var
 #   var_name: L:EX500_ScreenLuminosity
@@ -2245,42 +2385,6 @@ shared:
   -
     type: var
     var_name: L:EX500_MFD_AuxPage_DataBlock_Line2_State
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_DatablockFocus
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_DataBlock_Line1_Index
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_DataBlock_Line2_Index
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_AirportFilterFocus
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_AirportFilter_Towered
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_AirportFilter_Untowered
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_AirportFilter_Hard
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_AirportFilter_Soft
-    cancel_h_events: true
-  -
-    type: var
-    var_name: L:EX500_MFD_AuxPage_AirportFilter_Water
     cancel_h_events: true
   -
     type: var
@@ -2379,6 +2483,12 @@ shared:
 #   var_name: L:RADIONAV_SOURCE
 # -
 #   type: var
+#   var_name: L:Glasscockpits_FPLHaveOrigin
+# -
+#   type: var
+#   var_name: L:Glasscockpits_FPLHaveDestination
+# -
+#   type: var
 #   var_name: L:EADI_ScreenLuminosity
 # -
 #   type: var
@@ -2410,9 +2520,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_Baro_Selector_HPA_1
-# -
-#   type: var
-#   var_name: L:XMLVAR_Mins_Selector_Baro
 # -
 #   type: var
 #   var_name: L:ASD_SWITCH_EFIS_POWER_TIMER_DIFF
@@ -2536,3 +2643,43 @@ shared:
 # -
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_ALTITUDE
+# -
+#   type: var
+#   var_name: L:YourControlsServerRunning
+
+  - # Manually added
+    type: var
+    var_name: L:EX500_MFD_AuxPage_DatablockFocus
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_DataBlock_Line1_Index
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_DataBlock_Line2_Index
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_AirportFilterFocus
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_AirportFilter_Towered
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_AirportFilter_Untowered
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_AirportFilter_Hard
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_AirportFilter_Soft
+    cancel_h_events: true
+  -
+    type: var
+    var_name: L:EX500_MFD_AuxPage_AirportFilter_Water
+    cancel_h_events: true

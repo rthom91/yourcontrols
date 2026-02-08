@@ -3,15 +3,11 @@
 include:
   - definitions/modules/Instruments/AS_Aera.yaml
   - definitions/modules/Instruments/AS_KT76C.yaml
-  - definitions/modules/autopilot.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
-  - definitions/modules/electrical.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
+  - definitions/modules/magnetos.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
@@ -19,6 +15,39 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Autopilot
+    type: NumSet
+    var_name: A:AUTOPILOT HEADING LOCK DIR:1
+    var_units: Degrees
+    var_type: f64
+    event_name: HEADING_BUG_SET
+    event_param: 1
+
+  - # Avionics
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:20
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 20
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
+    unreliable: true
+
   - # Doors
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:0
@@ -26,6 +55,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -33,6 +63,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -40,6 +71,45 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: i32
+    event_name: ALTERNATOR_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: STARTER1_SET
+    use_calculator: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_FUEL_VALVE_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -62,6 +132,42 @@ shared:
     var_type: i32
     event_name: CABIN_LIGHTS_SET
     event_param: 2
+
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT BEACON:1
+    var_units: Bool
+    var_type: i32
+    event_name: BEACON_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT TAXI:1
+    var_units: Bool
+    var_type: i32
+    event_name: TAXI_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
 
   - # LVAR's (trimmed)
     type: var
@@ -90,12 +196,12 @@ shared:
   -
     type: var
     var_name: L:TABLET_BTN_COPILOT_VIS
-# -
-#   type: var
-#   var_name: L:PILOT_VIS
-# -
-#   type: var
-#   var_name: L:COPILOT_VIS
+  -
+    type: var
+    var_name: L:PILOT_VIS
+  -
+    type: var
+    var_name: L:COPILOT_VIS
 # -
 #   type: var
 #   var_name: L:VAR_HEAD_COPILOTO
@@ -123,9 +229,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_ANIM_Needle_Volt
-  -
-    type: var
-    var_name: L:CUSTOM_PANEL_LIGHT_D17S
+# -
+#   type: var
+#   var_name: L:CUSTOM_PANEL_LIGHT_D17S
 # -
 #   type: var
 #   var_name: L:AUX_BETA_MIN_REV
@@ -264,9 +370,9 @@ shared:
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C3
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C4
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C4
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C5
@@ -285,33 +391,33 @@ shared:
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C10
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C11
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C12
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C11
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C12
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C13
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C14
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C15
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C16
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C14
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C15
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C16
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C17
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C18
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C19
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C18
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C19
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C20
@@ -333,12 +439,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C26
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C27
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C28
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C27
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C28
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C29
@@ -363,48 +469,48 @@ shared:
 # -
 #   type: var
 #   var_name: L:AUX_ELECTRICAL_C36
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C37
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C38
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C39
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C40
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C41
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C42
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C43
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C44
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C45
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C46
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C47
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C48
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C49
-  -
-    type: var
-    var_name: L:AUX_ELECTRICAL_C50
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C37
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C38
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C39
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C40
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C41
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C42
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C43
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C44
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C45
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C46
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C47
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C48
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C49
+# -
+#   type: var
+#   var_name: L:AUX_ELECTRICAL_C50
 # -
 #   type: var
 #   var_name: L:AUX_WIND_VEL_ABS

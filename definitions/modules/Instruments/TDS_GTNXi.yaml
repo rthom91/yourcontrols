@@ -177,9 +177,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:TDSGTNXI750U2_ElectricalCircuit
-# -
-#   type: var
-#   var_name: L:TDSGTNXI_INSTALLED
   -
     type: var
     var_name: L:TDSGTNXI_ACTIVE
@@ -210,6 +207,10 @@ shared:
   -
     type: var
     var_name: L:TDSGTNXI_ActiveNavigationSource
+
+# - # Ignore
+#   type: var
+#   var_name: L:TDSGTNXI_INSTALLED
 # -
 #   type: var
 #   var_name: L:TDSGTNXI_GlidePathValueActive

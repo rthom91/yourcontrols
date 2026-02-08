@@ -5,18 +5,21 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_AUTOFEATHER_ARM
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP SYNC ACTIVE
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_PROPELLER_SYNC
+    use_calculator: true
   -
     type: NumSet
     var_name: A:RADIATOR COOLING FLAPS POSITION
     var_units: Position 16k
     var_type: f64
     event_name: RADIATOR_COOLING_FLAPS_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -24,6 +27,7 @@ shared:
     var_units: Percent
     var_type: i32
     event_name: TOGGLE_PRIMER1
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -31,6 +35,7 @@ shared:
     var_units: Percent
     var_type: i32
     event_name: TOGGLE_PRIMER2
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -38,6 +43,7 @@ shared:
     var_units: Percent
     var_type: i32
     event_name: TOGGLE_PRIMER3
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -45,6 +51,7 @@ shared:
     var_units: Percent
     var_type: i32
     event_name: TOGGLE_PRIMER4
+    use_calculator: true
     unreliable: true
   -
     type: ToggleSwitch
@@ -52,30 +59,35 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: ENGINE_MASTER_1_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:RECIP ENG ENGINE MASTER SWITCH:2
     var_units: Bool
     var_type: bool
     event_name: ENGINE_MASTER_2_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:RECIP ENG ENGINE MASTER SWITCH:3
     var_units: Bool
     var_type: bool
     event_name: ENGINE_MASTER_3_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:RECIP ENG ENGINE MASTER SWITCH:4
     var_units: Bool
     var_type: bool
     event_name: ENGINE_MASTER_4_TOGGLE
+    use_calculator: true
   -
     type: NumSet
     var_name: A:RECIP ENG COWL FLAP POSITION:1
     var_units: Position 16k
     var_type: f64
     event_name: COWLFLAP1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -83,6 +95,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: COWLFLAP2_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -90,6 +103,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: COWLFLAP3_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -97,6 +111,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: COWLFLAP4_SET
+    use_calculator: true
     unreliable: true
   -
     type: ToggleSwitch
@@ -104,54 +119,63 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_AFTERBURNER1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:TURB ENG AFTERBURNER:2
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_AFTERBURNER2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:TURB ENG AFTERBURNER:3
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_AFTERBURNER3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:TURB ENG AFTERBURNER:4
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_AFTERBURNER4
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TURB ENG IGNITION SWITCH EX1:1
     var_units: Enum
     var_type: i32
     event_name: TURBINE_IGNITION_SWITCH_SET1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TURB ENG IGNITION SWITCH EX1:2
     var_units: Enum
     var_type: i32
     event_name: TURBINE_IGNITION_SWITCH_SET2
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TURB ENG IGNITION SWITCH EX1:3
     var_units: Enum
     var_type: i32
     event_name: TURBINE_IGNITION_SWITCH_SET3
+    use_calculator: true
   -
     type: NumSet
     var_name: A:TURB ENG IGNITION SWITCH EX1:4
     var_units: Enum
     var_type: i32
     event_name: TURBINE_IGNITION_SWITCH_SET4
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MIXTURE LEVER POSITION:1
     var_units: Position 16k
     var_type: f64
     event_name: MIXTURE1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -159,6 +183,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: MIXTURE2_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -166,6 +191,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: MIXTURE3_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -173,6 +199,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: MIXTURE4_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -180,6 +207,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: PROP_PITCH1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -187,6 +215,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: PROP_PITCH2_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -194,6 +223,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: PROP_PITCH3_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -201,6 +231,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: PROP_PITCH4_SET
+    use_calculator: true
     unreliable: true
 
 master:
@@ -210,6 +241,7 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE1_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -217,6 +249,7 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE2_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -224,6 +257,7 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE3_SET
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -231,4 +265,5 @@ master:
     var_units: Position 16k
     var_type: f64
     event_name: THROTTLE4_SET
+    use_calculator: true
     unreliable: true

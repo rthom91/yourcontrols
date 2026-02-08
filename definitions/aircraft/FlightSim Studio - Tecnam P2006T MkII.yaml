@@ -22,6 +22,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -29,6 +30,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG2
+    use_calculator: true
     unreliable: true
   -
     type: ToggleSwitch
@@ -36,6 +38,7 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
 
   - # Doors
     type: ToggleSwitch
@@ -44,6 +47,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -51,6 +55,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -58,6 +63,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
 
   - # Electric fan
     type: ToggleSwitch
@@ -66,6 +72,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 59
+    use_calculator: true
 
   - # Fuel
     type: NumSet
@@ -90,6 +97,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:4
@@ -97,6 +105,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 4
+    use_calculator: true
 
   - # Interior
     type: NumSet

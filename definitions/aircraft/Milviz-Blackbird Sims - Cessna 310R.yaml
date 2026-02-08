@@ -1,4 +1,4 @@
-# Version 2.0.4
+# Version 2.1.1
 
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
@@ -28,6 +28,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 55
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:56
@@ -35,6 +36,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 56
+    use_calculator: true
 
   - # Lights
     type: ToggleSwitch
@@ -93,8 +95,7 @@ shared:
     var_name: A:LIGHT PEDESTRAL
     var_units: Bool
     var_type: bool
-    event_name: PEDESTRAL_LIGHTS_ON
-    off_event_name: PEDESTRAL_LIGHTS_OFF
+    event_name: PEDESTRAL_LIGHTS_TOGGLE
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:6
@@ -107,8 +108,7 @@ shared:
     var_name: A:LIGHT GLARESHIELD
     var_units: Bool
     var_type: bool
-    event_name: GLARESHIELD_LIGHTS_ON
-    off_event_name: GLARESHIELD_LIGHTS_OFF
+    event_name: GLARESHIELD_LIGHTS_TOGGLE
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:7
@@ -123,6 +123,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 23
+    use_calculator: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:8
@@ -137,6 +138,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 53
+    use_calculator: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:9
@@ -151,6 +153,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 49
+    use_calculator: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:10
@@ -165,6 +168,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 50
+    use_calculator: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:11
@@ -179,6 +183,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 51
+    use_calculator: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:12
@@ -193,6 +198,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 52
+    use_calculator: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:13
@@ -200,13 +206,6 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_13_SET
     index_reversed: true
-
-  - # Payload
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:11
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
 
   - # LVAR's
     type: var
@@ -240,16 +239,19 @@ shared:
 #   var_name: L:LOCAL_milliBar_to_inHg
 # -
 #   type: var
-#   var_name: L:C310_PROP_FEATHER_LEFT
-# -
-#   type: var
 #   var_name: L:C310_DEICE_BOOTS_CYCLE
 # -
 #   type: var
+#   var_name: L:C310_LEng_Door_OPEN
+# -
+#   type: var
 #   var_name: L:C310_Door_0_OpenPercent
-  -
-    type: var
-    var_name: L:C310_LEng_Door_OPEN
+# -
+#   type: var
+#   var_name: L:C310_Landing_Light_Left
+# -
+#   type: var
+#   var_name: L:C310_Landing_Light_Right
 # -
 #   type: var
 #   var_name: L:C310_PROP_NORMAL_2
@@ -258,37 +260,34 @@ shared:
 #   var_name: L:C310_PROP_ANGLE_2
 # -
 #   type: var
-#   var_name: L:C310_PROP_FEATHER_RIGHT
-# -
-#   type: var
-#   var_name: L:C310_Landing_Light_Right
-  -
-    type: var
-    var_name: L:C310_REng_Door_OPEN
-# -
-#   type: var
-#   var_name: L:C310_Landing_Light_Left
-# -
-#   type: var
 #   var_name: L:C310_PROP_NORMAL_1
 # -
 #   type: var
 #   var_name: L:C310_PROP_ANGLE_1
 # -
 #   type: var
+#   var_name: L:C310_PROP_FEATHER_LEFT
+# -
+#   type: var
+#   var_name: L:C310_REng_Door_OPEN
+# -
+#   type: var
+#   var_name: L:C310_PROP_FEATHER_RIGHT
+# -
+#   type: var
 #   var_name: L:C310_Bent_Blur
   -
     type: var
     var_name: L:C310_TAB_CHOCKS
-  -
-    type: var
-    var_name: L:C310_PITOT_FLAGS
-  -
-    type: var
-    var_name: L:C310_INTAKE_FLAGS
-  -
-    type: var
-    var_name: L:C310_ENGINE_FLAGS
+# -
+#   type: var
+#   var_name: L:C310_PITOT_FLAGS
+# -
+#   type: var
+#   var_name: L:C310_INTAKE_FLAGS
+# -
+#   type: var
+#   var_name: L:C310_ENGINE_FLAGS
   -
     type: var
     var_name: L:C310_TAB_530
@@ -310,9 +309,9 @@ shared:
   -
     type: var
     var_name: L:C310_DIRTLEVEL_03
-  -
-    type: var
-    var_name: L:C310_Control_Lock
+# -
+#   type: var
+#   var_name: L:C310_Control_Lock
 # -
 #   type: var
 #   var_name: L:XMLVAR_ElevatorTrim_Switch_1
@@ -493,9 +492,9 @@ shared:
   -
     type: var
     var_name: L:C310_Toggle_Door_OPEN
-  -
-    type: var
-    var_name: L:C310_Toggle_Window_OPEN
+# -
+#   type: var
+#   var_name: L:C310_Toggle_Window_OPEN
 # -
 #   type: var
 #   var_name: L:C310_Toggle_YokeHidden1
@@ -784,21 +783,21 @@ shared:
   -
     type: var
     var_name: L:C310_EDML_MODE
-  -
-    type: var
-    var_name: L:C310_EDML_STEP
-  -
-    type: var
-    var_name: L:C310_EDML_FORC
+# - # Unsettable
+#   type: var
+#   var_name: L:C310_EDML_STEP
+# - # Unsettable
+#   type: var
+#   var_name: L:C310_EDML_FORC
   -
     type: var
     var_name: L:C310_EDMR_MODE
-  -
-    type: var
-    var_name: L:C310_EDMR_STEP
-  -
-    type: var
-    var_name: L:C310_EDMR_FORC
+# - # Unsettable
+#   type: var
+#   var_name: L:C310_EDMR_STEP
+# - # Unsettable
+#   type: var
+#   var_name: L:C310_EDMR_FORC
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Course_2
@@ -808,9 +807,10 @@ shared:
 # -
 #   type: var
 #   var_name: L:INSTRUMENT_Altimeter_2
-# -
-#   type: var
-#   var_name: L:C310_Window_OPEN
+  -
+    type: var
+    var_name: L:C310_Window_OPEN
+    unreliable: true
   -
     type: var
     var_name: L:C310_Egg_Count
@@ -865,6 +865,15 @@ shared:
   -
     type: var
     var_name: L:C310_TAB_RADIO
+  -
+    type: var
+    var_name: L:C310_TAB_FRONT_DOOR
+  -
+    type: var
+    var_name: L:C310_TAB_REAR_DOOR
+  -
+    type: var
+    var_name: L:C310_TAB_NOSE_DOOR
 # -
 #   type: var
 #   var_name: L:C310_ELEV_TRIM_DOWN_LIMIT
@@ -967,27 +976,21 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_GPS_DISABLED_GTN750
+  -
+    type: var
+    var_name: L:FuelTankSwitch
 # -
 #   type: var
-#   var_name: L:C310_ELE_TRIM_INDIC
+#   var_name: L:C310_AIL_TRIM_INDIC
 # -
 #   type: var
-#   var_name: L:C310_ELE_TRIM_INDIC_SCALED
+#   var_name: L:C310_ENG_MANIFOLD_PRESSURE_1
 # -
 #   type: var
-#   var_name: L:AS430_CDI_Source_1
+#   var_name: L:C310_ENG_MANIFOLD_PRESSURE_2
 # -
 #   type: var
-#   var_name: L:C310_ENG_EGT1
-# -
-#   type: var
-#   var_name: L:C310_FLAG_HDG
-# -
-#   type: var
-#   var_name: L:C310_ENG_CHT2
-# -
-#   type: var
-#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
+#   var_name: L:C310_FUEL_DISP_L
 # -
 #   type: var
 #   var_name: L:TDSGTNXI_INSTALLED
@@ -996,58 +999,46 @@ shared:
 #   var_name: L:TDSGTNXI_InstrumentPanelSelfTest
 # -
 #   type: var
-#   var_name: L:C310_ENG_OIL_PRESSURE_1
-  -
-    type: var
-    var_name: L:FuelTankSwitch
-# -
-#   type: var
-#   var_name: L:C310_OAT
-# -
-#   type: var
-#   var_name: L:C310_FUEL_DISP_L
-# -
-#   type: var
-#   var_name: L:C310_Airspeed_Indicated
-# -
-#   type: var
-#   var_name: L:C310_GSI_NAV_NEEDLE
-# -
-#   type: var
-#   var_name: L:C310_AIL_TRIM_INDIC
-# -
-#   type: var
-#   var_name: L:C310_RUD_TRIM_INDIC
-# -
-#   type: var
-#   var_name: L:C310_SUCTION
-# -
-#   type: var
-#   var_name: L:C310_ENG_OIL_TEMPERATURE_1
+#   var_name: L:AS430_CDI_Source_1
 # -
 #   type: var
 #   var_name: L:TDSGTNXI_GlidePathValueActive
 # -
 #   type: var
+#   var_name: L:C310_SUCTION
+# -
+#   type: var
+#   var_name: L:C310_ELE_TRIM_INDIC
+# -
+#   type: var
+#   var_name: L:C310_ELE_TRIM_INDIC_SCALED
+# -
+#   type: var
+#   var_name: L:C310_FLAG_HDG
+# -
+#   type: var
+#   var_name: L:C310_GSI_NAV_NEEDLE
+# -
+#   type: var
+#   var_name: L:C310_ENG_OIL_PRESSURE_2
+# -
+#   type: var
+#   var_name: L:C310_ENG_OIL_TEMPERATURE_1
+# -
+#   type: var
+#   var_name: L:C310_ENG_CHT2
+# -
+#   type: var
 #   var_name: L:C310_AIL_TRIM_INDIC_SCALED
 # -
 #   type: var
-#   var_name: L:C310_ELEC_AMMETER_NEEDLE
+#   var_name: L:C310_Fuel_Flow_Left
 # -
 #   type: var
 #   var_name: L:C310_FUEL_DISP_R
 # -
 #   type: var
-#   var_name: L:C310_ENG_MANIFOLD_PRESSURE_1
-# -
-#   type: var
-#   var_name: L:C310_ENG_RPM_1
-# -
-#   type: var
-#   var_name: L:C310_ENG_EGT2
-# -
-#   type: var
-#   var_name: L:C310_AirflowPercent
+#   var_name: L:C310_Airspeed_Indicated
 # -
 #   type: var
 #   var_name: L:C310_ENG_OIL_TEMPERATURE_2
@@ -1056,19 +1047,37 @@ shared:
 #   var_name: L:C310_ENG_RPM_2
 # -
 #   type: var
-#   var_name: L:C310_ENG_CHT1
+#   var_name: L:C310_ENG_RPM_1
 # -
 #   type: var
-#   var_name: L:C310_Fuel_Flow_Left
+#   var_name: L:C310_OAT
 # -
 #   type: var
-#   var_name: L:C310_ENG_OIL_PRESSURE_2
+#   var_name: L:C310_ENG_OIL_PRESSURE_1
 # -
 #   type: var
-#   var_name: L:C310_ENG_MANIFOLD_PRESSURE_2
+#   var_name: L:C310_ENG_EGT1
+# -
+#   type: var
+#   var_name: L:C310_RUD_TRIM_INDIC
 # -
 #   type: var
 #   var_name: L:C310_Fuel_Flow_Right
+# -
+#   type: var
+#   var_name: L:C310_AirflowPercent
+# -
+#   type: var
+#   var_name: L:C310_ELEC_AMMETER_NEEDLE
+# -
+#   type: var
+#   var_name: L:C310_ENG_CHT1
+# -
+#   type: var
+#   var_name: L:C310_ENG_EGT2
+# -
+#   type: var
+#   var_name: L:GTN750_HSI_GSI_NEEDLE_VALID
   -
     type: var
     var_name: L:C310_Fuel_Low_L_BBO
@@ -1215,13 +1224,55 @@ shared:
 #   var_name: L:AP_KAP140_INSTALLED
 # -
 #   type: var
-#   var_name: L:C310_WASM_VER
-  -
-    type: var
-    var_name: L:C310_RSTR_Air
+#   var_name: L:ASwt530_CDI_Source_1
 # -
 #   type: var
 #   var_name: L:XMLVAR_NEXTGEN_FLIGHTPLAN_ENABLED
+# -
+#   type: var
+#   var_name: L:Garmin_Need_OBS_Convert_DirectTo
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_DTK
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_XTK
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Is_Tracking
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Tracked_Leg_Index
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Transition_Mode
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Tracked_Vector_Index
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Course_To_Steer
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Is_Suspended
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Leg_Distance_Along
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Leg_Distance_Remaining
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Vector_Distance_Along
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Vector_Distance_Remaining
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Vector_Anticipation_Distance
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Along_Track_Speed
 # -
 #   type: var
 #   var_name: L:WT_LNavData_DTK_True
@@ -1260,13 +1311,593 @@ shared:
 #   var_name: L:WTGarmin_LNavData_Egress_Distance
 # -
 #   type: var
+#   var_name: L:WTGarmin_LNavData_ToFrom
+# -
+#   type: var
+#   var_name: L:WTAP_GP_Service_Level
+# -
+#   type: var
+#   var_name: L:WTAP_GP_Vertical_Deviation
+# -
+#   type: var
+#   var_name: L:WTAP_GP_Distance
+# -
+#   type: var
+#   var_name: L:WTAP_GP_FPA
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Is_Valid:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Bank_Angle:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Dtk:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Xtk:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_GPS_Steer_Command_Tae:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_State:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Is_Active:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Path_Mode:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Armed_Climb_Mode:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Should_Activate_Climb_Mode:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Alt_Capture_Type:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Should_Capture_Alt:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Alt_To_Capture:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Vertical_Path_Is_Valid:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Vertical_Path_Fpa:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Vertical_Path_Deviation:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Glidepath_Approach_Has_Gp:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Glidepath_Is_Valid:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_Glidepath_Can_Capture:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Path_Fpa:0
+# -
+#   type: var
+#   var_name: L:WT_Garmin_External_VNav_Path_Deviation:0
+# -
+#   type: var
 #   var_name: L:XMLVAR_VNAVButtonValue
 # -
 #   type: var
-#   var_name: L:WTAP_LNav_Along_Track_Speed
+#   var_name: L:WTGNS_ADSB_OPER
 # -
 #   type: var
-#   var_name: L:WTGNS_ADSB_OPER
+#   var_name: L:ASwt430_CDI_Source_1
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Obs_Active
+# -
+#   type: var
+#   var_name: L:WTAP_LNav_Obs_Course
+# -
+#   type: var
+#   var_name: L:WT_AP_FPA_Target:1
+# -
+#   type: var
+#   var_name: L:WTAP_VNav_Alt_Capture_Type
+# -
+#   type: var
+#   var_name: L:WT1000_AP_G1000_INSTALLED
+# -
+#   type: var
+#   var_name: L:WasmInstrument_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:WasmInstrument_State
+# -
+#   type: var
+#   var_name: L:AS330_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS330_State
+# -
+#   type: var
+#   var_name: L:KAP140_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:KAP140_State
+# -
+#   type: var
+#   var_name: L:AutopilotPreflightCheckCompleted
+# -
+#   type: var
+#   var_name: L:WT_GNS530_INSTALLED_1
+# -
+#   type: var
+#   var_name: L:AS530_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS530_State
+# -
+#   type: var
+#   var_name: L:WTAP_VNav_Target_Altitude
+# -
+#   type: var
+#   var_name: L:WTAP_VNAV_Required_VS
+# -
+#   type: var
+#   var_name: L:WTAP_GP_Required_VS
+# -
+#   type: var
+#   var_name: L:WT_GNS430_INSTALLED_1
+# -
+#   type: var
+#   var_name: L:AS430_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS430_State
+# -
+#   type: var
+#   var_name: L:GTN750_INT_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:GTN750_INT_State
+# -
+#   type: var
+#   var_name: L:GTN650_INT_2_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:GTN650_INT_2_State
+# -
+#   type: var
+#   var_name: L:KR87_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:KR87_State
+# -
+#   type: var
+#   var_name: L:MV_EFB_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:MV_EFB_State
+  -
+    type: var
+    var_name: L:C310_TAB_DENY_STATUS
+  -
+    type: var
+    var_name: L:C310_INSPECT_OPTION
+  -
+    type: var
+    var_name: L:C310_TAB_LEFT_LOCKER
+  -
+    type: var
+    var_name: L:C310_TAB_RIGHT_LOCKER
+  -
+    type: var
+    var_name: L:C310_TAB_EXHAUST
+  -
+    type: var
+    var_name: L:C310_TAB_INTAKE
+  -
+    type: var
+    var_name: L:C310_TAB_PITOT
+  -
+    type: var
+    var_name: L:C310_TAB_LOCK
+  -
+    type: var
+    var_name: L:C310_TAB_RIGHT_FRONT
+  -
+    type: var
+    var_name: L:C310_TAB_MID_LEFT
+  -
+    type: var
+    var_name: L:C310_TAB_MID_RIGHT
+  -
+    type: var
+    var_name: L:C310_TAB_REAR_LEFT
+  -
+    type: var
+    var_name: L:C310_TAB_REAR_RIGHT
+  -
+    type: var
+    var_name: L:C310_TAB_REAR_BAGS
+  -
+    type: var
+    var_name: L:C310_TAB_NOSE_BAGS
+  -
+    type: var
+    var_name: L:C310_TAB_LEFT_BAGS
+  -
+    type: var
+    var_name: L:C310_TAB_RIGHT_BAGS
+# -
+#   type: var
+#   var_name: L:C310_TAB_COMFORT_INDEX
+# -
+#   type: var
+#   var_name: L:C310_TAB_CLIMATE_INDEX
+# -
+#   type: var
+#   var_name: L:C310_TAB_REPAIR_STATUS
+  -
+    type: var
+    var_name: L:C310_TAB_DIRT
+  -
+    type: var
+    var_name: L:C310_TAB_DIRT_RATE
+  -
+    type: var
+    var_name: L:C310_TAB_ELE_TRIM_BASE
+  -
+    type: var
+    var_name: L:C310_TAB_AIL_TRIM_BASE
+  -
+    type: var
+    var_name: L:C310_TAB_RUD_TRIM_BASE
+  -
+    type: var
+    var_name: L:C310_TAB_WASH
+  -
+    type: var
+    var_name: L:C310_TAB_DEFAULT
+  -
+    type: var
+    var_name: L:C310_TAB_OWNED
+  -
+    type: var
+    var_name: L:C310_TAB_RENTAL
+  -
+    type: var
+    var_name: L:C310_TAB_INDIVIDUAL
+  -
+    type: var
+    var_name: L:C310_TAB_ENG_REALISM
+  -
+    type: var
+    var_name: L:C310_TAB_SYS_REALISM
+  -
+    type: var
+    var_name: L:C310_TAB_WEAR
+  -
+    type: var
+    var_name: L:C310_TAB_NEVER
+  -
+    type: var
+    var_name: L:C310_TAB_RARELY
+  -
+    type: var
+    var_name: L:C310_TAB_OCCASIONAL
+  -
+    type: var
+    var_name: L:C310_TAB_FREQUENT
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_BATTERY
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_LBRAKE
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_RBRAKE
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_NGEAR
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_LGEAR
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_RGEAR
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_LFLAP
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_RFLAP
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_CYL_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_CYL_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_PLUG_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_PLUG_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_LMAG_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_LMAG_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_RMAG_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_RMAG_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_START_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_START_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_ALT_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_ALT_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_FUELPUMP_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_FUELPUMP_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_AUXPUMP_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_AUXPUMP_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_VACPUMP_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_VACPUMP_2
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_OIL_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:C310_TAB_STAT_OIL_2
+    unreliable: true
+# -
+#   type: var
+#   var_name: L:MV_DME_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:MV_DME_State
+# -
+#   type: var
+#   var_name: L:C310_DME_MILES
+# -
+#   type: var
+#   var_name: L:C310_DME_KNOTS
+# -
+#   type: var
+#   var_name: L:C310_DME_MINS
+# -
+#   type: var
+#   var_name: L:MV_EDM_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:MV_EDM_State
+# -
+#   type: var
+#   var_name: L:C310_EDML_HP
+# -
+#   type: var
+#   var_name: L:C310_EDML_DOT
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_1
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_2
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_3
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_4
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_5
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_6
+# -
+#   type: var
+#   var_name: L:C310_EDML_OIL
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_1
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_2
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_3
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_4
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_5
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_6
+# -
+#   type: var
+#   var_name: L:C310_EDML_TIT
+# -
+#   type: var
+#   var_name: L:MV_EDM_1_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:MV_EDM_1_State
+# -
+#   type: var
+#   var_name: L:C310_EDMR_HP
+# -
+#   type: var
+#   var_name: L:C310_EDMR_DOT
+# -
+#   type: var
+#   var_name: L:C310_EDMR_EGT_1
+# -
+#   type: var
+#   var_name: L:C310_EDMR_EGT_2
+# -
+#   type: var
+#   var_name: L:C310_EDMR_EGT_3
+# -
+#   type: var
+#   var_name: L:C310_EDMR_EGT_4
+# -
+#   type: var
+#   var_name: L:C310_EDMR_EGT_5
+# -
+#   type: var
+#   var_name: L:C310_EDMR_EGT_6
+# -
+#   type: var
+#   var_name: L:C310_EDMR_OIL
+# -
+#   type: var
+#   var_name: L:C310_EDMR_CHT_1
+# -
+#   type: var
+#   var_name: L:C310_EDMR_CHT_2
+# -
+#   type: var
+#   var_name: L:C310_EDMR_CHT_3
+# -
+#   type: var
+#   var_name: L:C310_EDMR_CHT_4
+# -
+#   type: var
+#   var_name: L:C310_EDMR_CHT_5
+# -
+#   type: var
+#   var_name: L:C310_EDMR_CHT_6
+# -
+#   type: var
+#   var_name: L:C310_EDMR_TIT
+# -
+#   type: var
+#   var_name: L:KX155A_1_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:KX155A_1_State
+# -
+#   type: var
+#   var_name: L:KX155A_2_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:KX155A_2_State
+# -
+#   type: var
+#   var_name: L:AS5_1_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS5_1_State
+# -
+#   type: var
+#   var_name: L:Glasscockpit_HSI_Arc
+# -
+#   type: var
+#   var_name: L:PFD_BRG1_Source
+# -
+#   type: var
+#   var_name: L:PFD_BRG2_Source
+# -
+#   type: var
+#   var_name: L:AS5_2_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS5_2_State
+# -
+#   type: var
+#   var_name: L:PFD_CDI_Source
+# -
+#   type: var
+#   var_name: L:GPS_Current_Phase
+# -
+#   type: var
+#   var_name: L:Glasscockpit_DmeSource
+# -
+#   type: var
+#   var_name: L:MV_HM_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:MV_HM_State
+  -
+    type: var
+    var_name: L:C310_TAB_HOBBS
+# -
+#   type: var
+#   var_name: L:Glasscockpits_FPLHaveOrigin
+# -
+#   type: var
+#   var_name: L:Glasscockpits_FPLHaveDestination
+# -
+#   type: var
+#   var_name: L:YourControlsServerRunning
+# -
+#   type: var
+#   var_name: L:C310_WASM_VER
+# -
+#   type: var
+#   var_name: L:FCR_WASM_ONLINE
+  -
+    type: var
+    var_name: L:C310_RSTR_Air
 # -
 #   type: var
 #   var_name: L:C310_CABIN_FAN
@@ -1341,61 +1972,7 @@ shared:
     var_name: L:C310_CB_ENC_ALT
   -
     type: var
-    var_name: L:C310_TAB_FRONT_DOOR
-  -
-    type: var
-    var_name: L:C310_TAB_NOSE_DOOR
-  -
-    type: var
-    var_name: L:C310_TAB_REAR_DOOR
-  -
-    type: var
-    var_name: L:C310_TAB_LEFT_LOCKER
-  -
-    type: var
-    var_name: L:C310_TAB_RIGHT_LOCKER
-  -
-    type: var
-    var_name: L:C310_TAB_PITOT
-  -
-    type: var
-    var_name: L:C310_TAB_INTAKE
-  -
-    type: var
-    var_name: L:C310_TAB_EXHAUST
-  -
-    type: var
-    var_name: L:C310_TAB_LOCK
-  -
-    type: var
-    var_name: L:C310_TAB_HOBBS
-  -
-    type: var
     var_name: L:C310_DIRT_MINUTES
-  -
-    type: var
-    var_name: L:C310_TAB_DIRT
-  -
-    type: var
-    var_name: L:C310_TAB_DIRT_RATE
-  -
-    type: var
-    var_name: L:C310_TAB_ELE_TRIM_BASE
-  -
-    type: var
-    var_name: L:C310_TAB_AIL_TRIM_BASE
-  -
-    type: var
-    var_name: L:C310_TAB_RUD_TRIM_BASE
-  -
-    type: var
-    var_name: L:C310_TAB_LEFT_BAGS
-  -
-    type: var
-    var_name: L:C310_TAB_RIGHT_BAGS
-  -
-    type: var
-    var_name: L:C310_TAB_REAR_BAGS
 # -
 #   type: var
 #   var_name: L:C310_TAB_FUEL_MAIN_LEFT
@@ -1408,57 +1985,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:C310_TAB_FUEL_AUX_RIGHT
-  -
-    type: var
-    var_name: L:C310_TAB_RIGHT_FRONT
-  -
-    type: var
-    var_name: L:C310_TAB_MID_LEFT
-  -
-    type: var
-    var_name: L:C310_TAB_MID_RIGHT
-  -
-    type: var
-    var_name: L:C310_TAB_REAR_LEFT
-  -
-    type: var
-    var_name: L:C310_TAB_REAR_RIGHT
-  -
-    type: var
-    var_name: L:C310_TAB_NOSE_BAGS
-  -
-    type: var
-    var_name: L:C310_TAB_DEFAULT
-  -
-    type: var
-    var_name: L:C310_TAB_OWNED
-  -
-    type: var
-    var_name: L:C310_TAB_RENTAL
-  -
-    type: var
-    var_name: L:C310_TAB_INDIVIDUAL
-  -
-    type: var
-    var_name: L:C310_TAB_ENG_REALISM
-  -
-    type: var
-    var_name: L:C310_TAB_SYS_REALISM
-  -
-    type: var
-    var_name: L:C310_TAB_WEAR
-  -
-    type: var
-    var_name: L:C310_TAB_NEVER
-  -
-    type: var
-    var_name: L:C310_TAB_RARELY
-  -
-    type: var
-    var_name: L:C310_TAB_OCCASIONAL
-  -
-    type: var
-    var_name: L:C310_TAB_FREQUENT
 # -
 #   type: var
 #   var_name: L:C310_TAB_CHG_MAIN_LEFT
@@ -1471,124 +1997,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:C310_TAB_CHG_AUX_RIGHT
-  -
-    type: var
-    var_name: L:C310_TAB_DENY_STATUS
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_BATTERY
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_LBRAKE
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_RBRAKE
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_NGEAR
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_LGEAR
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_RGEAR
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_LFLAP
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_RFLAP
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_CYL_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_PLUG_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_LMAG_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_RMAG_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_START_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_ALT_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_FUELPUMP_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_AUXPUMP_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_VACPUMP_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_OIL_1
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_CYL_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_PLUG_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_LMAG_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_RMAG_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_START_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_ALT_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_FUELPUMP_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_AUXPUMP_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_VACPUMP_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_STAT_OIL_2
-    unreliable: true
-  -
-    type: var
-    var_name: L:C310_TAB_WASH
   -
     type: var
     var_name: L:C310_TABLET_HIDE
@@ -1619,21 +2027,15 @@ shared:
   -
     type: var
     var_name: L:C310_PRIME_RIGHT
+# -
+#   type: var
+#   var_name: L:C310_test_call_count
   -
     type: var
     var_name: L:C310_FAIL_ALT1
   -
     type: var
     var_name: L:C310_FAIL_ALT2
-# -
-#   type: var
-#   var_name: L:C310_DME_MILES
-# -
-#   type: var
-#   var_name: L:C310_DME_KNOTS
-# -
-#   type: var
-#   var_name: L:C310_DME_MINS
 # -
 #   type: var
 #   var_name: L:C310_SHARD_PITOT_ICE_PCT
@@ -1643,96 +2045,6 @@ shared:
 # -
 #   type: var
 #   var_name: L:C310_FLAG_NAV_GS
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_1
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_1
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_2
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_2
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_3
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_3
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_4
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_4
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_5
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_5
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_6
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_6
-# -
-#   type: var
-#   var_name: L:C310_EDML_TIT
-# -
-#   type: var
-#   var_name: L:C310_EDML_OIL
-# -
-#   type: var
-#   var_name: L:C310_EDML_HP
-# -
-#   type: var
-#   var_name: L:C310_EDMR_CHT_1
-# -
-#   type: var
-#   var_name: L:C310_EDMR_EGT_1
-# -
-#   type: var
-#   var_name: L:C310_EDMR_CHT_2
-# -
-#   type: var
-#   var_name: L:C310_EDMR_EGT_2
-# -
-#   type: var
-#   var_name: L:C310_EDMR_CHT_3
-# -
-#   type: var
-#   var_name: L:C310_EDMR_EGT_3
-# -
-#   type: var
-#   var_name: L:C310_EDMR_CHT_4
-# -
-#   type: var
-#   var_name: L:C310_EDMR_EGT_4
-# -
-#   type: var
-#   var_name: L:C310_EDMR_CHT_5
-# -
-#   type: var
-#   var_name: L:C310_EDMR_EGT_5
-# -
-#   type: var
-#   var_name: L:C310_EDMR_CHT_6
-# -
-#   type: var
-#   var_name: L:C310_EDMR_EGT_6
-# -
-#   type: var
-#   var_name: L:C310_EDMR_TIT
-# -
-#   type: var
-#   var_name: L:C310_EDMR_OIL
-# -
-#   type: var
-#   var_name: L:C310_EDMR_HP
 # -
 #   type: var
 #   var_name: L:C310_LIGHT_LANDING_LEFT_ON
@@ -1858,6 +2170,15 @@ shared:
 #   var_name: L:C310_ALTITUDE_ALERT
 # -
 #   type: var
+#   var_name: L:C310_MSFS2024
+# -
+#   type: var
+#   var_name: L:C310_EDML_EGT_REAL
+# -
+#   type: var
+#   var_name: L:C310_EDML_CHT_REAL
+# -
+#   type: var
 #   var_name: L:C310_EN_ENGINE1
 # -
 #   type: var
@@ -1937,261 +2258,18 @@ shared:
 # -
 #   type: var
 #   var_name: L:C310_SW_GEAR_HANDLE
-  -
-    type: var
-    var_name: L:C310_REDS_CHOCKS
-# -
-#   type: var
-#   var_name: L:C310_FD_SPOILERS_SET
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_DTK
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_XTK
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Is_Tracking
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Tracked_Leg_Index
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Transition_Mode
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Tracked_Vector_Index
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Course_To_Steer
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Is_Suspended
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Leg_Distance_Along
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Leg_Distance_Remaining
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Vector_Distance_Along
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Vector_Distance_Remaining
-# -
-#   type: var
-#   var_name: L:WTAP_LNav_Vector_Anticipation_Distance
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_State
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Path_Mode
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Path_Available
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Constraint_Altitude
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Next_Constraint_Altitude
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Target_Altitude
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_FPA
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Vertical_Deviation
-# -
-#   type: var
-#   var_name: L:WTAP_VNAV_Required_VS
-# -
-#   type: var
-#   var_name: L:WTAP_VNav_Alt_Capture_Type
-# -
-#   type: var
-#   var_name: L:WTAP_GP_Service_Level
-# -
-#   type: var
-#   var_name: L:WTAP_GP_Vertical_Deviation
-# -
-#   type: var
-#   var_name: L:WTAP_GP_Distance
-# -
-#   type: var
-#   var_name: L:WTAP_GP_FPA
-# -
-#   type: var
-#   var_name: L:WT_AP_FPA_Target:1
-# -
-#   type: var
-#   var_name: L:C310_TAB_COMFORT_INDEX
-# -
-#   type: var
-#   var_name: L:C310_TAB_CLIMATE_INDEX
-# -
-#   type: var
-#   var_name: L:WT1000_AP_G1000_INSTALLED
-# -
-#   type: var
-#   var_name: L:WasmInstrument_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:WasmInstrument_State
-# -
-#   type: var
-#   var_name: L:AS330_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS330_State
-# -
-#   type: var
-#   var_name: L:KAP140_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:KAP140_State
-# -
-#   type: var
-#   var_name: L:AutopilotPreflightCheckCompleted
-# -
-#   type: var
-#   var_name: L:WT_GNS530_INSTALLED_1
-# -
-#   type: var
-#   var_name: L:AS530_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS530_State
-# -
-#   type: var
-#   var_name: L:WTAP_GP_Required_VS
-# -
-#   type: var
-#   var_name: L:WT_GNS430_INSTALLED_1
-# -
-#   type: var
-#   var_name: L:AS430_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS430_State
-# -
-#   type: var
-#   var_name: L:GTN750_INT_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:GTN750_INT_State
-# -
-#   type: var
-#   var_name: L:GTN650_INT_2_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:GTN650_INT_2_State
-# -
-#   type: var
-#   var_name: L:KR87_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:KR87_State
-# -
-#   type: var
-#   var_name: L:MV_EFB_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:MV_EFB_State
-  -
-    type: var
-    var_name: L:C310_INSPECT_OPTION
-# -
-#   type: var
-#   var_name: L:C310_TAB_REPAIR_STATUS
-# -
-#   type: var
-#   var_name: L:MV_DME_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:MV_DME_State
-# -
-#   type: var
-#   var_name: L:MV_EDM_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:MV_EDM_State
-# -
-#   type: var
-#   var_name: L:C310_EDML_DOT
-# -
-#   type: var
-#   var_name: L:C310_EDML_EGT_REAL
-# -
-#   type: var
-#   var_name: L:C310_EDML_CHT_REAL
-# -
-#   type: var
-#   var_name: L:MV_EDM_1_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:MV_EDM_1_State
-# -
-#   type: var
-#   var_name: L:C310_EDMR_DOT
 # -
 #   type: var
 #   var_name: L:C310_EDMR_EGT_REAL
 # -
 #   type: var
 #   var_name: L:C310_EDMR_CHT_REAL
+  -
+    type: var
+    var_name: L:C310_REDS_CHOCKS
 # -
 #   type: var
-#   var_name: L:KX155A_1_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:KX155A_1_State
-# -
-#   type: var
-#   var_name: L:KX155A_2_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:KX155A_2_State
-# -
-#   type: var
-#   var_name: L:AS5_1_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS5_1_State
-# -
-#   type: var
-#   var_name: L:Glasscockpit_HSI_Arc
-# -
-#   type: var
-#   var_name: L:PFD_BRG1_Source
-# -
-#   type: var
-#   var_name: L:PFD_BRG2_Source
-# -
-#   type: var
-#   var_name: L:AS5_2_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS5_2_State
-# -
-#   type: var
-#   var_name: L:PFD_CDI_Source
-# -
-#   type: var
-#   var_name: L:GPS_Current_Phase
-# -
-#   type: var
-#   var_name: L:Glasscockpit_DmeSource
-# -
-#   type: var
-#   var_name: L:MV_HM_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:MV_HM_State
+#   var_name: L:C310_FD_SPOILERS_SET
 # -
 #   type: var
 #   var_name: L:C310_TRB_EARPAIN
@@ -2203,19 +2281,34 @@ shared:
 #   var_name: L:C310_TRB_G
 # -
 #   type: var
-#   var_name: L:Glasscockpits_FPLHaveOrigin
+#   var_name: L:HUD_AP_SELECTED_SPEED
 # -
 #   type: var
-#   var_name: L:Glasscockpits_FPLHaveDestination
+#   var_name: L:HUD_AP_SELECTED_ALTITUDE
 # -
 #   type: var
 #   var_name: L:KAP140_BARO_Display
 # -
 #   type: var
-#   var_name: L:HUD_AP_SELECTED_SPEED
+#   var_name: L:C310_EDMR_DATA
 # -
 #   type: var
-#   var_name: L:HUD_AP_SELECTED_ALTITUDE
+#   var_name: L:C310_EDML_DATA
+# -
+#   type: var
+#   var_name: L:C310_DIRT_ROC
+# -
+#   type: var
+#   var_name: L:C310_DIRT_LEVEL
+# -
+#   type: var
+#   var_name: L:C310_EDML_DATA_HIGH
+# -
+#   type: var
+#   var_name: L:C310_EDML_DATA_LOW
+# -
+#   type: var
+#   var_name: L:C310_EDML_QUAN
 
 ignore:
   - MV_EFB#input_right_main

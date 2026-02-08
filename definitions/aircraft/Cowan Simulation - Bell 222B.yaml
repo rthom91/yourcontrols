@@ -1,4 +1,4 @@
-# Version 2.2.0
+# Version 3.1.0
 
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
@@ -7,9 +7,6 @@ include:
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/autopilot.yaml
-  - definitions/modules/controls_rotor.yaml
-  - definitions/modules/electrical.yaml
-  - definitions/modules/engines_rotor.yaml
   - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
@@ -17,7 +14,6 @@ include:
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
-  - definitions/modules/rotorcraft.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/trim.yaml
 
@@ -29,6 +25,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 5
+    use_calculator: true
 
   - # Deice
     type: NumSet
@@ -50,12 +47,129 @@ shared:
     var_units: Bool
     var_type: i32
     event_name: ANTI_ICE_TOGGLE_ENG1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:ENG ANTI ICE:2
     var_units: Bool
     var_type: i32
     event_name: ANTI_ICE_TOGGLE_ENG2
+    use_calculator: true
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR1
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_ALTERNATOR2
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STARTER1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG STARTER:2
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_STARTER2
+    use_calculator: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM PUMP SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM PUMP SWITCH:2
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_PUMP_TOGGLE
+    event_param: 2
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:2
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 2
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:3
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 3
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:4
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 4
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:5
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 5
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:FUELSYSTEM VALVE SWITCH:6
+    var_units: Bool
+    var_type: bool
+    event_name: FUELSYSTEM_VALVE_TOGGLE
+    event_param: 6
+    use_calculator: true
+
+  - # Ignition
+    type: NumSet
+    var_name: A:TURB ENG IGNITION SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: TURBINE_IGNITION_SWITCH_SET1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:TURB ENG IGNITION SWITCH EX1:2
+    var_units: Enum
+    var_type: i32
+    event_name: TURBINE_IGNITION_SWITCH_SET2
+    use_calculator: true
 
   - # Inst/Emg lights
     type: ToggleSwitch
@@ -64,6 +178,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 25
+    use_calculator: true
   - # Cabin lights
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:26
@@ -71,6 +186,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 26
+    use_calculator: true
   - # Inverter 1
     type: CustomCalculator
     get: 1 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:12, Bool)
@@ -79,10 +195,6 @@ shared:
     type: CustomCalculator
     get: 10 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:13, Bool)
     set: 13 10 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
-# - # Bat Master (removed v2)
-#   type: CustomCalculator
-#   get: 4 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:11, Bool)
-#   set: 11 4 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
 # - # Bat 1 Intcon (broken and sim errors)
 #   type: CustomCalculator
 #   get: 11 (>A:BUS LOOKUP INDEX, Number) (A:BATTERY CONNECTION ON:1, Bool)
@@ -98,6 +210,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 18
+    use_calculator: true
   - # ECS
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:43
@@ -105,72 +218,13 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 43
-
-  - # Fuel
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM PUMP SWITCH:1
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_PUMP_TOGGLE
-    event_param: 1
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM PUMP SWITCH:2
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_PUMP_TOGGLE
-    event_param: 2
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:1
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 1
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:2
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 2
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:3
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_TOGGLE
-    event_param: 3
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:4
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
-    event_param: 4
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:5
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
-    event_param: 5
-  -
-    type: ToggleSwitch
-    var_name: A:FUELSYSTEM VALVE SWITCH:6
-    var_units: Bool
-    var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
-    event_param: 6
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT LANDING:2
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 2
 
@@ -197,12 +251,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: CABIN_SEATBELTS_ALERT_SWITCH_TOGGLE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CABIN NO SMOKING ALERT SWITCH
     var_units: Bool
     var_type: bool
     event_name: CABIN_NO_SMOKING_ALERT_SWITCH_TOGGLE
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -289,6 +345,55 @@ shared:
     event_param: 5
     index_reversed: true
 
+  - # Rotor
+    type: NumSet
+    var_name: A:ROTOR GOV SWITCH POS
+    var_units: Bool
+    var_type: i32
+    event_name: ROTOR_GOV_SWITCH_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:ROTOR BRAKE HANDLE POS
+    var_units: Position 16k
+    var_type: f64
+    event_name: AXIS_ROTOR_BRAKE_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ROTOR LATERAL TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ROTOR_LATERAL_TRIM_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:ROTOR LONGITUDINAL TRIM PCT
+    var_units: Position 16k
+    var_type: f64
+    event_name: ROTOR_LONGITUDINAL_TRIM_SET
+    use_calculator: true
+    unreliable: true
+
+  - # Twist
+    type: NumSet
+    var_name: A:HELICOPTER MASTER THROTTLE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: HELICOPTER_THROTTLE1_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:HELICOPTER MASTER THROTTLE POSITION:2
+    var_units: Position 16k
+    var_type: f64
+    event_name: HELICOPTER_THROTTLE2_SET
+    use_calculator: true
+    unreliable: true
+
   - # Wipers
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:30
@@ -296,6 +401,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 30
+    use_calculator: true
   -
     type: NumSet
     var_name: A:CIRCUIT POWER SETTING:30
@@ -311,6 +417,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 31
+    use_calculator: true
 
   - # LVAR's (trimmed)
     type: var
@@ -323,10 +430,7 @@ shared:
     var_name: L:222CautLightsBright
   -
     type: var
-    var_name: L:COWANSIM_GTN_OPTION
-  -
-    type: var
-    var_name: L:222ThrottleFrictionSetting
+    var_name: L:222_THROTTLE_FRICTION
     unreliable: true
   -
     type: var
@@ -372,7 +476,7 @@ shared:
 #   var_name: L:222GenaltIttCoolingLoss2
   -
     type: var
-    var_name: L:switchGpsNav1Nav2
+    var_name: L:222SwitchGpsNav1Nav2
 # -
 #   type: var
 #   var_name: L:222AnnunciatorLightTimer
@@ -404,46 +508,61 @@ shared:
 #   var_name: L:LOCAL_milliBar_to_inHg
   -
     type: var
+    var_name: L:222WindowROpen
+  -
+    type: var
     var_name: L:222DoorRLOpen
   -
     type: var
     var_name: L:222DoorRROpen
   -
     type: var
-    var_name: L:COWANSIM_LIGHT_LANDING_UP_DOWN
+    var_name: L:222WindowLOpen
   -
     type: var
     var_name: L:222DoorFLOpen
   -
     type: var
-    var_name: L:COWANSIM_LIGHT_LANDING_LR
-  -
-    type: var
-    var_name: L:222WindowLOpen
-  -
-    type: var
-    var_name: L:222WindowROpen
+    var_name: L:COWANSIM_LIGHT_LANDING_UP_DOWN
   -
     type: var
     var_name: L:222DoorFROpen
+  -
+    type: var
+    var_name: L:COWANSIM_LIGHT_LANDING_LR
+  -
+    type: var
+    var_name: L:222DoorsHide
 # -
 #   type: var
 #   var_name: L:COWANSIM_Throttle_2_Lever_Position
+# -
+#   type: var
+#   var_name: L:AP_Longitudinal_Command
 # -
 #   type: var
 #   var_name: L:COWANSIM_Throttle_1_Lever_Position
 # -
 #   type: var
 #   var_name: L:HANDLING_LATERAL_LONGITUDINAL_Trim_Position
+# -
+#   type: var
+#   var_name: L:COWANSIM_Cyclic_X_Position
+# -
+#   type: var
+#   var_name: L:AP_Lateral_Command
+# -
+#   type: var
+#   var_name: L:COWANSIM_Cyclic_Y_Position
   -
     type: var
     var_name: L:gearLightsTest
 # -
 #   type: var
 #   var_name: L:222WarningsActive
-  -
-    type: var
-    var_name: L:222AcknowledgedMasterWarning
+# -
+#   type: var
+#   var_name: L:222AcknowledgedMasterWarning
   -
     type: var
     var_name: L:222CautFireTest
@@ -483,12 +602,21 @@ shared:
 # -
 #   type: var
 #   var_name: L:TDSGTNXI_InactiveVar
+  -
+    type: var
+    var_name: L:COWANSIM_222B_GTN_Option
 # -
 #   type: var
 #   var_name: L:XMLVAR_GPS_DISABLED_AS530_1
 # -
 #   type: var
-#   var_name: L:XMLVAR_GPS_DISABLED_AS430_1
+#   var_name: L:XMLVAR_GPS_DISABLED_AS430_2
+# -
+#   type: var
+#   var_name: L:TDSGTNXI_INSTALLED
+# -
+#   type: var
+#   var_name: L:PMS50_GTN750_INSTALLED
 # -
 #   type: var
 #   var_name: L:TDSGTNXI750U1_LKnobInc
@@ -549,14 +677,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:TDSGTNXI650U2_DTOKey
-  -
-    type: var
-    var_name: L:222Throttle1Pos
-    unreliable: true
-  -
-    type: var
-    var_name: L:222Throttle2Pos
-    unreliable: true
+# - # Deprecated
+#   type: var
+#   var_name: L:222Throttle1Pos
+# -
+#   type: var
+#   var_name: L:222Throttle2Pos
   -
     type: var
     var_name: L:222HstPwr
@@ -565,7 +691,10 @@ shared:
     var_name: L:222ForceTrim
   -
     type: var
-    var_name: L:222AutoTrim
+    var_name: L:222_AP_SBY_Pushed
+  -
+    type: var
+    var_name: L:CS_Force_Trim_Release
 # -
 #   type: var
 #   var_name: L:ParkingBrake_Position
@@ -664,6 +793,15 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_Cabin_Air_2_Position
+# -
+#   type: var
+#   var_name: L:CS_Force_Trim_Release_Max_Time
+# -
+#   type: var
+#   var_name: L:CS_Force_Trim_Release_Timer
+# -
+#   type: var
+#   var_name: L:CS_S76C_AP_Att_Hold_Holds_Heading
   -
     type: var
     var_name: L:222GearAudioMute
@@ -672,22 +810,16 @@ shared:
 #   var_name: L:222PlayGearWarningSound
 # -
 #   type: var
-#   var_name: L:PMS50_GTN650_INSTALLED
-# -
-#   type: var
-#   var_name: L:PMS50_GTN750_INSTALLED
-# -
-#   type: var
-#   var_name: L:TDSGTNXI_INSTALLED
-# -
-#   type: var
 #   var_name: L:222Gov1ITerm
 # -
 #   type: var
-#   var_name: L:222Gov1LastInput
+#   var_name: L:222GovLastInput
 # -
 #   type: var
 #   var_name: L:exteriorSound
+# -
+#   type: var
+#   var_name: L:CS_HeliSAS_Lights_Green
 # -
 #   type: var
 #   var_name: L:AS530_ManualBrightness_Value_1
@@ -709,6 +841,9 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_AudioPanel_2
+# -
+#   type: var
+#   var_name: L:CS_HeliSAS_Lights_White
 
   - # Medical
     type: var
@@ -716,3 +851,31 @@ shared:
   -
     type: var
     var_name: L:hideMedic
+
+master:
+  -
+    type: var
+    var_name: L:COWANSIM_Cyclic_X_Position
+    unreliable: true
+  -
+    type: var
+    var_name: L:COWANSIM_Cyclic_Y_Position
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:TAIL ROTOR PEDAL POSITION
+    var_units: Position 16k
+    var_type: f64
+    multiply_by: -1
+    event_name: AXIS_RUDDER_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:COLLECTIVE HANDLE POSITION
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_COLLECTIVE_SET
+    use_calculator: true
+    unreliable: true

@@ -1,17 +1,14 @@
-# Version 0.1.2
+# Version 0.1.4
 
 include:
-  - definitions/modules/Instruments/AS_G3X_Touch.yaml
+  - definitions/modules/Instruments/WT_G3X_Touch.yaml
   - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/Instruments/TDS_GTNXi.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/electrical.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
@@ -26,6 +23,32 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 36
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+
+  - # Doors
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:0
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:INTERACTIVE POINT GOAL:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_AIRCRAFT_EXIT_FAST
+    event_param: 2
+    use_calculator: true
 
   - # Door Seal Power
     type: CustomCalculator
@@ -39,6 +62,21 @@ shared:
     type: CustomCalculator
     get: 1 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:4, Bool)
     set: 4 1 (>K:2:ELECTRICAL_BUS_TO_BUS_CONNECTION_TOGGLE)
+
+  - # Fuel
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -55,6 +93,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 2
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:3
@@ -63,6 +102,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 3
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:4
@@ -71,6 +111,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 4
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:5
@@ -79,6 +120,29 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 5
     index_reversed: true
+    unreliable: true
+
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT LANDING:1
+    var_units: Bool
+    var_type: i32
+    event_name: LANDING_LIGHTS_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT STROBE:1
+    var_units: Bool
+    var_type: i32
+    event_name: STROBES_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:LIGHT NAV:1
+    var_units: Bool
+    var_type: i32
+    event_name: NAV_LIGHTS_SET
+    event_param: 1
 
   - # LVAR's (trimmed)
     type: var
@@ -86,116 +150,29 @@ shared:
 # -
 #   type: var
 #   var_name: L:BKSQ_TurbochargerSound
-# -
-#   type: var
-#   var_name: L:LOCAL_milliBar_to_inHg
   -
     type: var
     var_name: L:var_LeftCabinDoor
+    cancel_h_events: true
   -
     type: var
     var_name: L:var_RightCabinDoor
-# -
-#   type: var
-#   var_name: L:XMLVAR_VNAVButtonValue
+    cancel_h_events: true
   -
     type: var
     var_name: L:BKSQ_MixtureLeverPosition_1
     unreliable: true
-# -
-#   type: var
-#   var_name: L:BKSQ_SOUND_IDENTIFIER
-# -
-#   type: var
-#   var_name: L:var_doorSealPressure
+  -
+    type: NumSet
+    var_name: L:starterSwitchPos
+    var_units: Bool
+    var_type: i32
+    event_name: SET_STARTER1_HELD
+    use_calculator: true
   -
     type: var
     var_name: L:var_friction
     unreliable: true
-# -
-#   type: var
-#   var_name: L:BKSQ_BeepSound
-# -
-#   type: var
-#   var_name: L:BKSQ_AUTOPILOT_DISCONNECT_SOUND
-# -
-#   type: var
-#   var_name: L:var_GearWarningHorn
-  -
-    type: var
-    var_name: L:var_fanSpeed
-  -
-    type: var
-    var_name: L:var_blower
-  -
-    type: var
-    var_name: L:var_cabinTemperatureSetPoint
-# -
-#   type: var
-#   var_name: L:var_cabinTemperature
-# -
-#   type: var
-#   var_name: L:var_cabinVentTemperature
-  -
-    type: var
-    var_name: L:var_environmentalTempUnit
-  -
-    type: var
-    var_name: L:var_environmentalOatTimer
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_environmentalSetTimer
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_environmentalFanTimer
-    unreliable: true
-  -
-    type: var
-    var_name: L:var_environmentalControlOn
-  -
-    type: var
-    var_name: L:var_environmentalAuto
-  -
-    type: var
-    var_name: L:var_environmentalDefrost
-# -
-#   type: var
-#   var_name: L:TDSGTNXI_INSTALLED
-# -
-#   type: var
-#   var_name: L:GTN750_INT_HIDDEN
-# -
-#   type: var
-#   var_name: L:var_fanSpeed_lerp
-# -
-#   type: var
-#   var_name: L:var_blower_lerp
-# -
-#   type: var
-#   var_name: L:var_aDoorOpen
-# -
-#   type: var
-#   var_name: L:var_turbochargerRPM
-# -
-#   type: var
-#   var_name: L:var_scaledMaximumMixturePosition_1
-# -
-#   type: var
-#   var_name: L:BKSQ_PersistentIndicatedAirspeed
-# -
-#   type: var
-#   var_name: L:BKSQ_PersistentIndicatedAirspeedSound
-  -
-    type: var
-    var_name: L:starterSwitchPos
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverPropellerHidden1
 # -
 #   type: var
 #   var_name: L:XMLVAR_ElevatorTrim_Switch_1
@@ -210,52 +187,34 @@ shared:
 #   var_name: L:XMLVAR_RudderTrim_1_SwitchStateTimer
 # -
 #   type: var
-#   var_name: L:ParkingBrake_Position
-# -
-#   type: var
 #   var_name: L:var_hideLeftStick
 # -
 #   type: var
 #   var_name: L:var_hideRightStick
-# -
-#   type: var
-#   var_name: L:var_GearLightTestButton
-# -
-#   type: var
-#   var_name: L:var_GearLightResetButton
-  -
-    type: var
-    var_name: L:var_EmergencyExtension
-# -
-#   type: var
-#   var_name: L:var_HaventPumpedThisInterval
   -
     type: var
     var_name: L:var_GearLightTestButton_IsDown
 # -
 #   type: var
 #   var_name: L:var_GearLightTestButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_GearLightTestButton_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_GearLightTestButton_LeftLeaveToRun
   -
     type: var
     var_name: L:var_GearLightResetButton_IsDown
 # -
 #   type: var
 #   var_name: L:var_GearLightResetButton_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_GearLightResetButton_LeftLeaveToRun
-  -
-    type: var
-    var_name: L:XMLVAR_Autopilot_1_Status
 # -
 #   type: var
-#   var_name: L:XMLVAR_Autopilot_Altitude_Increment
+#   var_name: L:var_GearLightResetButton_LeftLeaveToRun
 # -
 #   type: var
-#   var_name: L:XMLVAR_LTS_Test
+#   var_name: L:XMLVAR_VNAVButtonValue
+# -
+#   type: var
+#   var_name: L:TDSGTNXI_INSTALLED
 # -
 #   type: var
 #   var_name: L:GTN750_Vol
@@ -289,61 +248,255 @@ shared:
 # -
 #   type: var
 #   var_name: L:TDSGTNXI750U1_DTOKey
-# -
-#   type: var
-#   var_name: L:var_PilotStickPtt
+  -
+    type: var
+    var_name: L:var_blower
+    unreliable: true
   -
     type: var
     var_name: L:var_PilotStickPtt_IsDown
 # -
 #   type: var
 #   var_name: L:var_PilotStickPtt_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_PilotStickPtt_LeftLeaveToRun
 # -
 #   type: var
-#   var_name: L:var_CoPilotStickPtt
+#   var_name: L:var_PilotStickPtt_LeftLeaveToRun
   -
     type: var
     var_name: L:var_CoPilotStickPtt_IsDown
 # -
 #   type: var
 #   var_name: L:var_CoPilotStickPtt_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_CoPilotStickPtt_LeftLeaveToRun
 # -
 #   type: var
-#   var_name: L:var_PilotPtt
+#   var_name: L:var_CoPilotStickPtt_LeftLeaveToRun
   -
     type: var
     var_name: L:var_PilotPtt_IsDown
 # -
 #   type: var
 #   var_name: L:var_PilotPtt_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_PilotPtt_LeftLeaveToRun
 # -
 #   type: var
-#   var_name: L:var_CoPilotPtt
+#   var_name: L:var_PilotPtt_LeftLeaveToRun
   -
     type: var
     var_name: L:var_CoPilotPtt_IsDown
 # -
 #   type: var
 #   var_name: L:var_CoPilotPtt_MinReleaseTime
-  -
-    type: var
-    var_name: L:var_CoPilotPtt_LeftLeaveToRun
+# -
+#   type: var
+#   var_name: L:var_CoPilotPtt_LeftLeaveToRun
 # -
 #   type: var
 #   var_name: L:XMLVAR_ELT_STATE
+  -
+    type: var
+    var_name: L:var_EmergencyExtension
+  -
+    type: var
+    var_name: L:var_environmentalControlOn
+  -
+    type: var
+    var_name: L:var_environmentalAuto
+  -
+    type: var
+    var_name: L:var_fanSpeed
+  -
+    type: var
+    var_name: L:var_environmentalFanTimer
+    unreliable: true
 # -
 #   type: var
-#   var_name: L:XMLVAR_ELT_TEST_TIME
+#   var_name: L:BKSQ_BeepSound
+  - # Keep
+    type: var
+    var_name: L:var_cabinTemperatureSetPoint
+  -
+    type: var
+    var_name: L:var_environmentalSetTimer
+    unreliable: true
+  -
+    type: var
+    var_name: L:var_environmentalOatTimer
+    unreliable: true
+# -
+#   type: var
+#   var_name: L:var_cabinTemperature
+  -
+    type: var
+    var_name: L:bksq_TabletVisible
   -
     type: var
     var_name: L:var_ArmrestPosition
     unreliable: true
+# -
+#   type: var
+#   var_name: L:DEICE_Pitot_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_LANDING_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_STROBE_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_NAV_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_CABIN_1
+# -
+#   type: var
+#   var_name: L:XMLVAR_IE_Throttle_VR_Handled
+# -
+#   type: var
+#   var_name: L:XMLVAR_IE_Throttle_VR_Value
+# -
+#   type: var
+#   var_name: L:ParkingBrake_Position
+# -
+#   type: var
+#   var_name: L:LANDING_GEAR_Gear
+  -
+    type: var
+    var_name: L:LIGHTING_POTENTIOMETER_0
+    unreliable: true
+  -
+    type: var
+    var_name: L:LIGHTING_POTENTIOMETER_3
+    unreliable: true
+  -
+    type: var
+    var_name: L:LIGHTING_POTENTIOMETER_4
+    unreliable: true
+  -
+    type: var
+    var_name: L:LIGHTING_CABIN_0_Power_Setting
+    unreliable: true
+# -
+#   type: var
+#   var_name: L:XMLVAR_Autopilot_Altitude_Increment
+# -
+#   type: var
+#   var_name: L:XMLVAR_AirSpeedIsInMach
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_ACTIVATION_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+# -
+#   type: var
+#   var_name: L:BKSQ_SOUND_IDENTIFIER
+# -
+#   type: var
+#   var_name: L:var_doorSealPressure
+# -
+#   type: var
+#   var_name: L:BKSQ_AUTOPILOT_DISCONNECT_SOUND
+# -
+#   type: var
+#   var_name: L:var_GearWarningHorn
+# -
+#   type: var
+#   var_name: L:var_cabinVentTemperature
+  -
+    type: var
+    var_name: L:var_environmentalTempUnit
+  -
+    type: var
+    var_name: L:var_environmentalDefrost
+# -
+#   type: var
+#   var_name: L:GTN750_INT_HIDDEN
+# -
+#   type: var
+#   var_name: L:var_fanSpeed_lerp
+# -
+#   type: var
+#   var_name: L:var_blower_lerp
+# -
+#   type: var
+#   var_name: L:var_aDoorOpen
+# -
+#   type: var
+#   var_name: L:var_correctedBatteryLoad
+# -
+#   type: var
+#   var_name: L:var_turbochargerRPM
+# -
+#   type: var
+#   var_name: L:var_scaledMaximumMixturePosition_1
+# -
+#   type: var
+#   var_name: L:BKSQ_PersistentIndicatedAirspeed
+# -
+#   type: var
+#   var_name: L:BKSQ_PersistentIndicatedAirspeedSound
+# -
+#   type: var
+#   var_name: L:WTG3X_Screen_Backlight:1
+# -
+#   type: var
+#   var_name: L:WTG3X_Screen_Backlight:2
+# -
+#   type: var
+#   var_name: L:var_GearLightTestButton
+# -
+#   type: var
+#   var_name: L:var_GearLightResetButton
+  -
+    type: var
+    var_name: L:XMLVAR_Autopilot_1_Status
+# -
+#   type: var
+#   var_name: L:var_PilotStickPtt
+# -
+#   type: var
+#   var_name: L:var_CoPilotStickPtt
+# -
+#   type: var
+#   var_name: L:var_PilotPtt
+# -
+#   type: var
+#   var_name: L:var_CoPilotPtt
+# -
+#   type: var
+#   var_name: L:var_ToeBrakePosition_L
+# -
+#   type: var
+#   var_name: L:var_ToeBrakePosition_R
+# -
+#   type: var
+#   var_name: L:var_HaventPumpedThisInterval
+
+ignore:
+  - BlackSquareTablet#fuelLeftMainUpButton
+  - BlackSquareTablet#fuelLeftMainDownButton
+  - BlackSquareTablet#fuelRightMainUpButton
+  - BlackSquareTablet#fuelRightMainDownButton
+  - BlackSquareTablet#payloadPilotUpButton
+  - BlackSquareTablet#payloadPilotDownButton
+  - BlackSquareTablet#payloadPilotEmptyButton
+  - BlackSquareTablet#payloadPilotLoadedButton
+  - BlackSquareTablet#payloadCopilotUpButton
+  - BlackSquareTablet#payloadCopilotDownButton
+  - BlackSquareTablet#payloadCopilotEmptyButton
+  - BlackSquareTablet#payloadCopilotLoadedButton
+  - BlackSquareTablet#payloadPax1UpButton
+  - BlackSquareTablet#payloadPax1DownButton
+  - BlackSquareTablet#payloadPax1EmptyButton
+  - BlackSquareTablet#payloadPax1LoadedButton
+  - BlackSquareTablet#payloadPax2UpButton
+  - BlackSquareTablet#payloadPax2DownButton
+  - BlackSquareTablet#payloadPax2EmptyButton
+  - BlackSquareTablet#payloadPax2LoadedButton
+  - BlackSquareTablet#payloadPax3UpButton
+  - BlackSquareTablet#payloadPax3DownButton
+  - BlackSquareTablet#payloadPax3EmptyButton
+  - BlackSquareTablet#payloadPax3LoadedButton
+  - BlackSquareTablet#payloadRearBaggageUpButton
+  - BlackSquareTablet#payloadRearBaggageDownButton
+  - BlackSquareTablet#payloadRearBaggageEmptyButton
+  - BlackSquareTablet#payloadRearBaggageLoadedButton

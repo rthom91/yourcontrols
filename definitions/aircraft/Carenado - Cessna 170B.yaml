@@ -1,11 +1,10 @@
-# Version 2.0.0
+# Version 2.0.2
 
 include:
   - definitions/modules/Instruments/AS_Aera.yaml
   - definitions/modules/Instruments/AS_KT76C.yaml
   - definitions/modules/autopilot.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/electrical.yaml
   - definitions/modules/engines.yaml
   - definitions/modules/fuel.yaml
@@ -19,6 +18,15 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Deice
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
+    unreliable: true
+
   - # Doors
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:0
@@ -26,6 +34,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -33,6 +42,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -40,6 +50,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:4
@@ -47,6 +58,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 5
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -246,9 +258,6 @@ shared:
 #   var_name: L:LOCAL_milliBar_to_inHg
 # -
 #   type: var
-#   var_name: L:XMLVAR_Starter_State
-# -
-#   type: var
 #   var_name: L:XMLVAR_Starter_State_IsDown
 # -
 #   type: var
@@ -262,25 +271,7 @@ shared:
     var_name: L:ASD_SWITCH_PRIMER_ANN
 # -
 #   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverMixtureHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden2
-# -
-#   type: var
 #   var_name: L:YokePilot
-  -
-    type: var
-    var_name: L:AircraftLandingTaxiInit
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverFlapsHidden
 # -
 #   type: var
 #   var_name: L:HANDLING_ElevatorTrim
@@ -291,9 +282,6 @@ shared:
     type: var
     var_name: L:XMLVAR_PUSH_TEST_IDENT_BTN
     unreliable: true
-# -
-#   type: var
-#   var_name: L:ParkingBrake_Position
   -
     type: var
     var_name: L:TABLET_BTN_PILOT_DOOR
@@ -318,6 +306,12 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_IE_Throttle_VR_Value
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
 # -
 #   type: var
 #   var_name: L:LIGHTING_BEACON_1
@@ -345,3 +339,15 @@ shared:
   -
     type: var
     var_name: L:CARVAR_Cabin_Vent_Copilot
+# -
+#   type: var
+#   var_name: L:INSTRUMENT_Altimeter_1
+# -
+#   type: var
+#   var_name: L:ParkingBrake_Position
+# -
+#   type: var
+#   var_name: L:XMLVAR_Starter_State
+  -
+    type: var
+    var_name: L:AircraftLandingTaxiInit

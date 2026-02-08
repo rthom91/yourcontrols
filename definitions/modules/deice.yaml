@@ -34,12 +34,14 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: TOGGLE_STRUCTURAL_DEICE
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:WINDSHIELD DEICE SWITCH
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
 
   - # ASOBO_DEICE_Switch_Engine_Template
     type: ToggleSwitch
@@ -47,24 +49,28 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ENG ANTI ICE:2
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ENG ANTI ICE:3
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ENG ANTI ICE:4
     var_units: Bool
     var_type: bool
     event_name: ANTI_ICE_TOGGLE_ENG4
+    use_calculator: true
 
   - # ASOBO_DEICE_Switch_Propeller_Template
     type: ToggleSwitch
@@ -73,6 +79,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:2
@@ -80,6 +87,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:3
@@ -87,6 +95,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:PROP DEICE SWITCH:4
@@ -94,6 +103,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_PROPELLER_DEICE
     event_param: 4
+    use_calculator: true
 
   - # ASOBO_ENGINE_Switch_AlternateAir_Template
     type: var
@@ -126,6 +136,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -133,6 +144,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG2
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -140,6 +152,7 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG3
+    use_calculator: true
     unreliable: true
   -
     type: NumSet
@@ -147,4 +160,5 @@ shared:
     var_units: Position 16k
     var_type: f64
     event_name: ANTI_ICE_GRADUAL_SET_ENG4
+    use_calculator: true
     unreliable: true

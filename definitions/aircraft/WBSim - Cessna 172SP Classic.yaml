@@ -3,12 +3,10 @@
 include:
   - definitions/modules/Instruments/AS_GNS430.yaml
   - definitions/modules/Instruments/AS_GNS530.yaml
+  - definitions/modules/Instruments/AS_KAP140.yaml
   - definitions/modules/Instruments/AS_KT76C.yaml
-  - definitions/modules/Instruments/PMS50_GTN.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/magnetos.yaml
@@ -19,91 +17,47 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
-  - # Autopilot
+  - # Avionics masters
     type: ToggleSwitch
-    var_name: A:AUTOPILOT MASTER
+    var_name: A:CIRCUIT SWITCH ON:39
     var_units: Bool
     var_type: bool
-    event_name: AUTOPILOT_ON
-    off_event_name: AUTOPILOT_OFF
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 39
+    use_calculator: true
   -
     type: ToggleSwitch
-    var_name: A:AUTOPILOT HEADING LOCK
+    var_name: A:CIRCUIT SWITCH ON:40
     var_units: Bool
     var_type: bool
-    event_name: AP_HDG_HOLD_ON
-    off_event_name: AP_HDG_HOLD_OFF
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 40
+    use_calculator: true
+
+  - # Avionics breakers
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:46
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 46
+    use_calculator: true
   -
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:47
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 47
+    use_calculator: true
+
+  - # Deice
     type: NumSet
-    var_name: A:AUTOPILOT HEADING LOCK DIR:1
-    var_units: Degrees
-    var_type: f64
-    event_name: HEADING_BUG_SET
-    event_param: 1
-    interpolate: Default
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT ALTITUDE LOCK
+    var_name: A:PITOT HEAT SWITCH:1
     var_units: Bool
-    var_type: bool
-    event_name: AP_ALT_HOLD_ON
-    off_event_name: AP_ALT_HOLD_OFF
-  -
-    type: NumSet
-    var_name: A:AUTOPILOT ALTITUDE LOCK VAR:1
-    var_units: Feet
     var_type: i32
-    event_name: AP_ALT_VAR_SET_ENGLISH
+    event_name: PITOT_HEAT_SET
     event_param: 1
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT VERTICAL HOLD
-    var_units: Bool
-    var_type: bool
-    event_name: AP_VS_ON
-    off_event_name: AP_VS_OFF
-  -
-    type: NumSet
-    var_name: A:AUTOPILOT VERTICAL HOLD VAR:1
-    var_units: Feet per minute
-    var_type: i32
-    event_name: AP_VS_VAR_SET_ENGLISH
-    event_param: 1
-    interpolate: Default
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT NAV1 LOCK
-    var_units: Bool
-    var_type: bool
-    event_name: AP_NAV1_HOLD
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT APPROACH HOLD
-    var_units: Bool
-    var_type: bool
-    event_name: AP_APR_HOLD_ON
-    off_event_name: AP_APR_HOLD_OFF
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT BACKCOURSE HOLD
-    var_units: Bool
-    var_type: bool
-    event_name: AP_BC_HOLD_ON
-    off_event_name: AP_BC_HOLD_OFF
-  -
-    type: ToggleSwitch
-    var_name: A:AUTOPILOT WING LEVELER
-    var_units: Bool
-    var_type: bool
-    event_name: AP_WING_LEVELER_ON
-    off_event_name: AP_WING_LEVELER_OFF
-  -
-    type: ToggleSwitch
-    var_name: A:GPS DRIVES NAV1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_GPS_DRIVES_NAV1
-    cancel_h_events: true
 
   - # Electrical
     type: ToggleSwitch
@@ -112,6 +66,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
@@ -120,76 +75,68 @@ shared:
     event_name: ALTERNATOR_SET
     event_param: 1
   -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:39
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 39
-  -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:40
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 40
-  -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:46
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 46
-  -
-    type: ToggleSwitch
-    var_name: A:CIRCUIT SWITCH ON:47
-    var_units: Bool
-    var_type: bool
-    event_name: ELECTRICAL_CIRCUIT_TOGGLE
-    event_param: 47
-  -
     type: NumSet
     var_name: A:GENERAL ENG STARTER:1
     var_units: Bool
     var_type: i32
-    event_name: STARTER1_SET
-  -
-    type: event
     event_name: SET_STARTER1_HELD
+    use_calculator: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_FUEL_VALVE_ENG1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG FUEL PUMP SWITCH EX1:1
+    var_units: Enum
+    var_type: i32
+    event_name: ELECT_FUEL_PUMP1_SET
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT BEACON:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: BEACON_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT LANDING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT TAXI:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT NAV:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: NAV_LIGHTS_SET
     event_param: 0
   -
     type: NumSet
     var_name: A:LIGHT STROBE:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: STROBES_SET
     event_param: 0
 
@@ -208,6 +155,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 10
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:2
@@ -223,6 +171,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 11
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT CABIN:3
@@ -238,6 +187,7 @@ shared:
     event_name: LIGHT_POTENTIOMETER_SET
     event_param: 12
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:3
@@ -245,6 +195,7 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_3_SET
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:5
@@ -252,6 +203,7 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_5_SET
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:6
@@ -259,6 +211,7 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_6_SET
     index_reversed: true
+    unreliable: true
   -
     type: NumSet
     var_name: A:LIGHT POTENTIOMETER:7
@@ -266,6 +219,7 @@ shared:
     var_type: f64
     event_name: LIGHT_POTENTIOMETER_7_SET
     index_reversed: true
+    unreliable: true
 
   - # LVAR's
     type: var
@@ -739,26 +693,21 @@ shared:
   -
     type: var
     var_name: L:C172X_TRIM_TAB_PCT
-    cancel_h_events: true
 # - # Unsettable
 #   type: var
 #   var_name: L:KAP140_BARO_MODE
   -
     type: var
     var_name: L:C172X_CHOCKS_STATUS
-    cancel_h_events: true
   -
     type: var
     var_name: L:C172X_TIEDOWNS_STATUS
-    cancel_h_events: true
   -
     type: var
     var_name: L:C172X_PITOT_COVER_STATUS
-    cancel_h_events: true
   -
     type: var
     var_name: L:C172X_COWL_PLUGS_STATUS
-    cancel_h_events: true
   -
     type: var
     var_name: L:C172X_SCREEN_COLOR_STATUS
@@ -792,7 +741,6 @@ shared:
   -
     type: var
     var_name: L:C172X_REALISM
-    cancel_h_events: true
 # -
 #   type: var
 #   var_name: L:C172X_CABIN_TEMP
@@ -1175,30 +1123,111 @@ master:
     unreliable: true
 
 ignore:
+# - KAP140_ARM_PRESS
+# - KAP140_ARM_RELEASE
+# - KAP140_BARO_PRESS
+# - KAP140_BARO_RELEASE
+# - KAP140_UP_PRESS
+# - KAP140_UP_RELEASE
+# - KAP140_DN_PRESS
+# - KAP140_DN_RELEASE
   - KAP140_AP_PRESS
   - KAP140_AP_RELEASE
   - KAP140_HDG_PRESS
   - KAP140_HDG_RELEASE
-  - KAP140_NAV_PRESS
-  - KAP140_NAV_RELEASE
-  - KAP140_APR_PRESS
-  - KAP140_APR_RELEASE
-  - KAP140_REV_PRESS
-  - KAP140_REV_RELEASE
+# - KAP140_NAV_PRESS
+# - KAP140_NAV_RELEASE
+# - KAP140_APR_PRESS
+# - KAP140_APR_RELEASE
+# - KAP140_REV_PRESS
+# - KAP140_REV_RELEASE
   - KAP140_ALT_PRESS
   - KAP140_ALT_RELEASE
-  - KAP140_ARM_RELEASE
-  - KAP140_BARO_RELEASE
-  - KAP140_UP_PRESS
-  - KAP140_UP_RELEASE
-  - KAP140_DN_PRESS
-  - KAP140_DN_RELEASE
+# - KAP140_KNOB_INNER_INC
+# - KAP140_KNOB_INNER_DEC
+# - KAP140_KNOB_OUTER_INC
+# - KAP140_KNOB_OUTER_DEC
 
-  - KAP140_KNOB_INNER_INC
-  - KAP140_KNOB_INNER_DEC
-  - KAP140_KNOB_OUTER_INC
-  - KAP140_KNOB_OUTER_DEC
-
-  - KR87#OilDisplay
-  - KR87#OilPercent
+  - KR87_ADF_PRESS
+  - KR87_ADF_RELEASE
+  - KR87_BFO_PRESS
+  - KR87_BFO_RELEASE
+  - KR87_FREQ_PRESS
+  - KR87_FREQ_RELEASE
+  - KR87_FLTET_PRESS
+  - KR87_FLTET_RELEASE
+  - KR87_SETRST_PRESS
+  - KR87_SETRST_RELEASE
   - KR87#Pushback
+
+  - C172X_430_CDI_PRESS
+  - C172X_430_CDI_RELEASE
+  - C172X_430_OBS_PRESS
+  - C172X_430_OBS_RELEASE
+  - C172X_430_MSG_PRESS
+  - C172X_430_MSG_RELEASE
+  - C172X_430_FPL_PRESS
+  - C172X_430_FPL_RELEASE
+  - C172X_430_VNAV_PRESS
+  - C172X_430_VNAV_RELEASE
+  - C172X_430_PROC_PRESS
+  - C172X_430_PROC_RELEASE
+  - C172X_430_RNG_ZOOM_PRESS
+  - C172X_430_RNG_DEZOOM_PRESS
+  - C172X_430_RNG_RELEASE
+  - C172X_430_DTO_PRESS
+  - C172X_430_DTO_RELEASE
+  - C172X_430_MENU_PRESS
+  - C172X_430_MENU_RELEASE
+  - C172X_430_CLR_PRESS
+  - C172X_430_CLR_RELEASE
+  - C172X_430_ENT_PRESS
+  - C172X_430_ENT_RELEASE
+  - C172X_430_COMSWAP_PRESS
+  - C172X_430_COMSWAP_RELEASE
+  - C172X_430_NAVSWAP_PRESS
+  - C172X_430_NAVSWAP_RELEASE
+  - C172X_430_CRSR_SMALL_INC
+  - C172X_430_CRSR_SMALL_DEC
+  - C172X_430_CRSR_LARGE_INC
+  - C172X_430_CRSR_LARGE_DEC
+  - C172X_430_CRSR_PRESS
+  - C172X_430_CRSR_RELEASE
+  - C172X_430_CV_PRESS
+  - C172X_430_CV_RELEASE
+
+  - C172X_530_CDI_PRESS
+  - C172X_530_CDI_RELEASE
+  - C172X_530_OBS_PRESS
+  - C172X_530_OBS_RELEASE
+  - C172X_530_MSG_PRESS
+  - C172X_530_MSG_RELEASE
+  - C172X_530_FPL_PRESS
+  - C172X_530_FPL_RELEASE
+  - C172X_530_VNAV_PRESS
+  - C172X_530_VNAV_RELEASE
+  - C172X_530_PROC_PRESS
+  - C172X_530_PROC_RELEASE
+  - C172X_530_RNG_ZOOM_PRESS
+  - C172X_530_RNG_DEZOOM_PRESS
+  - C172X_530_RNG_RELEASE
+  - C172X_530_DTO_PRESS
+  - C172X_530_DTO_RELEASE
+  - C172X_530_MENU_PRESS
+  - C172X_530_MENU_RELEASE
+  - C172X_530_CLR_PRESS
+  - C172X_530_CLR_RELEASE
+  - C172X_530_ENT_PRESS
+  - C172X_530_ENT_RELEASE
+  - C172X_530_COMSWAP_PRESS
+  - C172X_530_COMSWAP_RELEASE
+  - C172X_530_NAVSWAP_PRESS
+  - C172X_530_NAVSWAP_RELEASE
+  - C172X_530_CRSR_SMALL_INC
+  - C172X_530_CRSR_SMALL_DEC
+  - C172X_530_CRSR_LARGE_INC
+  - C172X_530_CRSR_LARGE_DEC
+  - C172X_530_CRSR_PRESS
+  - C172X_530_CRSR_RELEASE
+  - C172X_530_CV_PRESS
+  - C172X_530_CV_RELEASE

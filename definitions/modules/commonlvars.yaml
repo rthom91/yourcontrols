@@ -10,6 +10,9 @@ shared:
     var_name: L:XMLVAR_Baro_Selector_HPA_1
   -
     type: var
+    var_name: L:XMLVAR_Baro_Selector_HPA_2
+  -
+    type: var
     var_name: L:XMLVAR_Baro1_ForcedToSTD
   -
     type: var
@@ -69,9 +72,9 @@ shared:
   -
     type: var
     var_name: L:XMLVAR_STBYBattery_IsHeld
-  -
-    type: var
-    var_name: L:XMLVAR_Starter_State
+# -
+#   type: var
+#   var_name: L:XMLVAR_Starter_State
   -
     type: var
     var_name: L:XMLVAR_Starter_State_IsDown
@@ -183,6 +186,9 @@ shared:
     var_name: L:XMLVAR_ADF_Frequency_10_Khz
   -
     type: var
+    var_name: L:XMLVAR_AudioPanel
+  -
+    type: var
     var_name: L:XMLVAR_AudioPanel_1
   -
     type: var
@@ -215,6 +221,15 @@ shared:
   -
     type: var
     var_name: L:Generic_Gear_Advisory_Pushed
+
+  - # Clock
+    type: var
+    var_name: L:XMLVAR_Hours_Delta
+    interpolate: Default
+  -
+    type: var
+    var_name: L:XMLVAR_Minutes_Delta
+    interpolate: Default
 
   - # Working Title
     type: var
@@ -263,4 +278,3 @@ shared:
   -
     type: var
     var_name: L:WT_MINIMUMS_MODE
-    cancel_h_events: true

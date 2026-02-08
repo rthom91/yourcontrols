@@ -14,6 +14,7 @@ include:
   - definitions/modules/handling.yaml
   - definitions/modules/lights.yaml
   - definitions/modules/navigation.yaml
+  - definitions/modules/payload_new.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/safety.yaml
   - definitions/modules/trim.yaml
@@ -113,6 +114,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:2
@@ -120,6 +122,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:3
@@ -127,6 +130,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:4
@@ -134,6 +138,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 4
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:5
@@ -141,6 +146,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 5
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:6
@@ -148,6 +154,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 6
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:7
@@ -155,6 +162,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 7
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:8
@@ -162,6 +170,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 8
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:9
@@ -169,6 +178,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 9
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:10
@@ -176,6 +186,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 10
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:11
@@ -183,6 +194,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 11
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:12
@@ -190,6 +202,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 12
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:13
@@ -197,6 +210,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 13
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:14
@@ -204,6 +218,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 14
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:15
@@ -211,6 +226,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 15
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:16
@@ -218,6 +234,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 16
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:17
@@ -225,6 +242,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 17
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:18
@@ -232,6 +250,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 18
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:19
@@ -239,6 +258,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 19
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:20
@@ -246,6 +266,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 20
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:21
@@ -253,6 +274,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 21
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:22
@@ -260,6 +282,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 22
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:23
@@ -267,6 +290,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 23
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:24
@@ -274,6 +298,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 24
+    use_calculator: true
 
   - # Interior
     type: NumSet
@@ -290,6 +315,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -297,25 +323,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
-
-  - # Payload
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:3
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
+    use_calculator: true
 
   - # LVAR's (trimmed)
     type: var
@@ -593,7 +601,7 @@ shared:
     var_name: L:BTCI_CTDN
 
 master:
-  - # Throttles
+  -
     type: var
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:5
     var_units: Position 16k
@@ -615,67 +623,6 @@ master:
     type: var
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:8
     var_units: Position 16k
-    var_type: f64
-    unreliable: true
-
-  - # Fuel
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:1
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:2
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:3
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:4
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:5
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:6
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:7
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:8
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:9
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:10
-    var_units: Percent
     var_type: f64
     unreliable: true
   -

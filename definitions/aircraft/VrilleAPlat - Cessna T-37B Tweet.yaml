@@ -7,6 +7,7 @@ include:
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
   - definitions/modules/navigation.yaml
+  - definitions/modules/payload_new.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/transponder.yaml
   - definitions/modules/trim.yaml
@@ -26,6 +27,7 @@ shared:
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
 
   - # Electrical
     type: ToggleSwitch
@@ -34,6 +36,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
@@ -54,21 +57,23 @@ shared:
     var_units: Bool
     var_type: i32
     event_name: STARTER1_SET
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG STARTER:2
     var_units: Bool
     var_type: i32
     event_name: STARTER2_SET
+    use_calculator: true
 
   - # Fuel
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:1
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_PUMP_ON
-    off_event_name: FUELSYSTEM_PUMP_OFF
+    event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:1
@@ -76,6 +81,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:2
@@ -83,46 +89,47 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:3
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:4
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 4
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:5
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 5
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:8
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 8
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:9
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 9
+    use_calculator: true
 
   - # INV Main
     type: ToggleSwitch
@@ -131,6 +138,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 35
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:36
@@ -138,6 +146,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 36
+    use_calculator: true
   -
     type: CustomCalculator
     get: 1 (>A:BUS LOOKUP INDEX, Number) (A:BUS CONNECTION ON:6, Bool)
@@ -154,6 +163,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 22
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:27
@@ -161,6 +171,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 27
+    use_calculator: true
 
   - # Lights
     type: ToggleSwitch
@@ -288,19 +299,6 @@ shared:
     var_type: i32
     event_name: PEDESTRAL_LIGHTS_SET
     event_param: 0
-
-  - # Payload
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
 
   - # LVAR's
     type: var
@@ -1056,23 +1054,3 @@ shared:
 # -
 #   type: var
 #   var_name: L:HUD_AP_SELECTED_ALTITUDE
-
-master:
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:1
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:2
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:3
-    var_units: Percent
-    var_type: f64
-    unreliable: true

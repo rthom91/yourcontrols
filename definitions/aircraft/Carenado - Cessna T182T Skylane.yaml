@@ -1,9 +1,8 @@
-# Version 2.0.2 (do not add G1000)
+# Version 2.0.4 (do not add G1000)
 
 include:
   - definitions/modules/Instruments/AS_KAP140.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
   - definitions/modules/engines.yaml
   - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
@@ -17,6 +16,29 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Deice
+    type: NumSet
+    var_name: A:PITOT HEAT SWITCH:1
+    var_units: Bool
+    var_type: i32
+    event_name: PITOT_HEAT_SET
+    event_param: 1
+  -
+    type: ToggleSwitch
+    var_name: A:PROP DEICE SWITCH:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_PROPELLER_DEICE
+    event_param: 1
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:WINDSHIELD DEICE SWITCH
+    var_units: Bool
+    var_type: bool
+    event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
+
   - # Doors
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:0
@@ -24,6 +46,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -31,6 +54,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -38,6 +62,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -45,6 +70,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:4
@@ -52,6 +78,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 5
+    use_calculator: true
 
   - # Avionics Bus
     type: ToggleSwitch
@@ -60,6 +87,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 24
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:25
@@ -67,6 +95,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 25
+    use_calculator: true
 
   - # Electrical
     type: ToggleSwitch
@@ -75,6 +104,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:ELECTRICAL MASTER BATTERY:2
@@ -82,6 +112,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 2
+    use_calculator: true
   -
     type: NumSet
     var_name: A:GENERAL ENG MASTER ALTERNATOR:1
@@ -93,44 +124,42 @@ shared:
     var_name: A:GENERAL ENG STARTER:1
     var_units: Bool
     var_type: i32
-    event_name: STARTER1_SET
-  -
-    type: event
     event_name: SET_STARTER1_HELD
+    use_calculator: true
 
   - # Lights
     type: NumSet
     var_name: A:LIGHT BEACON:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: BEACON_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT LANDING:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: LANDING_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT TAXI:1
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: TAXI_LIGHTS_SET
     event_param: 1
   -
     type: NumSet
     var_name: A:LIGHT NAV:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: NAV_LIGHTS_SET
     event_param: 0
   -
     type: NumSet
     var_name: A:LIGHT STROBE:0
     var_units: Bool
-    var_type: f64
+    var_type: i32
     event_name: STROBES_SET
     event_param: 0
 
@@ -508,64 +537,10 @@ shared:
     var_name: L:XMLVAR_ELECTRICAL_Switch_Power12V_ON
 # -
 #   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverPropellerHidden1
-# -
-#   type: var
-#   var_name: L:ENG FUEL VALVE:1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverMixtureHidden1
-# -
-#   type: var
 #   var_name: L:HANDLING_ElevatorTrim
 # -
 #   type: var
-#   var_name: L:ParkingBrake_Position
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden2
-# -
-#   type: var
 #   var_name: L:YokePilot
-# -
-#   type: var
-#   var_name: L:AS1000_PFD_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS1000_PFD_Brightness
-# -
-#   type: var
-#   var_name: L:AS1000_PFD_Brightness_IsAuto
-  -
-    type: var
-    var_name: L:XMLVAR_Autopilot_1_Status
-# -
-#   type: var
-#   var_name: L:AS1000_MFD_Brightness
-# -
-#   type: var
-#   var_name: L:AS1000_MFD_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:AS1000_MFD_Brightness_IsAuto
-  -
-    type: var
-    var_name: L:XMLVAR_Autopilot_2_Status
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_STATE
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_TEST_TIME
-# -
-#   type: var
-#   var_name: L:YokeCopilot
   -
     type: var
     var_name: L:ASD_LEVER_C182T_OXYGENE
@@ -589,6 +564,9 @@ shared:
 #   var_name: L:HANDLING_RudderTrim
 # -
 #   type: var
+#   var_name: L:ParkingBrake_Position
+# -
+#   type: var
 #   var_name: L:DEICE_Pitot_1
 # -
 #   type: var
@@ -605,6 +583,126 @@ shared:
   -
     type: var
     var_name: L:CUSTOM_AP_ALT_VAR_SET_ENGLISH
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_SelectedNavIndex
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_SelectedComIndex
+# -
+#   type: var
+#   var_name: L:PFD_CDI_Source
+# -
+#   type: var
+#   var_name: L:PFD_InnerMap_MapZoomRange
+# -
+#   type: var
+#   var_name: L:PFD_InnerMap_MapShowCursor
+# -
+#   type: var
+#   var_name: L:AS1000_MID_Display_Backup_Active
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_SelectedNavIndex
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_SelectedComIndex
+# -
+#   type: var
+#   var_name: L:MFD_InnerMap_MapZoomRange
+# -
+#   type: var
+#   var_name: L:MFD_InnerMap_MapShowCursor
+# -
+#   type: var
+#   var_name: L:INSTRUMENT_Altimeter_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_POTENTIOMETER_3
+# -
+#   type: var
+#   var_name: L:LIGHTING_PANEL_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_PEDESTRAL_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_POTENTIOMETER_4
+# -
+#   type: var
+#   var_name: L:LIGHTING_CABIN_2
+# -
+#   type: var
+#   var_name: L:LIGHTING_CABIN_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_BEACON_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_LANDING_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_TAXI_1
+# -
+#   type: var
+#   var_name: L:LIGHTING_NAV_0
+# -
+#   type: var
+#   var_name: L:LIGHTING_STROBE_0
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_STATE
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_ACTIVATION_TIME
+# -
+#   type: var
+#   var_name: L:ENG FUEL VALVE:1
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_Brightness
+# -
+#   type: var
+#   var_name: L:AS1000_PFD_Brightness_IsAuto
+  -
+    type: var
+    var_name: L:XMLVAR_Autopilot_1_Status
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_ScreenLuminosity
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_Brightness
+# -
+#   type: var
+#   var_name: L:AS1000_MFD_Brightness_IsAuto
+  -
+    type: var
+    var_name: L:XMLVAR_Autopilot_2_Status
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverThrottleHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverPropellerHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_LeverMixtureHidden1
+# -
+#   type: var
+#   var_name: L:YokeCopilot
 
   - # Import of G1000 module
     type: var
@@ -646,11 +744,9 @@ shared:
   -
     type: var
     var_name: L:AS3000_MinimalsMode
-    cancel_h_events: true
   -
     type: var
     var_name: L:AS3000_MinimalsValue
-    cancel_h_events: true
   -
     type: var
     var_name: L:Glasscockpit_HSI_Arc
@@ -676,6 +772,7 @@ shared:
     var_type: f64
     event_name: AP_NAV_SELECT_SET
     cancel_h_events: true
+    use_calculator: true
   -
     type: var
     var_name: L:PFD_InnerMap_MapZoomRange

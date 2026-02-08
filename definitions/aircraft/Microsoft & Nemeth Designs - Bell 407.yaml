@@ -31,12 +31,14 @@ shared:
     var_type: bool
     event_name: ANTI_ICE_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:WINDSHIELD DEICE SWITCH
     var_units: Bool
     var_type: bool
     event_name: WINDSHIELD_DEICE_TOGGLE
+    use_calculator: true
 
   - # Engine
     type: ToggleSwitch
@@ -53,14 +55,15 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:2
     var_units: Bool
     var_type: bool
-    event_name: FUELSYSTEM_VALVE_OPEN
-    off_event_name: FUELSYSTEM_VALVE_CLOSE
+    event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:1
@@ -68,6 +71,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:2
@@ -75,6 +79,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 2
+    use_calculator: true
 
   - # Hydraulics
     type: NumSet

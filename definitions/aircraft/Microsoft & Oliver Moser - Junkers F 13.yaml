@@ -1,15 +1,12 @@
-# Version 0.1.2
+# Version 0.1.9
 
 include:
   - definitions/modules/Instruments/AS_Aera.yaml
   - definitions/modules/controls.yaml
-  - definitions/modules/deice.yaml
-  - definitions/modules/electrical.yaml
   - definitions/modules/engines.yaml
-  - definitions/modules/fuel.yaml
   - definitions/modules/general.yaml
   - definitions/modules/handling.yaml
-  - definitions/modules/lights.yaml
+  - definitions/modules/magnetos.yaml
   - definitions/modules/navigation.yaml
   - definitions/modules/payload.yaml
   - definitions/modules/radios.yaml
@@ -18,6 +15,15 @@ include:
   - definitions/modules/trim.yaml
 
 shared:
+  - # Avionics
+    type: ToggleSwitch
+    var_name: A:CIRCUIT SWITCH ON:16
+    var_units: Bool
+    var_type: bool
+    event_name: ELECTRICAL_CIRCUIT_TOGGLE
+    event_param: 16
+    use_calculator: true
+
   - # Breakers
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:1
@@ -25,6 +31,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:2
@@ -32,6 +39,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:5
@@ -39,6 +47,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 5
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:6
@@ -46,6 +55,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 6
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:7
@@ -53,6 +63,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 7
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:8
@@ -60,6 +71,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 8
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:9
@@ -67,6 +79,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 9
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:10
@@ -74,6 +87,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 10
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:11
@@ -81,6 +95,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 11
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:12
@@ -88,6 +103,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 12
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:CIRCUIT SWITCH ON:14
@@ -95,6 +111,65 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 14
+    use_calculator: true
+
+  - # Deice
+    type: NumSet
+    var_name: A:GENERAL ENG ANTI ICE POSITION:1
+    var_units: Position 16k
+    var_type: f64
+    event_name: ANTI_ICE_GRADUAL_SET_ENG1
+    use_calculator: true
+    unreliable: true
+
+  - # Electrical
+    type: ToggleSwitch
+    var_name: A:ELECTRICAL MASTER BATTERY:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_MASTER_BATTERY
+    event_param: 1
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG MASTER ALTERNATOR:1
+    var_units: Bool
+    var_type: i32
+    event_name: ALTERNATOR_SET
+    event_param: 1
+  -
+    type: NumSet
+    var_name: A:GENERAL ENG STARTER:1
+    var_units: Bool
+    var_type: i32
+    event_name: STARTER1_SET
+    use_calculator: true
+
+  - # Fuel
+    type: ToggleSwitch
+    var_name: A:GENERAL ENG FUEL VALVE:1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_FUEL_VALVE_ALL
+    use_calculator: true
+  -
+    type: NumSet
+    var_name: A:FUEL TANK SELECTOR:1
+    var_units: Enum
+    var_type: i32
+    event_name: FUEL_SELECTOR_SET
+    use_calculator: true
+  -
+    type: event
+    event_name: MANUAL_FUEL_PRESSURE_PUMP
+
+  - # Lights
+    type: NumSet
+    var_name: A:LIGHT BEACON:1
+    var_units: Bool
+    var_type: i32
+    event_name: BEACON_LIGHTS_SET
+    event_param: 1
 
   - # LVAR's
     type: var
@@ -102,6 +177,9 @@ shared:
   -
     type: var
     var_name: L:Lever_Startup_Fuel_2
+  -
+    type: var
+    var_name: L:Clipboard_Door_Toggle
   -
     type: var
     var_name: L:Clipboard_Stairway_Toggle
@@ -116,74 +194,51 @@ shared:
     var_name: L:Luggage_Counter
   -
     type: var
-    var_name: L:Clipboard_Door_Toggle
-  -
-    type: var
-    var_name: L:Clipboard_Toggle
-  -
-    type: var
-    var_name: L:Clipboard_Page_Toggle
-  -
-    type: var
-    var_name: L:KNOB_Magneto_1
-  -
-    type: var
-    var_name: L:Clipboard_Reoil
+    var_name: L:ENGINE_Lever_Ignition
   -
     type: var
     var_name: L:LEVER_Manual_Fuelpump
   -
     type: var
-    var_name: L:Engine_Starter_1
-  -
-    type: var
-    var_name: L:ENGINE_Lever_Ignition
-  -
-    type: var
     var_name: L:Clipboard_Luggage_unload_Toggle
-  -
-    type: var
-    var_name: L:Clipboard_Luggage_load_Toggle
   -
     type: var
     var_name: L:Toggle_Cockpit_Rear_Window
     unreliable: true
   -
     type: var
-    var_name: L:Clipboard_Chocks_Toggle
+    var_name: L:Clipboard_Reoil
   -
     type: var
-    var_name: L:Aircraft_Secured
+    var_name: L:Clipboard_Luggage_load_Toggle
   -
     type: var
-    var_name: L:Aircraft_Boarding
+    var_name: L:Engine_Starter_1
+    unreliable: true
+  -
+    type: var
+    var_name: L:Clipboard_Page_Toggle
+  -
+    type: var
+    var_name: L:Clipboard_Toggle
   -
     type: var
     var_name: L:Clipboard_Engine_Start
-# -
-#   type: var
-#   var_name: L:ParkingBrake_Position
   -
     type: var
-    var_name: L:Reoil_scale_anim
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_YokeHidden2
+    var_name: L:KNOB_Magneto_1
 # -
 #   type: var
 #   var_name: L:HANDLING_ElevatorTrim
 # -
 #   type: var
-#   var_name: L:XMLVAR_LeverThrottleHidden1
-# -
-#   type: var
-#   var_name: L:XMLVAR_LeverMixtureHidden1
+#   var_name: L:ParkingBrake_Position
   -
     type: var
     var_name: L:Clipboard_Refuel_25
+  -
+    type: var
+    var_name: L:Aircraft_Secured
   -
     type: var
     var_name: L:Clipboard_Refuel_50
@@ -195,16 +250,25 @@ shared:
     var_name: L:Clipboard_Refuel_100
 # -
 #   type: var
+#   var_name: L:XMLVAR_YokeHidden1
+# -
+#   type: var
+#   var_name: L:XMLVAR_YokeHidden2
+# -
+#   type: var
 #   var_name: L:XMLVAR_IE_Throttle_VR_Handled
 # -
 #   type: var
 #   var_name: L:XMLVAR_IE_Throttle_VR_Value
-# -
-#   type: var
-#   var_name: L:XMLVAR_IsDeiceAirFrame
-# -
-#   type: var
-#   var_name: L:XMLVAR_IsDeiceAirFrame2
+  -
+    type: var
+    var_name: L:Clipboard_Chocks_Toggle
+  -
+    type: var
+    var_name: L:Aircraft_Boarding
+  -
+    type: var
+    var_name: L:Reoil_scale_anim
 
   - # Replica
     type: var
@@ -242,126 +306,99 @@ shared:
   -
     type: var
     var_name: L:Circuit_Breaker_13
-  -
-    type: var
-    var_name: L:EFI_RKS_Fuel_Request
-  -
-    type: var
-    var_name: L:SWITCH_Magnetos_1
-  -
-    type: var
-    var_name: L:A510_Switch_Power
-  -
-    type: var
-    var_name: L:SWITCH_Start_Guard
-  -
-    type: var
-    var_name: L:PUSH_Com_Mde
-  -
-    type: var
-    var_name: L:SWITCH_Engine_Primer_1
-  -
-    type: var
-    var_name: L:EFI_LKS_2
-  -
-    type: var
-    var_name: L:EFI_RKS_Refuel
-  -
-    type: var
-    var_name: L:SWITCH_Fuelpump_2
-  -
-    type: var
-    var_name: L:PUSH_Com_Sql
-  -
-    type: var
-    var_name: L:PUSH_Xpndr_Vfr
-  -
-    type: var
-    var_name: L:EFI_RKS_5
-  -
-    type: var
-    var_name: L:EFI_RKS_2
-  -
-    type: var
-    var_name: L:Knob_EFI_Back_Next
+# -
+#   type: var
+#   var_name: L:YourControlsPanelId
   -
     type: var
     var_name: L:PUSH_Xpndr_Sel
   -
     type: var
-    var_name: L:EFI_LKS_4
-  -
-    type: var
-    var_name: L:EFI_RKS_1
-  -
-    type: var
-    var_name: L:EFI_LKS_3
+    var_name: L:EFI_RKS_4
   -
     type: var
     var_name: L:SWITCH_Fuelpump_1
   -
     type: var
-    var_name: L:KNOB_Clock_Timer_Start_Stop
+    var_name: L:EFI_RKS_2
   -
     type: var
-    var_name: L:Tailwheel_Lock_R
+    var_name: L:EFI_RKS_5
   -
     type: var
     var_name: L:SWITCH_Voltamps
   -
     type: var
-    var_name: L:SWITCH_Magnetos_2
+    var_name: L:KNOB_Clock_Timer_Start_Stop
+  -
+    type: var
+    var_name: L:Knob_EFI_Back_Next
+  -
+    type: var
+    var_name: L:A510_Switch_Power
+  -
+    type: var
+    var_name: L:PUSH_Xpndr_Vfr
+  -
+    type: var
+    var_name: L:PUSH_Com_Mde
   -
     type: var
     var_name: L:Tailwheel_Lock_L
   -
     type: var
-    var_name: L:Knob_EFI_Mode
-  -
-    type: var
-    var_name: L:EFI_LKS_1
+    var_name: L:EFI_LKS_4
   -
     type: var
     var_name: L:EFI_RKS_3
   -
     type: var
-    var_name: L:EFI_RKS_4
+    var_name: L:EFI_RKS_Fuel_Request
   -
     type: var
-    var_name: L:Fuelpump_LH_available
+    var_name: L:PUSH_Com_Sql
   -
     type: var
-    var_name: L:Fuelpump_RH_available
+    var_name: L:EFI_LKS_2
   -
     type: var
-    var_name: L:KNOB_Attitude_Cage_1
+    var_name: L:SWITCH_Start_Guard
+  -
+    type: var
+    var_name: L:SWITCH_Fuelpump_2
+  -
+    type: var
+    var_name: L:EFI_RKS_Refuel
+  -
+    type: var
+    var_name: L:Knob_EFI_Mode
+  -
+    type: var
+    var_name: L:SWITCH_Engine_Primer_1
+  -
+    type: var
+    var_name: L:EFI_LKS_1
+  -
+    type: var
+    var_name: L:EFI_LKS_3
+  -
+    type: var
+    var_name: L:EFI_RKS_1
+  -
+    type: var
+    var_name: L:Tailwheel_Lock_R
 # -
 #   type: var
 #   var_name: L:XMLVAR_ELT_STATE
-# -
-#   type: var
-#   var_name: L:XMLVAR_ELT_TEST_TIME
-# -
-#   type: var
-#   var_name: L:Clock_Counter_Seconds
-# -
-#   type: var
-#   var_name: L:Clock_Counter_Minutes
-# -
-#   type: var
-#   var_name: L:Clock_Counter_Hours
-  -
-    type: var
-    var_name: L:KNOB_Clock_Timer_Reset
-  -
-    type: var
-    var_name: L:KNOB_Attitude_Cage_2
   -
     type: var
     var_name: L:SWITCH_Start
 # -
 #   type: var
 #   var_name: L:LIGHTING_BEACON_1
+  -
+    type: var
+    var_name: L:KNOB_Attitude_Cage_1
   -
     type: var
     var_name: L:Knob_EFI_Back_Next_EMERGENCY_PAGE_0
@@ -434,60 +471,30 @@ shared:
 # -
 #   type: var
 #   var_name: L:XMLVAR_ELT_ACTIVATION_TIME
+# -
+#   type: var
+#   var_name: L:XMLVAR_ELT_TEST_TIME
+  -
+    type: var
+    var_name: L:KNOB_Attitude_Cage_2
   -
     type: var
     var_name: L:PUSH_Clock_Seconds
+  -
+    type: var
+    var_name: L:KNOB_Clock_Timer_Reset
+  -
+    type: var
+    var_name: L:Fuelpump_LH_available
+  -
+    type: var
+    var_name: L:Fuelpump_RH_available
 # -
 #   type: var
-#   var_name: L:YourControlsPanelId
+#   var_name: L:Clock_Counter_Seconds
 # -
 #   type: var
-#   var_name: L:IsChangeDataFieldsMenuOn
+#   var_name: L:Clock_Counter_Minutes
 # -
 #   type: var
-#   var_name: L:Aera_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:Aera_State
-# -
-#   type: var
-#   var_name: L:AIRLINER_MCDU_CURRENT_FPLN_WAYPOINT
-# -
-#   type: var
-#   var_name: L:MAP_FP1_NOT_SPECIFIC_COLORS
-# -
-#   type: var
-#   var_name: L:MFD_MapShowCursor
-# -
-#   type: var
-#   var_name: L:MFD_MapZoomRange
-# -
-#   type: var
-#   var_name: L:Aera_IsPositionOverride
-# -
-#   type: var
-#   var_name: L:Glasscockpits_FPLHaveOrigin
-# -
-#   type: var
-#   var_name: L:Glasscockpits_FPLHaveDestination
-# -
-#   type: var
-#   var_name: L:CJ4_SAI_ScreenLuminosity
-# -
-#   type: var
-#   var_name: L:CJ4_SAI_State
-# -
-#   type: var
-#   var_name: L:MAP_SHOW_TEMPORARY_FLIGHT_PLAN
-# -
-#   type: var
-#   var_name: L:FLIGHTPLAN_USE_DECEL_WAYPOINT
-# -
-#   type: var
-#   var_name: L:MAP_SHOWN_FLIGHTPLAN_INDEX
-# -
-#   type: var
-#   var_name: L:HUD_AP_SELECTED_SPEED
-# -
-#   type: var
-#   var_name: L:HUD_AP_SELECTED_ALTITUDE
+#   var_name: L:Clock_Counter_Hours

@@ -1,4 +1,4 @@
-# Version 1.0.8
+# Version 1.1.0
 
 include:
   - definitions/modules/Instruments/AS_GNS530.yaml
@@ -10,17 +10,18 @@ include:
   - definitions/modules/lights.yaml
   - definitions/modules/magnetos.yaml
   - definitions/modules/navigation.yaml
+  - definitions/modules/payload_new.yaml
   - definitions/modules/radios.yaml
   - definitions/modules/trim.yaml
 
 shared:
-  - # Temporary
-    type: ToggleSwitch
-    var_name: A:GPS DRIVES NAV1
-    var_units: Bool
-    var_type: bool
-    event_name: TOGGLE_GPS_DRIVES_NAV1
-    cancel_h_events: true
+  - # Altimeter
+    type: NumSet
+    var_name: A:KOHLSMAN SETTING MB:4
+    var_units: Millibars scaler 16
+    var_type: f64
+    event_name: KOHLSMAN_SET
+    event_param: 4
 
   - # APU
     type: ToggleSwitch
@@ -29,34 +30,45 @@ shared:
     var_type: bool
     event_name: APU_STARTER
     off_event_name: APU_OFF_SWITCH
+    is_user_event: true
+    use_calculator: true
 
   - # Autopilot
     type: ToggleSwitch
     var_name: A:AUTOPILOT MASTER
     var_units: Bool
     var_type: bool
-    event_name: AUTOPILOT_ON
-    off_event_name: AUTOPILOT_OFF
+    event_name: AP_MASTER
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT VERTICAL HOLD
     var_units: Bool
     var_type: bool
-    event_name: AP_VS_ON
-    off_event_name: AP_VS_OFF
+    event_name: AP_VS_HOLD
+    use_calculator: true
   -
     type: NumSet
-    var_name: A:AUTOPILOT VERTICAL HOLD VAR
+    var_name: A:AUTOPILOT VERTICAL HOLD VAR:1
     var_units: Feet per minute
     var_type: i32
     event_name: AP_VS_VAR_SET_ENGLISH
+    event_param: 1
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT HEADING LOCK
     var_units: Bool
     var_type: bool
-    event_name: AP_HDG_HOLD_ON
-    off_event_name: AP_HDG_HOLD_OFF
+    event_name: AP_HDG_HOLD
+    use_calculator: true
+  -
+    type: ToggleSwitch
+    var_name: A:GPS DRIVES NAV1
+    var_units: Bool
+    var_type: bool
+    event_name: TOGGLE_GPS_DRIVES_NAV1
+    cancel_h_events: true
+    use_calculator: true
 
   - # Nose
     type: ToggleSwitch
@@ -65,6 +77,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   - # Crew Rest
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:1
@@ -72,6 +85,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   - # Crew Stairs
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -79,6 +93,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
   - # Passenger Stairs
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:3
@@ -86,21 +101,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 4
-
-  - # Altimeters
-    type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:3
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 3
-  -
-    type: NumSet
-    var_name: A:KOHLSMAN SETTING MB:4
-    var_units: Millibars scaler 16
-    var_type: f64
-    event_name: KOHLSMAN_SET
-    event_param: 4
+    use_calculator: true
 
   - # Deice
     type: var
@@ -176,6 +177,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_MASTER_BATTERY
     event_param: 1
+    use_calculator: true
   -
     type: NumSet
     var_name: A:AVIONICS MASTER SWITCH:1
@@ -287,6 +289,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 7
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:1
@@ -294,6 +297,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:2
@@ -301,6 +305,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:17
@@ -308,6 +313,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 17
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:18
@@ -315,6 +321,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 18
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:19
@@ -322,6 +329,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 19
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:20
@@ -329,6 +337,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 20
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:21
@@ -336,6 +345,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 21
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:22
@@ -343,6 +353,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 22
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:23
@@ -350,6 +361,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 23
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:24
@@ -357,6 +369,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 24
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:25
@@ -364,6 +377,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 25
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM VALVE SWITCH:26
@@ -371,6 +385,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_VALVE_TOGGLE
     event_param: 26
+    use_calculator: true
 
   - # Generators
     type: NumSet
@@ -524,43 +539,6 @@ shared:
     event_name: CABIN_LIGHTS_SET
     event_param: 6
 
-  - # Payload
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:1
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:2
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:3
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:4
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:5
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:PAYLOAD STATION WEIGHT:6
-    var_units: Pounds
-    var_type: f64
-    unreliable: true
-
   - # LVAR's (trimmed)
     type: var
     var_name: L:Float_Switch_State
@@ -697,11 +675,11 @@ shared:
 #   var_name: L:Propeller_Angle_6
   -
     type: var
-    var_name: L:Gonio_Antenna_Angle
-    unreliable: true
+    var_name: L:Door_Cockpit_Bar
   -
     type: var
-    var_name: L:Door_Cockpit_Bar
+    var_name: L:Gonio_Antenna_Angle
+    unreliable: true
   -
     type: var
     var_name: L:COVERS_SET
@@ -1366,21 +1344,21 @@ shared:
 # -
 #   type: var
 #   var_name: L:Cowl_Flap_Smooth_Anim_6
-# -
-#   type: var
-#   var_name: L:Compas_Nav_H_2
-# -
-#   type: var
-#   var_name: L:Compas_Nav_H
-  -
-    type: var
-    var_name: L:Push_Vion_press
   -
     type: var
     var_name: L:My_Prop_pitch_Electrical
+# -
+#   type: var
+#   var_name: L:Compas_Nav_H
+# -
+#   type: var
+#   var_name: L:Compas_Nav_H_2
+  -
+    type: var
+    var_name: L:Push_Vion_press
 
 master:
-  - # Throttles
+  -
     type: var
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:5
     var_units: Position 16k
@@ -1390,67 +1368,6 @@ master:
     type: var
     var_name: A:GENERAL ENG THROTTLE LEVER POSITION:6
     var_units: Position 16k
-    var_type: f64
-    unreliable: true
-
-  - # Fuel
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:1
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:2
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:3
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:4
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:5
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:6
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:7
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:8
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:9
-    var_units: Percent
-    var_type: f64
-    unreliable: true
-  -
-    type: var
-    var_name: A:FUELSYSTEM TANK LEVEL:10
-    var_units: Percent
     var_type: f64
     unreliable: true
   -

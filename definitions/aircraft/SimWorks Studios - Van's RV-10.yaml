@@ -27,14 +27,14 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 37
+    use_calculator: true
 
   - # Doors
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:6
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 6
   -
     type: ToggleSwitch
@@ -43,13 +43,13 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:SMOKE ENABLE:7
     var_units: Bool
     var_type: bool
-    event_name: SMOKE_ON
-    off_event_name: SMOKE_OFF
+    event_name: SMOKE_TOGGLE
     event_param: 7
   -
     type: ToggleSwitch
@@ -58,6 +58,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 2
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:2
@@ -65,6 +66,7 @@ shared:
     var_type: bool
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 3
+    use_calculator: true
 
   - # Interior
     type: NumSet

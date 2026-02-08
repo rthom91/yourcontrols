@@ -26,6 +26,7 @@ shared:
     var_type: f64
     event_name: TOGGLE_AIRCRAFT_EXIT_FAST
     event_param: 1
+    use_calculator: true
 
   - # Electrical
     type: var
@@ -45,6 +46,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 1
+    use_calculator: true
   -
     type: ToggleSwitch
     var_name: A:FUELSYSTEM PUMP SWITCH:2
@@ -52,6 +54,7 @@ shared:
     var_type: bool
     event_name: FUELSYSTEM_PUMP_TOGGLE
     event_param: 2
+    use_calculator: true
 
   - # G5 Power
     type: ToggleSwitch
@@ -60,6 +63,7 @@ shared:
     var_type: bool
     event_name: ELECTRICAL_CIRCUIT_TOGGLE
     event_param: 36
+    use_calculator: true
 
   - # Interior
     type: NumSet

@@ -5,6 +5,25 @@ include:
   - definitions/modules/payload.yaml
 
 shared:
+  - # Brakes (cross-linked)
+    type: NumSet
+    var_name: A:BRAKE LEFT POSITION EX1
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_LEFT_BRAKE_SET
+    use_calculator: true
+    unreliable: true
+  -
+    type: NumSet
+    var_name: A:BRAKE RIGHT POSITION EX1
+    var_units: Position 32k
+    var_type: f64
+    add_by: -16384
+    event_name: AXIS_RIGHT_BRAKE_SET
+    use_calculator: true
+    unreliable: true
+
   - # FWD 1L Cabin
     type: ToggleSwitch
     var_name: A:INTERACTIVE POINT GOAL:0
@@ -2495,33 +2514,33 @@ shared:
   -
     type: var
     var_name: L:S_XPDR_ALTREPORTING
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_1
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_2
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_3
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_4
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_5
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_6
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_7
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_0
-# -
-#   type: var
-#   var_name: L:S_PED_ATC_CLR
+  -
+    type: var
+    var_name: L:S_PED_ATC_1
+  -
+    type: var
+    var_name: L:S_PED_ATC_2
+  -
+    type: var
+    var_name: L:S_PED_ATC_3
+  -
+    type: var
+    var_name: L:S_PED_ATC_4
+  -
+    type: var
+    var_name: L:S_PED_ATC_5
+  -
+    type: var
+    var_name: L:S_PED_ATC_6
+  -
+    type: var
+    var_name: L:S_PED_ATC_7
+  -
+    type: var
+    var_name: L:S_PED_ATC_0
+  -
+    type: var
+    var_name: L:S_PED_ATC_CLR
   -
     type: var
     var_name: L:S_XPDR_IDENT
@@ -3715,14 +3734,8 @@ shared:
     type: var
     var_name: L:N_OXYGEN_MASK_2_TEST_FO
   -
-    type: NumSet
+    type: var
     var_name: L:N_FC_BRAKE_LEFT_CAPT
-    var_units: Percent
-    var_type: f64
-    multiply_by: 32768
-    add_by: -16384
-    event_name: AXIS_LEFT_BRAKE_SET
-    use_calculator: true
     unreliable: true
 # -
 #   type: var
@@ -3797,14 +3810,8 @@ shared:
 #   type: var
 #   var_name: L:N_FC_SIDESTICK_FO_PITCH
   -
-    type: NumSet
+    type: var
     var_name: L:N_FC_BRAKE_RIGHT_CAPT
-    var_units: Percent
-    var_type: f64
-    multiply_by: 32768
-    add_by: -16384
-    event_name: AXIS_RIGHT_BRAKE_SET
-    use_calculator: true
     unreliable: true
 # -
 #   type: var
@@ -3813,14 +3820,8 @@ shared:
 #   type: var
 #   var_name: L:N_STANDBY_ALT_IMPERIAL_1000
   -
-    type: NumSet
+    type: var
     var_name: L:N_FC_BRAKE_RIGHT_FO
-    var_units: Percent
-    var_type: f64
-    multiply_by: 32768
-    add_by: -16384
-    event_name: AXIS_RIGHT_BRAKE_SET
-    use_calculator: true
     unreliable: true
 # -
 #   type: var
@@ -3853,14 +3854,8 @@ shared:
     type: var
     var_name: L:N_OXYGEN_MASK_1_TEST_FO
   -
-    type: NumSet
+    type: var
     var_name: L:N_FC_BRAKE_LEFT_FO
-    var_units: Percent
-    var_type: f64
-    multiply_by: 32768
-    add_by: -16384
-    event_name: AXIS_LEFT_BRAKE_SET
-    use_calculator: true
     unreliable: true
 # -
 #   type: var

@@ -577,5 +577,3 @@ ignore:
   - LVFR_Airbus_CDU_AP_DEC_ALT
   - LVFR_Airbus_FCU_VS_INC
   - LVFR_Airbus_FCU_VS_DEC
-
-  - LVFR_Airbus_EXPEDITE_MODE

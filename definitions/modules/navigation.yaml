@@ -62,7 +62,6 @@ shared:
     var_units: Feet
     var_type: f64
     event_name: SET_DECISION_ALTITUDE_MSL
-    cancel_h_events: true
     use_calculator: true
   -
     type: NumSet

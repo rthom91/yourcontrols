@@ -12044,8 +12044,13 @@ shared:
     var_name: L:INI_HF_2_VOLUME_COM3
     unreliable: true
   -
-    type: var
+    type: NumSet
     var_name: L:INI_THROTTLE_MAPPING_USE_REVERSE_ON_AXIS
+    var_units: Number
+    var_type: f64
+    event_name: INIB.SET_THROTTLE_REVERSE_ON_AXIS
+    cancel_h_events: true
+    use_calculator: true
 # -
 #   type: var
 #   var_name: L:INI_ECAM_CURRENT_PAGE

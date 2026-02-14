@@ -92,6 +92,12 @@ shared:
     var_type: bool
     event_name: AP_MANAGED_SPEED_IN_MACH_TOGGLE
     use_calculator: true
+  - # Expedite
+    type: NumSet
+    var_name: A:AUTOPILOT SPEED SLOT INDEX
+    var_units: Number
+    var_type: i32
+    event_name: AP_SPEED_SLOT_INDEX_SET
   -
     type: ToggleSwitch
     var_name: A:AUTOPILOT THROTTLE ARM
